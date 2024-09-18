@@ -19,8 +19,13 @@ public class LoginController : Controller
     [HttpPost("Login")]
     public IActionResult Login([FromBody] LoginBody loginBody)
     {
-        // TODO: Impelement login method
-        return Unauthorized("Incorrect password");
+        LoginStatus status = _loginService.CheckPassword(loginBody.Username ?? "", loginBody.Password ?? "");
+        return status switch {
+            LoginStatus.Success => Ok("Logged in"),
+            LoginStatus.IncorrectUsername => Unauthorized("Incorrect username"),
+            LoginStatus.IncorrectPassword => Unauthorized("Incorrect password"),
+            _ => BadRequest("")
+        };
     }
 
     [HttpGet("IsAdminLoggedIn")]
