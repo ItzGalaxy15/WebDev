@@ -26,7 +26,7 @@ namespace StarterKit.Models
 
         public DateTime AttendanceDate { get; set; }
 
-        public required User User { get; set; }
+        public required int UserId { get; set; }
     }
 
     public class Event_Attendance
@@ -34,8 +34,8 @@ namespace StarterKit.Models
         public int Event_AttendanceId { get; set; }
         public int Rating { get; set; }
         public required string Feedback { get; set; }
-        public required User User { get; set; }
-        public required Event Event { get; set; }
+        public required int UserId { get; set; }
+        public required int EventId { get; set; }
     }
 
     public class Event
