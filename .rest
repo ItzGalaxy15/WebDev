@@ -5,3 +5,21 @@ content-type: application/json
     "Username": "admin1" ,
     "Password": "password"
 }
+
+###
+
+POST http://localhost:5097/api/v1/login/login HTTP/1.1
+content-type: application/json
+
+{
+    "Username": "admin2" ,
+    "Password": "tooeasytooguess"
+}
+
+###
+
+GET http://localhost:5097/api/v1/login/isadminloggedin HTTP/1.1
+
+###
+
+GET http://localhost:5097/api/v1/login/logout HTTP/1.1
