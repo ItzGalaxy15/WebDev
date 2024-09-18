@@ -26,11 +26,16 @@ public class LoginService : ILoginService
         {
             return LoginStatus.IncorrectUsername;
         }
-        if (admin.Password == EncryptionHelper.EncryptPassword(inputPassword))
+        if (admin.Password != EncryptionHelper.EncryptPassword(inputPassword))
         {
-            return LoginStatus.Success;
+            return LoginStatus.IncorrectPassword;
         }
 
-        return LoginStatus.IncorrectPassword;
+        return LoginStatus.Success;
+    }
+
+    public bool IsAdminLoggedIn(string? username){
+        if (username == null) return false;
+        return _context.Admin.Any(a => a.UserName == username);
     }
 }
