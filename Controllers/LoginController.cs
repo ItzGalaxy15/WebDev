@@ -35,6 +35,7 @@ public class LoginController : Controller
     }
 
     [HttpGet("IsAdminLoggedIn")]
+    // checks if the user is an admin
     public IActionResult IsAdminLoggedIn()
     {
         string? username = HttpContext.Session.GetString("username");
@@ -43,12 +44,12 @@ public class LoginController : Controller
     }
 
     [HttpGet("Logout")]
+    // makes the admin log out
     public IActionResult Logout()
     {
         string? username = HttpContext.Session.GetString("username");
         if (username == null) return BadRequest("You are not logged in");
         HttpContext.Session.Remove("username");
-        //HttpContext.Session.Remove(HttpContext.Session.GetString("username"));
         return Ok($"Logged out {username}");
     }
 

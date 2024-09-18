@@ -19,7 +19,7 @@ public class LoginService : ILoginService
 
     public LoginStatus CheckPassword(string username, string inputPassword)
     {
-        // TODO: Make this method check the password with what is in the database
+        // this method checks if the password is correct
 
         var admin = _context.Admin.FirstOrDefault(a => a.UserName == username);
         if (admin == null)
