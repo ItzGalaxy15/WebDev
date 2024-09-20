@@ -23,3 +23,8 @@ GET http://localhost:5097/api/v1/login/isadminloggedin HTTP/1.1
 ###
 
 GET http://localhost:5097/api/v1/login/logout HTTP/1.1
+
+
+###
+
+GET http://localhost:5097/api/v1/events HTTP/1.1

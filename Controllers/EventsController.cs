@@ -9,7 +9,8 @@ public class EventsController : Controller
 
     private readonly IEventsService _eventService;
 
-    public EventsController(IEventsService eventService){
+    public EventsController(IEventsService eventService)
+    {
         _eventService = eventService;
     }
 

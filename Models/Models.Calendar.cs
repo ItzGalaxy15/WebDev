@@ -15,9 +15,12 @@ namespace StarterKit.Models
         // A comma sepparated string that could look like this: "mo,tu,we,th,fr"
         public required string RecuringDays { get; set; }
 
-        public required List<Attendance> Attendances { get; set; }
 
-        public required List<Event_Attendance> Event_Attendances { get; set; }
+        // We don't need / have a usage for these lists at the moment
+
+        //public required List<Attendance> Attendances { get; set; }
+
+        //public required List<Event_Attendance> Event_Attendances { get; set; }
     }
 
     public class Attendance
@@ -26,7 +29,7 @@ namespace StarterKit.Models
 
         public DateTime AttendanceDate { get; set; }
 
-        public required int UserId { get; set; }
+        public required User User { get; set; }
     }
 
     public class Event_Attendance
@@ -56,6 +59,8 @@ namespace StarterKit.Models
 
         public bool AdminApproval { get; set; }
 
+        // This list is not saved in the database, but is used when getting all events,
+        // so all event_attendances can get added to the event when returning.
         public required List<Event_Attendance> Event_Attendances { get; set; }
     }
 }

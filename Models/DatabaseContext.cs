@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using StarterKit.Utils;
 
@@ -41,46 +42,51 @@ namespace StarterKit.Models
                 .HasData(new Admin { AdminId = 5, Email = "admin5@example.com", UserName = "admin5", Password = EncryptionHelper.EncryptPassword("Whatisapassword?") });
 
 
-            modelBuilder.Entity<User>()
-                .HasIndex(p => p.UserId).IsUnique();
+            modelBuilder.Entity<Event>()
+                .HasIndex(e => e.EventId).IsUnique();
+        
+            modelBuilder.Entity<Event>()
+                .HasData(new Event { EventId = 1, Title = "Opening", Description = "First day", EventDate = new DateOnly(2024, 9, 2),
+                StartTime = new TimeSpan(10, 30, 0), EndTime = new TimeSpan(15, 0, 0), Location = "Hogeschool Rotterdam", AdminApproval = true, Event_Attendances = new() });
+            modelBuilder.Entity<Event>()
+                .HasData(new Event { EventId = 2, Title = "Final", Description = "Last day", EventDate = new DateOnly(2025, 6, 30),
+                StartTime = new TimeSpan(11, 0, 0), EndTime = new TimeSpan(12, 0, 0), Location = "Hogeschool Rotterdam", AdminApproval = true, Event_Attendances = new() });
 
-            var user1 = new User { UserId = 1, FirstName = "Max", LastName = "Bretherton", Email = "max@example.com", Password = "secret", 
-                    RecuringDays = "12", Attendances = new List<Attendance>(), Event_Attendances = new List<Event_Attendance>()};
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.UserId).IsUnique();
+            
+            var user1 = new User { UserId = 1, FirstName = "Max", LastName = "Bretherton", Email = "max@example.com", Password = EncryptionHelper.EncryptPassword("secret"), RecuringDays = "mo,tu,we"};
             modelBuilder.Entity<User>().HasData(user1);
-            var user2 = new User { UserId = 2, FirstName = "Amer", LastName = "Alhasoun", Email = "amer@example.com", Password = "secret", 
-                    RecuringDays = "12", Attendances = new List<Attendance>(), Event_Attendances = new List<Event_Attendance>()};
+            
+            var user2 = new User { UserId = 2, FirstName = "Amer", LastName = "Alhasoun", Email = "max@example.com", Password = EncryptionHelper.EncryptPassword("secret"), RecuringDays = "we,th,fr"};
             modelBuilder.Entity<User>().HasData(user2);
-            var user3 = new User { UserId = 3, FirstName = "Aymane", LastName = "Aazouz", Email = "aymene@example.com", Password = "secret", 
-                    RecuringDays = "12", Attendances = new List<Attendance>(), Event_Attendances = new List<Event_Attendance>()};
+            
+            var user3 = new User { UserId = 3, FirstName = "Aymane", LastName = "Aazouz", Email = "max@example.com", Password = EncryptionHelper.EncryptPassword("secret"), RecuringDays = "mo,we,fr"};
             modelBuilder.Entity<User>().HasData(user3);
-            var user4 = new User { UserId = 4, FirstName = "Jordy", LastName = "Mahn", Email = "jordy@example.com", Password = "secret", 
-                    RecuringDays = "12", Attendances = new List<Attendance>(), Event_Attendances = new List<Event_Attendance>()};
+           
+            var user4 = new User { UserId = 4, FirstName = "Jordy", LastName = "Mahn", Email = "max@example.com", Password = EncryptionHelper.EncryptPassword("secret"), RecuringDays = "tu,we,th"};
             modelBuilder.Entity<User>().HasData(user4);
 
 
-            modelBuilder.Entity<Event>()
-                .HasIndex(e => e.EventId).IsUnique();
-
-            var event1 = new Event { EventId = 1, Title = "Opening", Description = "First event of the year", EventDate = new DateOnly(2024, 09, 01),
-                StartTime = new TimeSpan(12, 30, 0), EndTime = new TimeSpan(16, 0, 0), Location = "Hogeschool Rotterdam", AdminApproval = true, Event_Attendances = new List<Event_Attendance>()};
-
-            modelBuilder.Entity<Event>().HasData(event1);
-
             modelBuilder.Entity<Event_Attendance>()
-                .HasIndex(p => p.Event_AttendanceId).IsUnique();
-
-            var attendee1 = new Event_Attendance{ Event_AttendanceId = 1, Rating = 5, Feedback = "This was amazing!", UserId = user1.UserId, EventId = event1.EventId};
-            modelBuilder.Entity<Event_Attendance>()
-                .HasData(attendee1);
-            var attendee2 = new Event_Attendance{ Event_AttendanceId = 2, Rating = 1, Feedback = "This sucked!", UserId = user3.UserId, EventId = event1.EventId};
-            modelBuilder.Entity<Event_Attendance>()
-                .HasData(attendee2);
-
-            //event1.Event_Attendances.Add(attendee1);
-            //event1.Event_Attendances.Add(attendee2);
+                .HasIndex(a => a.Event_AttendanceId).IsUnique();
             
-        }
+            modelBuilder.Entity<Event_Attendance>()
+                .HasData(new Event_Attendance { Event_AttendanceId = 1, Rating = 5, Feedback = "It was excellent", UserId = 1, EventId = 1});
+            modelBuilder.Entity<Event_Attendance>()
+                .HasData(new Event_Attendance { Event_AttendanceId = 2, Rating = 2, Feedback = "It was bad", UserId = 1, EventId = 2});
+            modelBuilder.Entity<Event_Attendance>()
+                .HasData(new Event_Attendance { Event_AttendanceId = 3, Rating = 4, Feedback = "It was good", UserId = 2, EventId = 1});
+            modelBuilder.Entity<Event_Attendance>()
+                .HasData(new Event_Attendance { Event_AttendanceId = 4, Rating = 1, Feedback = "It was awful", UserId = 3, EventId = 1});
+            modelBuilder.Entity<Event_Attendance>()
+                .HasData(new Event_Attendance { Event_AttendanceId = 5, Rating = 3, Feedback = "It was okay", UserId = 3, EventId = 2});
+            modelBuilder.Entity<Event_Attendance>()
+                .HasData(new Event_Attendance { Event_AttendanceId = 6, Rating = 3, Feedback = "It was decent", UserId = 4, EventId = 2});
 
+        }
+        
     }
 
 }
