@@ -34,8 +34,4 @@ public class LoginService : ILoginService
         return LoginStatus.Success;
     }
 
-    public bool IsAdminLoggedIn(string? username){
-        if (username == null) return false;
-        return _context.Admin.Any(a => a.UserName == username);
-    }
 }
