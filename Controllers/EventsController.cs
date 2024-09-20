@@ -31,18 +31,18 @@ public class EventsController : Controller
     }
 
     [HttpPost]
-    public IActionResult CreateEvent([FromBody] Event newEvent)
+    public async Task<IActionResult> CreateEvent([FromBody] Event newEvent)
     {
         if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") == null) return Unauthorized("Admin access required");
-        _eventService.CreateEvent(newEvent);
+        await _eventService.CreateEvent(newEvent);
         return CreatedAtAction(nameof(GetEvent), new { id = newEvent.EventId }, newEvent);
     }
 
-    [HttpDelete("{eventId}")]
-    public IActionResult GetDelete([FromQuery]int eventId)
+    [HttpDelete]
+    public async Task<IActionResult> GetDelete([FromQuery] int eventId)
     {
         if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") == null) return Unauthorized("Admin access required");
-        bool deleteEvent = _eventService.DeleteEvent(eventId); // calls a method to check if the given Event_Id indeed exist
-        return (deleteEvent) ? Ok("Even has been deleted") : BadRequest("Event not found");
+        bool deleteEvent = await _eventService.DeleteEvent(eventId); // calls a method to check if the given Event_Id indeed exist
+        return deleteEvent ? Ok($"Event {eventId} has been deleted") : BadRequest($"Event {eventId} not found");
     }
 }

@@ -35,14 +35,16 @@ public class EventsService : IEventsService
         return ev;
     }
 
-    public void CreateEvent(Event newEvent)
+    public async Task CreateEvent(Event newEvent)
     {
         _context.Event.Add(newEvent);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
-    
-    public bool DeleteEvent(int eventId)
+
+    public async Task<bool> DeleteEvent(int eventId)
     {
+        Console.WriteLine(eventId);
+        
         bool IsDeleted = false;
         foreach (Event ev in _context.Event)
         {
@@ -53,6 +55,8 @@ public class EventsService : IEventsService
                 break;
             }
         }
+        await _context.SaveChangesAsync();
+
         return IsDeleted;
     }
 }

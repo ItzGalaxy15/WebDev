@@ -5,8 +5,8 @@ namespace StarterKit.Services;
 public interface IEventsService {
     public Event[] GetAllEvents();
     public Event? GetEventById(int id);
-    public void CreateEvent(Event newEvent);
+    public Task CreateEvent(Event newEvent);
     
-    public bool DeleteEvent(int eventID);
+    public Task<bool> DeleteEvent(int eventID);
 }
 
