@@ -34,4 +34,20 @@ public class EventsService : IEventsService
 
         return Events.ToArray();
     }
+    
+    // checks if the given Event_Id indeed exist
+    public bool DeleteEvent(int eventId)
+    {
+        bool IsDeleted = false;
+        foreach (Event ev in _context.Event)
+        {
+            if (ev.EventId ==  eventId)
+            {
+                IsDeleted = true;
+                ev.Delete = true;
+                break;
+            }
+        }
+        return IsDeleted;
+    }
 }
