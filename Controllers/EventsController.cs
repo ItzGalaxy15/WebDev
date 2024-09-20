@@ -37,4 +37,12 @@ public class EventsController : Controller
         _eventService.CreateEvent(newEvent);
         return CreatedAtAction(nameof(GetEvent), new { id = newEvent.EventId }, newEvent);
     }
+
+    [HttpDelete("{eventId}")]
+    public IActionResult GetDelete([FromQuery]int eventId)
+    {
+        if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") == null) return Unauthorized("Admin access required");
+        bool deleteEvent = _eventService.DeleteEvent(eventId); // calls a method to check if the given Event_Id indeed exist
+        return (deleteEvent) ? Ok("Even has been deleted") : BadRequest("Event not found");
+    }
 }

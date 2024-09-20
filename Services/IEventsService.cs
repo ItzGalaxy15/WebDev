@@ -7,4 +7,6 @@ public interface IEventsService {
     public Event? GetEventById(int id);
     public void CreateEvent(Event newEvent);
     
+    public bool DeleteEvent(int eventID);
 }
+

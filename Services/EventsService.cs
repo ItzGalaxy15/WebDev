@@ -26,6 +26,7 @@ public class EventsService : IEventsService
 
     public Event? GetEventById(int id)
     {
+        // checks if the given Event_Id indeed exist
         var ev = _context.Event.FirstOrDefault(e => e.EventId == id);
         if (ev != null)
         {
@@ -38,5 +39,20 @@ public class EventsService : IEventsService
     {
         _context.Event.Add(newEvent);
         _context.SaveChanges();
+    }
+    
+    public bool DeleteEvent(int eventId)
+    {
+        bool IsDeleted = false;
+        foreach (Event ev in _context.Event)
+        {
+            if (ev.EventId ==  eventId)
+            {
+                IsDeleted = true;
+                ev.Delete = true;
+                break;
+            }
+        }
+        return IsDeleted;
     }
 }
