@@ -38,6 +38,14 @@ public class EventsController : Controller
         return CreatedAtAction(nameof(GetEvent), new { id = newEvent.EventId }, newEvent);
     }
 
+    [HttpPut]
+    public async Task<IActionResult> CreateAttendenceEvent([FromBody] Event_Attendance newAttendance)
+    {
+        if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") == null) return Unauthorized("Admin access required");
+        await _eventService.CreateAttendenceEvent(newAttendance);
+        return CreatedAtAction(nameof(GetEvent), new { id = newAttendance.Event_AttendanceId}, newAttendance);
+    }
+
     [HttpDelete]
     public async Task<IActionResult> GetDelete([FromQuery] int eventId)
     {

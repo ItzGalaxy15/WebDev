@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.Filters;
 using StarterKit.Models;
 using StarterKit.Utils;
 
@@ -38,6 +39,12 @@ public class EventsService : IEventsService
     public async Task CreateEvent(Event newEvent)
     {
         _context.Event.Add(newEvent);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task CreateAttendenceEvent(Event_Attendance newAttendance)
+    {
+        _context.Event_Attendance.Add(newAttendance);
         await _context.SaveChangesAsync();
     }
 
