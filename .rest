@@ -58,9 +58,8 @@ PUT  http://localhost:5097/api/v1/events HTTP/1.1
 content-type: application/json
 
 {
-    "Event_AttendanceId": 7,
     "Rating": 1,
     "Feedback": "it was ok",
-    "UserId": 0,
+    "UserId": 4,
     "EventId": 1
 }

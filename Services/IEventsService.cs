@@ -7,7 +7,7 @@ public interface IEventsService {
     public Event? GetEventById(int id);
     public Task CreateEvent(Event newEvent);
 
-    public Task CreateAttendenceEvent(Event_Attendance newAttendance);
+    public Task<bool> CreateAttendenceEvent(Event_Attendance newAttendance);
 
     public Task<bool> DeleteEvent(int eventID);
 }

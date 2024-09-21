@@ -42,10 +42,27 @@ public class EventsService : IEventsService
         await _context.SaveChangesAsync();
     }
 
-    public async Task CreateAttendenceEvent(Event_Attendance newAttendance)
+    public async Task<bool> CreateAttendenceEvent(Event_Attendance newAttendance)
     {
-        _context.Event_Attendance.Add(newAttendance);
-        await _context.SaveChangesAsync();
+        bool alreadyExist = false;
+        foreach(Event_Attendance att in _context.Event_Attendance)
+        {
+            if (att.EventId == newAttendance.EventId && att.UserId == newAttendance.UserId)
+            {
+                alreadyExist = true;
+                break;
+            }
+        }
+        if (!alreadyExist)
+        {
+            _context.Event_Attendance.Add(newAttendance);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public async Task<bool> DeleteEvent(int eventId)
