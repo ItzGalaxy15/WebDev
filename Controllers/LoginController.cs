@@ -19,7 +19,7 @@ public class LoginController : Controller
     [HttpPost("Login")]
     public IActionResult Login([FromBody] LoginBody loginBody)
     {
-        // checks if the user is already logged in
+        // checks if an admin is already logged in
         if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") != null) return Ok("You are already logged in");
 
         if (loginBody.Username is null) return Unauthorized("Incorrect username");
@@ -38,7 +38,7 @@ public class LoginController : Controller
     }
 
     [HttpGet("IsAdminLoggedIn")]
-    // checks if the user is an admin
+    // checks if the caller is an admin
     public IActionResult IsAdminLoggedIn()
     {
         string? username = HttpContext.Session.GetString("ADMIN_SESSION_KEY");
