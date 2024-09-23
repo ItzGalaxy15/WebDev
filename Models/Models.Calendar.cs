@@ -59,8 +59,10 @@ namespace StarterKit.Models
 
         public bool AdminApproval { get; set; }
 
+        public bool Delete { get; set; } = false;
+
         // This list is not saved in the database, but is used when getting all events,
         // so all event_attendances can get added to the event when returning.
-        public required List<Event_Attendance> Event_Attendances { get; set; }
+        public List<Event_Attendance>? Event_Attendances { get; set; }
     }
 }

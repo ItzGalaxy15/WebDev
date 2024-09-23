@@ -28,3 +28,38 @@ GET http://localhost:5097/api/v1/login/logout HTTP/1.1
 ###
 
 GET http://localhost:5097/api/v1/events HTTP/1.1
+
+
+###
+GET http://localhost:5097/api/v1/Events/1 HTTP/1.1
+
+###
+POST http://localhost:5097/api/v1/events HTTP/1.1
+content-type: application/json
+
+{
+    "Title": "Event 1",
+    "Description": "Event 1 Description",
+    "EventDate": "2021-12-12",
+    "StartTime": "12:00:00",
+    "EndTime": "14:00:00",
+    "Location": "Event 1 Location"
+}
+
+
+###
+
+DELETE http://localhost:5097/api/v1/events?eventId=3 HTTP/1.1
+
+
+###
+
+PUT  http://localhost:5097/api/v1/events HTTP/1.1
+content-type: application/json
+
+{
+    "Rating": 1,
+    "Feedback": "it was ok",
+    "UserId": 4,
+    "EventId": 1
+}
