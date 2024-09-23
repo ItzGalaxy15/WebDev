@@ -39,17 +39,17 @@ public class EventsController : Controller
     }
 
     [HttpPut]
-    public async Task<IActionResult> CreateAttendenceEvent([FromBody] Event_Attendance newAttendance)
+    public async Task<IActionResult> CreateAttendenceEvent([FromBody] Event_Attendance newEventAttendance)
     {
         if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") == null) return Unauthorized("Admin access required");
-        bool check = await _eventService.CreateAttendenceEvent(newAttendance);
+        bool check = await _eventService.AddEventFeedback(newEventAttendance);
         if (check)
         {
             return Ok("New attendance added successfully.");
         }
         else
         {
-            return Conflict("Attendance already exist");
+            return BadRequest("Couldn't add feedback.");
         }
     }
 

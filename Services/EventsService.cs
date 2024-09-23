@@ -16,6 +16,7 @@ public class EventsService : IEventsService
 
    public Event[] GetAllEvents()
     {
+        // Group all Event_Attendances by their EventId, and then add those groups to the correct Event.Event_Attendances
         var EventAttendancesPerEvent = _context.Event_Attendance.GroupBy(ev_att => ev_att.EventId).ToList();
         List<Event> Events = _context.Event.ToList();
         foreach (var ev in Events)
@@ -42,33 +43,22 @@ public class EventsService : IEventsService
         await _context.SaveChangesAsync();
     }
 
-    public async Task<bool> CreateAttendenceEvent(Event_Attendance newAttendance)
+    public async Task<bool> AddEventFeedback(Event_Attendance newEventAttendance)
     {
-        bool alreadyExist = false;
-        foreach(Event_Attendance att in _context.Event_Attendance)
-        {
-            if (att.EventId == newAttendance.EventId && att.UserId == newAttendance.UserId)
-            {
-                alreadyExist = true;
-                break;
-            }
-        }
-        if (!alreadyExist)
-        {
-            _context.Event_Attendance.Add(newAttendance);
-            await _context.SaveChangesAsync();
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        // Check if the user and event actually exist
+        if (_context.User.Any(user => user.UserId == newEventAttendance.UserId) == false) return false;
+        if (_context.Event.Any(_event => _event.EventId == newEventAttendance.EventId) == false) return false;
+        
+        _context.Event_Attendance.Add(newEventAttendance);
+        await _context.SaveChangesAsync();
+        return true;
     }
 
     public async Task<bool> DeleteEvent(int eventId)
     {
         Console.WriteLine(eventId);
         
+        // Instead of removing the event, put the event on disabled, so references to the event wont break
         bool IsDeleted = false;
         foreach (Event ev in _context.Event)
         {
