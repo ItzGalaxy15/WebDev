@@ -15,6 +15,6 @@ public interface IEventsService {
 
     public Task<bool> CreateEventAttendance(Event_Attendance newAttendance);
 
-    public bool RequesterIsSession(string? USER_SESSION_KEY, int userID);
+    public Task<bool> RequesterIsSession(string? USER_SESSION_KEY, int userID);
 }
 
