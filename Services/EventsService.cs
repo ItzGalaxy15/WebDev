@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
 using StarterKit.Models;
 using StarterKit.Utils;
 
@@ -16,26 +17,23 @@ public class EventsService : IEventsService
         _context = context;
     }
 
-   public Event[] GetAllEvents()
+   public async Task<Event[]> GetAllEvents()
     {
-        // Group all Event_Attendances by their EventId, and then add those groups to the correct Event.Event_Attendances
-        var EventAttendancesPerEvent = _context.Event_Attendance.GroupBy(ev_att => ev_att.EventId).ToList();
-        List<Event> Events = _context.Event.ToList();
-        foreach (var ev in Events)
-        {
-            ev.Event_Attendances = EventAttendancesPerEvent.FirstOrDefault(gr => gr.Key == ev.EventId)?.ToList() ?? new();
-        }
-        return Events.ToArray();
+        return await Task.FromResult(_context.Event
+        .Include(evnt => evnt.Event_Attendances)
+        .AsNoTracking()
+        .ToArray()
+        );
     }
 
-    public Event? GetEventById(int id)
+    public async Task<Event?> GetEventById(int id)
     {
-        // checks if the given Event_Id indeed exist
-        var ev = _context.Event.FirstOrDefault(e => e.EventId == id);
-        if (ev != null)
-        {
-            ev.Event_Attendances = _context.Event_Attendance.Where(ea => ea.EventId == id).ToList();
-        }
+        // checks if the given EventId indeed exist
+        var ev = await _context.Event
+        .Include(evnt => evnt.Event_Attendances)
+        .AsNoTracking()
+        .FirstOrDefaultAsync(e => e.EventId == id);
+        
         return ev;
     }
 
@@ -125,9 +123,9 @@ public class EventsService : IEventsService
 
 
     // Should probably move to a different place
-    public bool RequesterIsSession(string? USER_SESSION_KEY, int userID){
+    public async Task<bool> RequesterIsSession(string? USER_SESSION_KEY, int userID){
         // Check if the userID of the body is the same as the userID of the logged in user
-        if (userID == _context.User.FirstOrDefault(user => user.Email == USER_SESSION_KEY)?.UserId)
+        if (userID == (await _context.User.FirstOrDefaultAsync(user => user.Email == USER_SESSION_KEY))?.UserId)
             return true;
         return false;
     }

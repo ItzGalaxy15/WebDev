@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace StarterKit.Models
 {
     public class User
@@ -20,7 +22,7 @@ namespace StarterKit.Models
 
         //public required List<Attendance> Attendances { get; set; }
 
-        //public required List<Event_Attendance> Event_Attendances { get; set; }
+        public List<Event_Attendance>? Event_Attendances { get; set; }
     }
 
     public class Attendance
@@ -37,8 +39,14 @@ namespace StarterKit.Models
         public int Event_AttendanceId { get; set; }
         public int Rating { get; set; }
         public string Feedback { get; set; } = "";
+
         public required int UserId { get; set; }
+        [JsonIgnore]
+        public User? User { get; set; } = null;
+
         public required int EventId { get; set; }
+        [JsonIgnore]
+        public Event? Event { get; set; } = null;
     }
 
     public class Event
