@@ -47,6 +47,7 @@ public class EventsService : IEventsService
 
     public async Task<bool> EditEvent(EditEventBody editEventBody, string[] changes)
     {
+        if (changes.Length < 1) return false;
         foreach(string change in changes)  if (!ValidEventBody.Contains(change)) return false;
 
         Event? existEvent = await _context.Event.FirstOrDefaultAsync(e => e.EventId == editEventBody.EventId);
