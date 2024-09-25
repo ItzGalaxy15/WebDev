@@ -8,6 +8,8 @@ namespace StarterKit.Services;
 public class EventsService : IEventsService 
 {
     public readonly HashSet<int> ValidRating = new(){0, 1, 2, 3, 4, 5};
+    public readonly HashSet<string> ValidEventBody = new() {"Title", "Description", "EventDate",
+    "StartTime", "EndTime", "Location", "AdminApproval"};
     public const char SplitCharacter = '|';
 
     private readonly DatabaseContext _context;
@@ -41,6 +43,37 @@ public class EventsService : IEventsService
     {
         _context.Event.Add(newEvent);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<bool> EditEvent(EditEventBody editEventBody, string[] changes)
+    {
+        foreach(string change in changes)  if (!ValidEventBody.Contains(change)) return false;
+
+        Event? existEvent = await _context.Event.FirstOrDefaultAsync(e => e.EventId == editEventBody.EventId);
+        if (existEvent == null) return false;
+
+        foreach(string change in changes)
+        {
+            switch (change)
+            {
+                case "Title": existEvent.Title = editEventBody.Title;
+                break;
+                case "Description": existEvent.Description = editEventBody.Description;
+                break;
+                case "EventDate": existEvent.EventDate = editEventBody.EventDate;
+                break;
+                case "StartTime": existEvent.StartTime = editEventBody.StartTime;
+                break;
+                case "EndTime": existEvent.EndTime = editEventBody.EndTime;
+                break;
+                case "Location": existEvent.Location = editEventBody.Location;
+                break;
+                case "AdminApproval": existEvent.AdminApproval = editEventBody.AdminApproval;
+                break;
+            }
+        }
+        await _context.SaveChangesAsync();
+        return true;
     }
 
     public async Task<bool> CreateEventAttendance(Event_Attendance newEventAttendance)

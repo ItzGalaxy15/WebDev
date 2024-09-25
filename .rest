@@ -124,3 +124,44 @@ Content-Type: application/json
     "Password": "securepassword123"
 }
 ###
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PUT http://localhost:5097/api/v1/events?changed=Title&changed=Description HTTP/1.1
+
+content-type: application/json
+
+{
+    "Title": "Event 1",
+    "Description": "Event 1 Description"
+}

@@ -40,8 +40,17 @@ public class EventsController : Controller
         return CreatedAtAction(nameof(GetEvent), new { id = newEvent.EventId }, newEvent);
     }
 
-    // [HttpPut]
-    // This method is used to edit an event
+    [HttpPut]
+    public async Task<IActionResult> EditEvent([FromQuery] string[] changed, [FromBody] EditEventBody editedEventBody)
+    {
+        if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") == null) return Unauthorized("Admin access required");
+        bool check = await _eventService.EditEvent(editedEventBody, changed);
+
+        if (check) return Ok("Event has been successfully edited.");
+        return BadRequest("Couldn't edited the Event.");
+    }
+
+    
 
 
     [HttpPost("CreateEventAttendance")]

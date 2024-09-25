@@ -49,6 +49,8 @@ namespace StarterKit.Models
         public Event? Event { get; set; } = null;
     }
 
+    public record EditEventBody (int EventId, string Title, string Description, DateOnly EventDate,
+    TimeSpan StartTime, TimeSpan EndTime, string Location, bool AdminApproval);
     public class Event
     {
         public int EventId { get; set; }
