@@ -19,6 +19,8 @@ public class LoginController : Controller
     [HttpPost("Login")]
     public IActionResult Login([FromBody] LoginBody loginBody)
     {
+        // HttpContext.Session is a built-in object of ASP.NET Core for managing data across a user's session,
+        // and it's more like a dictionary where you store "SetString()" and retrieve data "GetString()" using keys.
         if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") != null ||
             HttpContext.Session.GetString("USER_SESSION_KEY") != null)
             return Ok("You are already logged in");
@@ -41,15 +43,16 @@ public class LoginController : Controller
         };
     }
 
+    // registerBody has the same structure as loginBody, but the username will be set to email in the database
     [HttpPost("Register")]
-    public async Task<IActionResult> Register([FromBody] RegisterBody registerBody)
+    public async Task<IActionResult> Register([FromBody] LoginBody registerBody)
     {
-        if (registerBody.Email is null || registerBody.Password is null)
+        if (registerBody.Username is null || registerBody.Password is null)
         {
             return BadRequest("Email and password are required");
         }
 
-        var registrationResult = await _loginService.RegisterUser(registerBody.Email, registerBody.Password);
+        var registrationResult = await _loginService.RegisterUser(registerBody.Username, registerBody.Password);
 
         return registrationResult switch
         {
@@ -95,12 +98,6 @@ public class LoginController : Controller
 public class LoginBody
 {
     public string? Username { get; set; }
-    public string? Password { get; set; }
-}
-
-public class RegisterBody
-{
-    public string? Email { get; set; }
     public string? Password { get; set; }
 }
 
