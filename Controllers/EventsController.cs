@@ -41,10 +41,26 @@ public class EventsController : Controller
     // [HttpPut]
     // This method is used to edit an event
 
+
+    [HttpPost("CreateEventAttendance")]
+    public async Task<IActionResult> CreateAttendenceEvent([FromBody] Event_Attendance newAttendance)
+    {
+        if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Log in required");
+        if (!_eventService.RequesterIsSession(HttpContext.Session.GetString("USER_SESSION_KEY"), newAttendance.UserId)) return Unauthorized("Incorrect user");
+
+
+        bool check = await _eventService.CreateEventAttendance(newAttendance);
+
+        if (check) return Ok("Event attendance created successfully.");
+        else return Conflict("Event attendance already exist");
+    }
+
     [HttpPut("AddReview")]
     public async Task<IActionResult> AddReview([FromBody] Event_Attendance newEventAttendance)
     {
-        if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") == null) return Unauthorized("Admin access required");
+        if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Login required");
+        if (!_eventService.RequesterIsSession(HttpContext.Session.GetString("USER_SESSION_KEY"), newEventAttendance.UserId)) return Unauthorized("Incorrect login");
+
         bool check = await _eventService.AddEventFeedback(newEventAttendance);
         if (check)
         {

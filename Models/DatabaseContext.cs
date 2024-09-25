@@ -59,13 +59,13 @@ namespace StarterKit.Models
             var user1 = new User { UserId = 1, FirstName = "Max", LastName = "Bretherton", Email = "max@example.com", Password = EncryptionHelper.EncryptPassword("secret"), RecuringDays = "mo,tu,we"};
             modelBuilder.Entity<User>().HasData(user1);
             
-            var user2 = new User { UserId = 2, FirstName = "Amer", LastName = "Alhasoun", Email = "max@example.com", Password = EncryptionHelper.EncryptPassword("secret"), RecuringDays = "we,th,fr"};
+            var user2 = new User { UserId = 2, FirstName = "Amer", LastName = "Alhasoun", Email = "amer@example.com", Password = EncryptionHelper.EncryptPassword("secret"), RecuringDays = "we,th,fr"};
             modelBuilder.Entity<User>().HasData(user2);
             
-            var user3 = new User { UserId = 3, FirstName = "Aymane", LastName = "Aazouz", Email = "max@example.com", Password = EncryptionHelper.EncryptPassword("secret"), RecuringDays = "mo,we,fr"};
+            var user3 = new User { UserId = 3, FirstName = "Aymane", LastName = "Aazouz", Email = "aymane@example.com", Password = EncryptionHelper.EncryptPassword("secret"), RecuringDays = "mo,we,fr"};
             modelBuilder.Entity<User>().HasData(user3);
            
-            var user4 = new User { UserId = 4, FirstName = "Jordy", LastName = "Mahn", Email = "max@example.com", Password = EncryptionHelper.EncryptPassword("secret"), RecuringDays = "tu,we,th"};
+            var user4 = new User { UserId = 4, FirstName = "Jordy", LastName = "Mahn", Email = "jordy@example.com", Password = EncryptionHelper.EncryptPassword("secret"), RecuringDays = "tu,we,th"};
             modelBuilder.Entity<User>().HasData(user4);
 
 

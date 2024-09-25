@@ -36,7 +36,7 @@ namespace StarterKit.Models
     {
         public int Event_AttendanceId { get; set; }
         public int Rating { get; set; }
-        public required string Feedback { get; set; }
+        public string Feedback { get; set; } = "";
         public required int UserId { get; set; }
         public required int EventId { get; set; }
     }
