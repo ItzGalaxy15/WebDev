@@ -17,15 +17,17 @@ public class EventsController : Controller
     }
 
     [HttpGet]
-    public IActionResult GetEvents()
+    public async Task<IActionResult> GetEvents()
     {
-        return Ok(_eventService.GetAllEvents());
+        if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Log in required");
+        return Ok(await _eventService.GetAllEvents());
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetEvent(int id)
+    public async Task<IActionResult> GetEvent(int id)
     {
-        var ev = _eventService.GetEventById(id);
+        if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Log in required");
+        var ev = await _eventService.GetEventById(id);
         if (ev == null) return NotFound();
         return Ok(ev);
     }
@@ -46,7 +48,7 @@ public class EventsController : Controller
     public async Task<IActionResult> CreateAttendenceEvent([FromBody] Event_Attendance newAttendance)
     {
         if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Log in required");
-        if (!_eventService.RequesterIsSession(HttpContext.Session.GetString("USER_SESSION_KEY"), newAttendance.UserId)) return Unauthorized("Incorrect user");
+        if (! await _eventService.RequesterIsSession(HttpContext.Session.GetString("USER_SESSION_KEY"), newAttendance.UserId)) return Unauthorized("Incorrect user");
 
 
         bool check = await _eventService.CreateEventAttendance(newAttendance);
@@ -59,7 +61,7 @@ public class EventsController : Controller
     public async Task<IActionResult> AddReview([FromBody] Event_Attendance newEventAttendance)
     {
         if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Login required");
-        if (!_eventService.RequesterIsSession(HttpContext.Session.GetString("USER_SESSION_KEY"), newEventAttendance.UserId)) return Unauthorized("Incorrect login");
+        if (! await _eventService.RequesterIsSession(HttpContext.Session.GetString("USER_SESSION_KEY"), newEventAttendance.UserId)) return Unauthorized("Incorrect login");
 
         bool check = await _eventService.AddEventFeedback(newEventAttendance);
         if (check)

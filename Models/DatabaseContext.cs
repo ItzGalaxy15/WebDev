@@ -44,6 +44,12 @@ namespace StarterKit.Models
 
             modelBuilder.Entity<Event>()
                 .HasIndex(e => e.EventId).IsUnique();
+            modelBuilder.Entity<Event>()
+                .HasMany(e => e.Event_Attendances)
+                .WithOne(e => e.Event)
+                .HasForeignKey(e => e.EventId)
+                .IsRequired();
+        
         
             modelBuilder.Entity<Event>()
                 .HasData(new Event { EventId = 1, Title = "Opening", Description = "First day", EventDate = new DateOnly(2024, 9, 2),
@@ -55,6 +61,11 @@ namespace StarterKit.Models
 
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.UserId).IsUnique();
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Event_Attendances)
+                .WithOne(e => e.User)
+                .HasForeignKey(e => e.UserId)
+                .IsRequired();
             
             var user1 = new User { UserId = 1, FirstName = "Max", LastName = "Bretherton", Email = "max@example.com", Password = EncryptionHelper.EncryptPassword("secret"), RecuringDays = "mo,tu,we"};
             modelBuilder.Entity<User>().HasData(user1);
