@@ -1,3 +1,4 @@
+using StarterKit.Controllers;
 using StarterKit.Models;
 using StarterKit.Utils;
 
@@ -9,6 +10,23 @@ public enum ADMIN_SESSION_KEY { adminLoggedIn }
 
 public class LoginService : ILoginService
 {
+    public async Task<RegistrationStatus> RegisterUser(string email, string password)
+    {
+        if (!email.Contains("@")) return RegistrationStatus.Failure;
+
+        var encryptedPassword = EncryptionHelper.EncryptPassword(password);
+        var newUser = new User 
+        { 
+            Email = email, 
+            Password = encryptedPassword,
+            FirstName = "DefaultFirstName",
+            LastName = "DefaultLastName",
+            RecuringDays = string.Empty
+        };
+        _context.User.Add(newUser);
+        await _context.SaveChangesAsync();
+        return RegistrationStatus.Success;
+    }
 
     private readonly DatabaseContext _context;
 
@@ -19,14 +37,19 @@ public class LoginService : ILoginService
 
     public LoginStatus CheckPassword(string username, string inputPassword)
     {
-        // this method checks if the password is correct
+        string? password;
+        if (username.Contains("@")){
+            password = _context.User.FirstOrDefault(a => a.Email == username)?.Password;
+        }
+        else {
+            password = _context.Admin.FirstOrDefault(a => a.UserName == username)?.Password;
+        }
 
-        var admin = _context.Admin.FirstOrDefault(a => a.UserName == username);
-        if (admin == null)
+        if (password == null)
         {
             return LoginStatus.IncorrectUsername;
         }
-        if (admin.Password != EncryptionHelper.EncryptPassword(inputPassword))
+        if (password != EncryptionHelper.EncryptPassword(inputPassword))
         {
             return LoginStatus.IncorrectPassword;
         }

@@ -17,11 +17,26 @@ content-type: application/json
 }
 
 ###
+POST http://localhost:5097/api/v1/login/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "Username": "newuser@example.com",
+    "Password": "securepassword123"
+}
+###
 
 GET http://localhost:5097/api/v1/login/isadminloggedin HTTP/1.1
 
 ###
 
+GET http://localhost:5097/api/v1/login/isuserloggedin HTTP/1.1
+
+###
+
+GET http://localhost:5097/api/v1/login/logout HTTP/1.1
+
+###
 GET http://localhost:5097/api/v1/login/logout HTTP/1.1
 
 
@@ -54,7 +69,7 @@ DELETE http://localhost:5097/api/v1/events?eventId=3 HTTP/1.1
 
 ###
 
-PUT  http://localhost:5097/api/v1/events HTTP/1.1
+PUT  http://localhost:5097/api/v1/events/AddReview HTTP/1.1
 content-type: application/json
 
 {
@@ -62,4 +77,14 @@ content-type: application/json
     "Feedback": "it was ok",
     "UserId": 4,
     "EventId": 1
+}
+
+###
+
+POST http://localhost:5097/api/v1/login/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "Email": "newuser@example.com",
+    "Password": "securepassword123"
 }

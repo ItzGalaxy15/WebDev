@@ -38,14 +38,17 @@ public class EventsController : Controller
         return CreatedAtAction(nameof(GetEvent), new { id = newEvent.EventId }, newEvent);
     }
 
-    [HttpPut]
-    public async Task<IActionResult> CreateAttendanceEvent([FromBody] Event_Attendance newEventAttendance)
+    // [HttpPut]
+    // This method is used to edit an event
+
+    [HttpPut("AddReview")]
+    public async Task<IActionResult> AddReview([FromBody] Event_Attendance newEventAttendance)
     {
         if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") == null) return Unauthorized("Admin access required");
         bool check = await _eventService.AddEventFeedback(newEventAttendance);
         if (check)
         {
-            return Ok("New attendance added successfully.");
+            return Ok("New review added successfully.");
         }
         else
         {
