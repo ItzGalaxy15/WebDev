@@ -125,9 +125,8 @@ public class EventsService : IEventsService
         }
         // Check if the user and event actually exist
         //if (_context.User.Any(user => user.UserId == eventAttendanceReview.UserId) == false) return false;
-        if (_context.Event.Any(_event => _event.EventId == newReview.Event_AttendanceId) == false) return false;
+        //if (_context.Event.Any(_event => _event.EventId == newReview.Event_AttendanceId) == false) return false;
         
-        Console.WriteLine("jeff");
         var Reviews = await _context.Review.FirstOrDefaultAsync(rev => rev.Event_AttendanceId == newReview.Event_AttendanceId);
         if (Reviews != null)
         {
