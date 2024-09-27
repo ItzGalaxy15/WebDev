@@ -99,8 +99,8 @@ content-type: application/json
 {
     "Rating": 3,
     "Feedback": "after thinking about it, i liked it more",
-    "UserId": 4,
-    "EventId": 1
+    //"UserId": 4,
+    "Event_AttendanceId": 6
 }
 
 ###

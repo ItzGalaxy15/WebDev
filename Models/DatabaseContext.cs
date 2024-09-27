@@ -17,6 +17,7 @@ namespace StarterKit.Models
         public DbSet<Attendance> Attendance { get; set; }
         public DbSet<Event_Attendance> Event_Attendance { get; set; }
         public DbSet<Event> Event { get; set; }
+        public DbSet<Review> Review { get; set; }
 
 
 
@@ -107,7 +108,7 @@ namespace StarterKit.Models
                 .HasIndex(r => r.ReviewId).IsUnique();
             modelBuilder.Entity<Review>()
                 .HasData(new Review { ReviewId = 1, Rating = 3, Feedback = "It was decent", Event_AttendanceId = 1});
-                modelBuilder.Entity<Review>()
+            modelBuilder.Entity<Review>()
                 .HasData(new Review { ReviewId = 2, Rating = 5, Feedback = "It was awesome", Event_AttendanceId = 3});
         }
         
