@@ -37,8 +37,6 @@ namespace StarterKit.Models
     public class Event_Attendance
     {
         public int Event_AttendanceId { get; set; }
-        public int Rating { get; set; }
-        public string Feedback { get; set; } = "";
 
         public required int UserId { get; set; }
         [JsonIgnore]
@@ -47,6 +45,8 @@ namespace StarterKit.Models
         public required int EventId { get; set; }
         [JsonIgnore]
         public Event? Event { get; set; } = null;
+
+        public List<Review>? Reviews {get; set; }
     }
 
     public record EditEventBody (int EventId, string Title, string Description, DateOnly EventDate,
@@ -74,5 +74,19 @@ namespace StarterKit.Models
         // This list is not saved in the database, but is used when getting all events,
         // so all event_attendances can get added to the event when returning.
         public List<Event_Attendance>? Event_Attendances { get; set; }
+    }
+
+    public class Review
+    {
+        public int ReviewId { get; set; }
+
+        public required string Feedback { get; set; }
+
+        public required int Rating { get; set; }
+
+        public required int Event_AttendanceId { get; set; }
+
+        [JsonIgnore]
+        public Event_Attendance? Event_Attendance { get; set; } = null;
     }
 }

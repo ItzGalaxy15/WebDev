@@ -81,21 +81,34 @@ namespace StarterKit.Models
 
 
             modelBuilder.Entity<Event_Attendance>()
-                .HasIndex(a => a.Event_AttendanceId).IsUnique();
+                .HasIndex(ea => ea.Event_AttendanceId).IsUnique();
+            modelBuilder.Entity<Event_Attendance>()
+                .HasMany(e => e.Reviews)
+                .WithOne(e => e.Event_Attendance)
+                .HasForeignKey(e => e.Event_AttendanceId)
+                .IsRequired();
+
             
             modelBuilder.Entity<Event_Attendance>()
-                .HasData(new Event_Attendance { Event_AttendanceId = 1, Rating = 5, Feedback = "It was excellent", UserId = 1, EventId = 1});
+                .HasData(new Event_Attendance { Event_AttendanceId = 1, UserId = 1, EventId = 1});
             modelBuilder.Entity<Event_Attendance>()
-                .HasData(new Event_Attendance { Event_AttendanceId = 2, Rating = 2, Feedback = "It was bad", UserId = 1, EventId = 2});
+                .HasData(new Event_Attendance { Event_AttendanceId = 2, UserId = 1, EventId = 2});
             modelBuilder.Entity<Event_Attendance>()
-                .HasData(new Event_Attendance { Event_AttendanceId = 3, Rating = 4, Feedback = "It was good", UserId = 2, EventId = 1});
+                .HasData(new Event_Attendance { Event_AttendanceId = 3, UserId = 2, EventId = 1});
             modelBuilder.Entity<Event_Attendance>()
-                .HasData(new Event_Attendance { Event_AttendanceId = 4, Rating = 1, Feedback = "It was awful", UserId = 3, EventId = 1});
+                .HasData(new Event_Attendance { Event_AttendanceId = 4, UserId = 3, EventId = 1});
             modelBuilder.Entity<Event_Attendance>()
-                .HasData(new Event_Attendance { Event_AttendanceId = 5, Rating = 3, Feedback = "It was okay", UserId = 3, EventId = 2});
+                .HasData(new Event_Attendance { Event_AttendanceId = 5, UserId = 3, EventId = 2});
             modelBuilder.Entity<Event_Attendance>()
-                .HasData(new Event_Attendance { Event_AttendanceId = 6, Rating = 3, Feedback = "It was decent", UserId = 4, EventId = 2});
+                .HasData(new Event_Attendance { Event_AttendanceId = 6, UserId = 4, EventId = 2});
 
+
+            modelBuilder.Entity<Review>()
+                .HasIndex(r => r.ReviewId).IsUnique();
+            modelBuilder.Entity<Review>()
+                .HasData(new Review { ReviewId = 1, Rating = 3, Feedback = "It was decent", Event_AttendanceId = 1});
+                modelBuilder.Entity<Review>()
+                .HasData(new Review { ReviewId = 2, Rating = 5, Feedback = "It was awesome", Event_AttendanceId = 3});
         }
         
     }

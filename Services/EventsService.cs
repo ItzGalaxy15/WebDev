@@ -92,9 +92,6 @@ public class EventsService : IEventsService
             }
         }
 
-        // If a review was given, get rid of it
-        newEventAttendance.Feedback = "";
-        newEventAttendance.Rating = 0;
 
         _context.Event_Attendance.Add(newEventAttendance);
         await _context.SaveChangesAsync();
