@@ -23,6 +23,7 @@ public class EventsService : IEventsService
     {
         return await Task.FromResult(_context.Event
         .Include(evnt => evnt.Event_Attendances)
+        .ThenInclude(evAtt => evAtt.Reviews)
         .AsNoTracking()
         .ToArray()
         );
@@ -33,6 +34,7 @@ public class EventsService : IEventsService
         // checks if the given EventId indeed exist
         var ev = await _context.Event
         .Include(evnt => evnt.Event_Attendances)
+        .ThenInclude(evAtt => evAtt.Reviews)
         .AsNoTracking()
         .FirstOrDefaultAsync(e => e.EventId == id);
         
@@ -117,8 +119,8 @@ public class EventsService : IEventsService
 
     public async Task<bool> AddReview(Review newReview)
     {
-        // If feedback contains the split character '|' or the rating not a number between 0-5, its invalid
-        if (newReview.Feedback.Contains('|') || 
+        // the rating not a number between 0-5, its invalid
+        if ( 
             !ValidRating.Contains(newReview.Rating))
         {
             return false;
@@ -126,11 +128,12 @@ public class EventsService : IEventsService
         // Check if the user and event actually exist
         //if (_context.User.Any(user => user.UserId == eventAttendanceReview.UserId) == false) return false;
         //if (_context.Event.Any(_event => _event.EventId == newReview.Event_AttendanceId) == false) return false;
-        
+        // check of att id bestaat zodat ik een review er aan kan hangen
         var Reviews = await _context.Review.FirstOrDefaultAsync(rev => rev.Event_AttendanceId == newReview.Event_AttendanceId);
         if (Reviews != null)
         {
             // If there already is feedback, add the extra feedback, split with the '|' character
+            // reviews should always be added and never changed
             if (Reviews.Feedback.Length > 0)
             {
                 Reviews.Feedback += $"|{newReview.Feedback}";

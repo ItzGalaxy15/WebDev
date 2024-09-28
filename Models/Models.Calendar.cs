@@ -46,7 +46,7 @@ namespace StarterKit.Models
         [JsonIgnore]
         public Event? Event { get; set; } = null;
 
-        public List<Review>? Reviews {get; set; }
+        public List<Review> Reviews {get; set; } = null!; // Makes it so it doesn't warn for null when .ThenInclude with EF Core
     }
 
     public record EditEventBody (int EventId, string Title, string Description, DateOnly EventDate,
@@ -73,7 +73,7 @@ namespace StarterKit.Models
 
         // This list is not saved in the database, but is used when getting all events,
         // so all event_attendances can get added to the event when returning.
-        public List<Event_Attendance>? Event_Attendances { get; set; }
+        public List<Event_Attendance> Event_Attendances { get; set; } = null!;
     }
 
     public class Review
