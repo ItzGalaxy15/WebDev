@@ -70,10 +70,13 @@ public class EventsController : Controller
     public async Task<IActionResult> AddReview([FromBody] Review newReview)
     {
         if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Login required");
-        //if (! await _eventService.RequesterIsSession(HttpContext.Session.GetString("USER_SESSION_KEY"), )) return Unauthorized("Incorrect login");
-        if (! await _eventService.CheckIfCorrectUser(HttpContext.Session.GetString("USER_SESSION_KEY"), newReview.Event_AttendanceId)) return Unauthorized("Incorrect login");
+        var (isCorrectUser, AttId) = await _eventService.CheckIfCorrectUser(HttpContext.Session.GetString("USER_SESSION_KEY"), newReview.EventId);
+        if(!isCorrectUser)
+        {
+            return Unauthorized("You didn't attend this event.");
+        }
 
-        bool check = await _eventService.AddReview(newReview);
+        bool check = await _eventService.AddReview(newReview, AttId);
         if (check)
         {
             return Ok("New review added successfully.");

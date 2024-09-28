@@ -101,61 +101,39 @@ public class EventsService : IEventsService
 
     }
 
-    public async Task<bool> CheckIfCorrectUser(string? USER_SESSION_KEY, int AttId)  //finds users email and checks if it matches the session
+    public async Task<(bool, int)> CheckIfCorrectUser(string? USER_SESSION_KEY, int EventId)
     {
-        var att = await _context.Event_Attendance.FirstOrDefaultAsync(id => id.Event_AttendanceId == AttId);
-        
-        if (att != null)
+        //with users email checks if it matches the session
+        var uid = await _context.User.FirstOrDefaultAsync(u => u.Email == USER_SESSION_KEY);
+        if (uid != null)
         {
-            var user =  await _context.User.FirstOrDefaultAsync(u => u.UserId == att.UserId);
-            if (user != null && user.Email == USER_SESSION_KEY)
+            foreach(Event_Attendance att in _context.Event_Attendance)
             {
-                return true;
+                //goes through event attendance to check if eventid and user id matches
+                if (att.EventId == EventId && att.UserId == uid.UserId)
+                {
+                    //sends that the correct into has been found along with the attendance id
+                    return (true, att.Event_AttendanceId);
+                }
             }
-            return false;
+            return (false, 0);
         }
-        return false;
+        return (false, 0);
     }
 
-    public async Task<bool> AddReview(Review newReview)
+    public async Task<bool> AddReview(Review newReview, int AttId)
     {
         // the rating not a number between 0-5, its invalid
-        if ( 
-            !ValidRating.Contains(newReview.Rating))
+        if (!ValidRating.Contains(newReview.Rating))
         {
             return false;
         }
-        // Check if the user and event actually exist
-        //if (_context.User.Any(user => user.UserId == eventAttendanceReview.UserId) == false) return false;
-        //if (_context.Event.Any(_event => _event.EventId == newReview.Event_AttendanceId) == false) return false;
-        // check of att id bestaat zodat ik een review er aan kan hangen
-        var Reviews = await _context.Review.FirstOrDefaultAsync(rev => rev.Event_AttendanceId == newReview.Event_AttendanceId);
-        if (Reviews != null)
-        {
-            // If there already is feedback, add the extra feedback, split with the '|' character
-            // reviews should always be added and never changed
-            if (Reviews.Feedback.Length > 0)
-            {
-                Reviews.Feedback += $"|{newReview.Feedback}";
-            }
-            else
-            {
-                Reviews.Feedback = newReview.Feedback;
-            }
-            // If a new Rating was given, replace it
-            if (newReview.Rating != 0)
-            {
-                Reviews.Rating = newReview.Rating;
-            }
-            await _context.SaveChangesAsync();
-            return true;
-        }
-        else
-        {
-            _context.Review.Add(newReview);
-            await _context.SaveChangesAsync();
-            return true;
-        }
+        //adding Event_AttendanceId for the foreignkeys
+        newReview.Event_AttendanceId = AttId;
+        
+        _context.Review.Add(newReview);
+        await _context.SaveChangesAsync();
+        return true;
     }
 
     public async Task<bool> DeleteEvent(int eventId)

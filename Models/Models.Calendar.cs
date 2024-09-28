@@ -84,7 +84,9 @@ namespace StarterKit.Models
 
         public required int Rating { get; set; }
 
-        public required int Event_AttendanceId { get; set; }
+        public required int EventId { get; set; }
+
+        public int Event_AttendanceId { get; set; }
 
         [JsonIgnore]
         public Event_Attendance? Event_Attendance { get; set; } = null;

@@ -107,9 +107,9 @@ namespace StarterKit.Models
             modelBuilder.Entity<Review>()
                 .HasIndex(r => r.ReviewId).IsUnique();
             modelBuilder.Entity<Review>()
-                .HasData(new Review { ReviewId = 1, Rating = 3, Feedback = "It was decent", Event_AttendanceId = 1});
+                .HasData(new Review { ReviewId = 1, Rating = 3, Feedback = "It was decent", EventId = 1, Event_AttendanceId = 1});
             modelBuilder.Entity<Review>()
-                .HasData(new Review { ReviewId = 2, Rating = 5, Feedback = "It was awesome", Event_AttendanceId = 3});
+                .HasData(new Review { ReviewId = 2, Rating = 5, Feedback = "It was awesome", EventId = 2, Event_AttendanceId = 3});
         }
         
     }

@@ -99,10 +99,7 @@ content-type: application/json
 {
     "Rating": 3,
     "Feedback": "after thinking about it, i liked it more",
-    //"UserId": 4,
-    //"Event_AttendanceId": 6
-    "Eventid": 1
-    //event id and user session vind the attendance id 
+    "EventId": 1
 }
 
 ###
