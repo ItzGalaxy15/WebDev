@@ -13,11 +13,11 @@ public interface IEventsService {
 
     public Task<bool> DeleteEvent(int eventID);
 
-    public Task<bool> CreateEventAttendance(Event_Attendance newAttendance);
+    public Task<bool> CreateEventAttendance(int eventId, int userId);
 
-    public Task<bool> RequesterIsSession(string? USER_SESSION_KEY, int userID);
+    public Task<int?> GetUserId(string? USER_SESSION_KEY);
 
-    public Task<(bool, int)> CheckIfCorrectUser(string? USER_SESSION_KEY, int AttId);
+    public Task<(bool, int)> CheckUserAttendedEvent(string? USER_SESSION_KEY, int AttId);
 
     public Task<bool> EditEvent(EditEventBody editEventBody, string[] changes);
 }

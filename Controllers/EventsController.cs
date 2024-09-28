@@ -54,13 +54,14 @@ public class EventsController : Controller
 
 
     [HttpPost("CreateEventAttendance")]
-    public async Task<IActionResult> CreateAttendenceEvent([FromBody] Event_Attendance newAttendance)
+    public async Task<IActionResult> CreateAttendenceEvent([FromQuery] int eventId)
     {
         if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Log in required");
-        if (! await _eventService.RequesterIsSession(HttpContext.Session.GetString("USER_SESSION_KEY"), newAttendance.UserId)) return Unauthorized("Incorrect user");
+        int? userId = await _eventService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
+        // Should not be able to be null
+        if (userId == null) return StatusCode(StatusCodes.Status500InternalServerError);
 
-
-        bool check = await _eventService.CreateEventAttendance(newAttendance);
+        bool check = await _eventService.CreateEventAttendance(eventId, (int)userId);
 
         if (check) return Ok("Event attendance created successfully.");
         else return Conflict("Event attendance already exist");
@@ -70,8 +71,8 @@ public class EventsController : Controller
     public async Task<IActionResult> AddReview([FromBody] Review newReview)
     {
         if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Login required");
-        var (isCorrectUser, AttId) = await _eventService.CheckIfCorrectUser(HttpContext.Session.GetString("USER_SESSION_KEY"), newReview.EventId);
-        if(!isCorrectUser)
+        var (attended, AttId) = await _eventService.CheckUserAttendedEvent(HttpContext.Session.GetString("USER_SESSION_KEY"), newReview.EventId);
+        if(!attended)
         {
             return Unauthorized("You didn't attend this event.");
         }

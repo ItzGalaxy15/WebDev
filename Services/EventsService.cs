@@ -79,29 +79,21 @@ public class EventsService : IEventsService
         return true;
     }
 
-    public async Task<bool> CreateEventAttendance(Event_Attendance newEventAttendance)
+    public async Task<bool> CreateEventAttendance(int eventId, int userId)
     {
         // Check if the user and event actually exist
-        if (_context.User.Any(user => user.UserId == newEventAttendance.UserId) == false) return false;
-        if (_context.Event.Any(_event => _event.EventId == newEventAttendance.EventId) == false) return false;
+        //if (_context.User.Any(user => user.UserId == newEventAttendance.UserId) == false) return false;
+        if (_context.Event.Any(_event => _event.EventId == eventId) == false) return false;
         
-        foreach(Event_Attendance att in _context.Event_Attendance)
-        {
-            if (att.EventId == newEventAttendance.EventId && att.UserId == newEventAttendance.UserId)
-            {
-                // Event attendance already exists for the user and the event
-                return false;
-            }
-        }
+        // if the Event_Attendance already exists
+        if (await _context.Event_Attendance.AnyAsync(evAtt => evAtt.EventId == eventId && evAtt.UserId == userId)) return false;
 
-
-        _context.Event_Attendance.Add(newEventAttendance);
+        _context.Event_Attendance.Add(new Event_Attendance { EventId = eventId, UserId = userId} );
         await _context.SaveChangesAsync();
         return true;
-
     }
 
-    public async Task<(bool, int)> CheckIfCorrectUser(string? USER_SESSION_KEY, int EventId)
+    public async Task<(bool, int)> CheckUserAttendedEvent(string? USER_SESSION_KEY, int EventId)
     {
         //with users email checks if it matches the session
         var uid = await _context.User.FirstOrDefaultAsync(u => u.Email == USER_SESSION_KEY);
@@ -158,10 +150,7 @@ public class EventsService : IEventsService
 
 
     // Should probably move to a different place
-    public async Task<bool> RequesterIsSession(string? USER_SESSION_KEY, int userID){
-        // Check if the userID of the body is the same as the userID of the logged in user
-        if (userID == (await _context.User.FirstOrDefaultAsync(user => user.Email == USER_SESSION_KEY))?.UserId)
-            return true;
-        return false;
+    public async Task<int?> GetUserId(string? USER_SESSION_KEY){
+        return (await _context.User.FirstOrDefaultAsync(user => user.Email == USER_SESSION_KEY))?.UserId;
     }
 }
