@@ -53,44 +53,6 @@ public class EventsController : Controller
         return BadRequest("Couldn't edited the Event.");
     }
 
-    
-
-
-    [HttpPost("CreateEventAttendance")]
-    public async Task<IActionResult> CreateAttendenceEvent([FromQuery] int eventId)
-    {
-        // if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Log in required");
-        int? userId = await _eventService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
-        // Should not be able to be null
-        if (userId == null) return StatusCode(StatusCodes.Status500InternalServerError);
-
-        bool check = await _eventService.CreateEventAttendance(eventId, (int)userId);
-
-        if (check) return Ok("Event attendance created successfully.");
-        else return Conflict("Event attendance already exist");
-    }
-
-    [HttpPut("AddReview")]
-    public async Task<IActionResult> AddReview([FromBody] Review newReview)
-    {
-        // if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Login required");
-        var (attended, AttId) = await _eventService.CheckUserAttendedEvent(HttpContext.Session.GetString("USER_SESSION_KEY"), newReview.EventId);
-        if(!attended)
-        {
-            return Unauthorized("You didn't attend this event.");
-        }
-
-        bool check = await _eventService.AddReview(newReview, AttId);
-        if (check)
-        {
-            return Ok("New review added successfully.");
-        }
-        else
-        {
-            return BadRequest("Couldn't add feedback.");
-        }
-    }
-
     [AdminRequired]
     [HttpDelete]
     public async Task<IActionResult> GetDelete([FromQuery] int eventId)

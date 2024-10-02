@@ -36,6 +36,7 @@ namespace StarterKit.Models
 
     public class Event_Attendance
     {
+        public TimeOnly? Time {get; set; } = null;
         public int Event_AttendanceId { get; set; }
 
         public required int UserId { get; set; }

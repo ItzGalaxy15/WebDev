@@ -9,11 +9,7 @@ public interface IEventsService {
 
     public Task CreateEvent(Event newEvent);
 
-    public Task<bool> AddReview(Review newReview, int AttId);
-
     public Task<bool> DeleteEvent(int eventID);
-
-    public Task<bool> CreateEventAttendance(int eventId, int userId);
 
     public Task<int?> GetUserId(string? USER_SESSION_KEY);
 
