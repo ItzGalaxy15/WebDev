@@ -19,14 +19,14 @@ public class EventsController : Controller
     [HttpGet]
     public async Task<IActionResult> GetEvents()
     {
-        if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Log in required");
+        // if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Log in required");
         return Ok(await _eventService.GetAllEvents());
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetEvent(int id)
     {
-        if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Log in required");
+        // if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Log in required");
         var ev = await _eventService.GetEventById(id);
         if (ev == null) return NotFound();
         return Ok(ev);
@@ -56,7 +56,7 @@ public class EventsController : Controller
     [HttpPost("CreateEventAttendance")]
     public async Task<IActionResult> CreateAttendenceEvent([FromQuery] int eventId)
     {
-        if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Log in required");
+        // if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Log in required");
         int? userId = await _eventService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
         // Should not be able to be null
         if (userId == null) return StatusCode(StatusCodes.Status500InternalServerError);
@@ -70,7 +70,7 @@ public class EventsController : Controller
     [HttpPut("AddReview")]
     public async Task<IActionResult> AddReview([FromBody] Review newReview)
     {
-        if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Login required");
+        // if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Login required");
         var (attended, AttId) = await _eventService.CheckUserAttendedEvent(HttpContext.Session.GetString("USER_SESSION_KEY"), newReview.EventId);
         if(!attended)
         {

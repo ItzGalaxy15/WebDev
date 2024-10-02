@@ -84,13 +84,13 @@ public class LoginController : Controller
     [HttpGet("Logout")]
     public IActionResult Logout()
     {
-        string? username = HttpContext.Session.GetString("ADMIN_SESSION_KEY");
-        string? email = HttpContext.Session.GetString("USER_SESSION_KEY");
-        if (username == null && email == null) return BadRequest("You are not logged in");
+        // string? username = HttpContext.Session.GetString("ADMIN_SESSION_KEY");
+        // string? email = HttpContext.Session.GetString("USER_SESSION_KEY");
+        // if (username == null && email == null) return BadRequest("You are not logged in");
         HttpContext.Session.Remove("ADMIN_SESSION_KEY");
         HttpContext.Session.Remove("USER_SESSION_KEY");
 
-        return Ok($"Logged out {username ?? email}");
+        return Ok($"Logged out");
     }
 
 }

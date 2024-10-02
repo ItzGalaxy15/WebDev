@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using StarterKit.Models;
 using StarterKit.Services;
 
+using  Middleware.LoginRequired;
+
 namespace StarterKit
 {
     class Program
@@ -45,6 +47,13 @@ namespace StarterKit
             app.UseAuthorization();
 
             app.UseSession();
+
+
+            app.UseLoginRequired();
+            // app.Use(async (context, next) => {
+            //     await next.Invoke();
+            //     Console.WriteLine(context.Request.Path);
+            // });
 
             app.MapControllerRoute(
                 name: "default",
