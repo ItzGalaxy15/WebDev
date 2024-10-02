@@ -16,6 +16,7 @@ public class LoginController : Controller
         _loginService = loginService;
     }
 
+
     [HttpPost("Login")]
     public IActionResult Login([FromBody] LoginBody loginBody)
     {
@@ -63,21 +64,23 @@ public class LoginController : Controller
     }
 
 
-
     [HttpGet("IsAdminLoggedIn")]
     // checks if the caller is an admin
     public IActionResult IsAdminLoggedIn()
     {
         string? username = HttpContext.Session.GetString("ADMIN_SESSION_KEY");
-        return username == null ? Unauthorized("You are not logged in") : Ok($"{username} is logged in");
+        string message = username == null ? "You are not logged in" : $"{username} is logged in";
+        return Ok(message);
     }
+
 
     [HttpGet("IsUserLoggedIn")]
     // checks if the caller is a user
     public IActionResult IsUserLoggedIn()
     {
         string? username = HttpContext.Session.GetString("USER_SESSION_KEY");
-        return username == null ? Unauthorized("You are not logged in") : Ok($"{username} is logged in");
+        string message = username == null ? "You are not logged in" : $"{username} is logged in";
+        return Ok(message);
     }
     
 

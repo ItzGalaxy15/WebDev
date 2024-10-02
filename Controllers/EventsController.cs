@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StarterKit.Models;
 using StarterKit.Services;
+using Filter.AdminRequired;
 
 namespace StarterKit.Controllers;
 
@@ -32,18 +33,20 @@ public class EventsController : Controller
         return Ok(ev);
     }
 
+    [AdminRequired]
     [HttpPost]
     public async Task<IActionResult> CreateEvent([FromBody] Event newEvent)
     {
-        if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") == null) return Unauthorized("Admin access required");
+        // if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") == null) return Unauthorized("Admin access required");
         await _eventService.CreateEvent(newEvent);
         return CreatedAtAction(nameof(GetEvent), new { id = newEvent.EventId }, newEvent);
     }
 
+    [AdminRequired]
     [HttpPut]
     public async Task<IActionResult> EditEvent([FromQuery] string[] changed, [FromBody] EditEventBody editedEventBody)
     {
-        if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") == null) return Unauthorized("Admin access required");
+        // if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") == null) return Unauthorized("Admin access required");
         bool check = await _eventService.EditEvent(editedEventBody, changed);
 
         if (check) return Ok("Event has been successfully edited.");
@@ -88,10 +91,11 @@ public class EventsController : Controller
         }
     }
 
+    [AdminRequired]
     [HttpDelete]
     public async Task<IActionResult> GetDelete([FromQuery] int eventId)
     {
-        if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") == null) return Unauthorized("Admin access required");
+        // if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") == null) return Unauthorized("Admin access required");
         bool deleteEvent = await _eventService.DeleteEvent(eventId); // calls a method to check if the given Event_Id indeed exist
         return deleteEvent ? Ok($"Event {eventId} has been deleted") : BadRequest($"Event {eventId} not found");
     }

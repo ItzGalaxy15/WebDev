@@ -8,11 +8,14 @@ public class LoginRequiredMiddleware
         _next = next;
     }
 
+    private HashSet<string> _excludedPaths = new(){"/api/v1/login/login", "api/v1/login/register", 
+                    "/api/v1/login/isuserloggedin", "/api/v1/login/isadminloggedin"};
     public async Task InvokeAsync(HttpContext context)
     {
+        // If the USER_SESSION_KEY is not set, no one is logged in
+        // It doesn't check the endpoints in excludedPaths, because they should be accessable for everyone
         string? userSession = context.Session.GetString("USER_SESSION_KEY");
-        if (context.Request.Path != "/api/v1/login/login" &&
-            context.Request.Path != "/api/v1/login/register" && 
+        if (!_excludedPaths.Contains(context.Request.Path.ToString().ToLower()) && 
             string.IsNullOrWhiteSpace(userSession))
         {
             context.Response.Redirect("login/login", true);
