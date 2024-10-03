@@ -7,11 +7,13 @@ namespace StarterKit.Services;
 
 public class AttendEventService : IAttendEventService 
 {
+    private readonly IEventsService _eventsService;
     private readonly DatabaseContext _context;
      public readonly HashSet<int> ValidRating = new(){0, 1, 2, 3, 4, 5};
-    public AttendEventService(DatabaseContext context)
+    public AttendEventService(DatabaseContext context, IEventsService eventsService)
     {
         _context = context;
+        _eventsService = eventsService;
     }
     public async Task<bool> CreateEventAttendance(int eventId, int userId)
     {
@@ -42,7 +44,44 @@ public class AttendEventService : IAttendEventService
         return true;
     }
 
+    public async Task<bool> SetEventAttendance(string USER_SESSION_KEY, int eventId)
+    {
+        // checks if the user is registered for a specific Event
+        (bool check, int event_AttendanceId)  = await _eventsService.CheckUserAttendedEvent(USER_SESSION_KEY, eventId);
+        if (check == false) return false;
+        
+        // Gets event_Attendance object based on event_AttendanceId
+        Event_Attendance? event_Attendance = await _context.Event_Attendance.FirstOrDefaultAsync(e_a => e_a.Event_AttendanceId == event_AttendanceId);
+        if (event_Attendance == null) return false;
 
-    // GetEventAttendancees
+        // has the person already been there? checks if the event_Attendance is already attended!!
+        TimeSpan? event_AttendanceTime = event_Attendance.Time;
+        if (event_AttendanceTime != null) return false;
+
+        Event? eventt =  await _context.Event.FirstOrDefaultAsync(e => e.EventId == eventId) ;
+        if (eventt == null) return false;
+        DateOnly? eventDate = eventt.EventDate;
+        TimeSpan startTime = eventt.StartTime;
+        TimeSpan endTime = eventt.EndTime;
+
+
+        //!!! Getting today's date as DateOnly. It has this format 02-10-2024
+        //!!!!!! in sqldb DateOnly (eventDate) has this format 2024-10-02
+        DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+        if (today != eventDate) return false;
+        
+
+        // Get the current time as TimeSpan. It has this format 17:12:47.6037312
+        TimeSpan currentTime = DateTime.Now.TimeOfDay;
+        // Check if the current time is between startTime and endTime
+        if (currentTime >= startTime && currentTime < endTime)
+        {
+            event_Attendance.Time = currentTime;
+            return false;
+        }
+
+        return false;
+    }
+
 
 }

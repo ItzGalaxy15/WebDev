@@ -83,7 +83,7 @@ public class EventsService : IEventsService
     public async Task<(bool, int)> CheckUserAttendedEvent(string? USER_SESSION_KEY, int EventId)
     {
         //with users email checks if it matches the session
-        var uid = await _context.User.FirstOrDefaultAsync(u => u.Email == USER_SESSION_KEY);
+        User? uid = await _context.User.FirstOrDefaultAsync(u => u.Email == USER_SESSION_KEY);
         if (uid != null)
         {
             foreach(Event_Attendance att in _context.Event_Attendance)
