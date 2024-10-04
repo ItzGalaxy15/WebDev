@@ -43,7 +43,8 @@ public class AttendEventService : IAttendEventService
         await _context.SaveChangesAsync();
         return true;
     }
-
+    
+    // It tries to set currentTime to event_Attendance.Time property
     public async Task<bool> SetEventAttendance(string USER_SESSION_KEY, int eventId)
     {
         // checks if the user is registered for the specific event
@@ -70,7 +71,7 @@ public class AttendEventService : IAttendEventService
         if (currentTime >= eventt.StartTime && currentTime < eventt.EndTime)
         {
             event_Attendance.Time = currentTime;
-            //!!! await _context.SaveChangesAsync(); // Save changes to database
+            await _context.SaveChangesAsync(); // Save changes to database
             return false;
         }
 

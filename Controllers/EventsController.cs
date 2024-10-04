@@ -11,10 +11,9 @@ public class EventsController : Controller
     private readonly IEventsService _eventService;
     private readonly DatabaseContext _dbContext;
 
-    public EventsController(IEventsService eventService, DatabaseContext dbContext)
+    public EventsController(IEventsService eventService)
     {
         _eventService = eventService;
-        _dbContext = dbContext;
     }
 
     [HttpGet]
