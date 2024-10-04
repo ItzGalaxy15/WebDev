@@ -79,4 +79,30 @@ public class AttendEventService : IAttendEventService
     }
 
 
+    // GetEventAttendancees
+
+    public async Task<List<User?>> GetEventAttendees(int eventId)
+    {
+        return await _context.Event_Attendance
+            .Where(ea => ea.EventId == eventId)
+            .Select(ea => ea.User)
+            .ToListAsync();
+    }
+
+    //DeleteEventAttendance
+    public async Task<bool> DeleteEventAttendance(int eventId, int userId)
+    {
+        var eventAttendance = await _context.Event_Attendance
+            .Where(ea => ea.EventId == eventId && ea.UserId == userId)
+            .FirstOrDefaultAsync();
+
+        if (eventAttendance == null) return false;
+
+        _context.Event_Attendance.Remove(eventAttendance);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+
+
+
 }
