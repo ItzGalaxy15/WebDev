@@ -18,6 +18,7 @@ namespace StarterKit.Models
         public DbSet<Event_Attendance> Event_Attendance { get; set; }
         public DbSet<Event> Event { get; set; }
         public DbSet<Review> Review { get; set; }
+        public DbSet<Message> Message { get; set; }
 
 
 
@@ -110,6 +111,14 @@ namespace StarterKit.Models
                 .HasData(new Review { ReviewId = 1, Rating = 3, Feedback = "It was decent", EventId = 1, Event_AttendanceId = 1});
             modelBuilder.Entity<Review>()
                 .HasData(new Review { ReviewId = 2, Rating = 5, Feedback = "It was awesome", EventId = 2, Event_AttendanceId = 3});
+
+
+            modelBuilder.Entity<Message>()
+                .HasIndex(m => m.MessageId).IsUnique();
+            modelBuilder.Entity<Message>()
+                .HasData(new Models.Message { MessageId = 1, Content = "Hello Amer!", Date = new DateTime(2024, 10, 4, 16, 15, 0), FromUserId = 1, ToUserId = 2});
+            modelBuilder.Entity<Message>()
+                .HasData(new Models.Message { MessageId = 2, Content = "Hello Max!", Date = new DateTime(2024, 10, 4, 16, 20, 0), FromUserId = 2, ToUserId = 1});
         }
         
     }
