@@ -75,7 +75,7 @@ DELETE http://localhost:5097/api/v1/events?eventId=3 HTTP/1.1
 ###
 
 // Create an Event_Attendance, for specific user and event
-POST  http://localhost:5097/api/v1/AttendEvent/CreateEventAttendance?EventId=1 HTTP/1.1
+POST  http://localhost:5097/api/v1/AttendEvent/CreateEventAttendance?EventId=2 HTTP/1.1
 content-type: application/json
 
 ###

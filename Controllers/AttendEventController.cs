@@ -22,35 +22,33 @@ public class AttendEventController : Controller
     }
 
     [HttpGet("GetEventAttendees")]
-public async Task<IActionResult> GetEventAttendees([FromQuery] int eventId)
-{
-    // Retrieve the user session key
-    string? userSession = HttpContext.Session.GetString("USER_SESSION_KEY");
-    if (string.IsNullOrWhiteSpace(userSession))
+    public async Task<IActionResult> GetEventAttendees([FromQuery] int eventId)
     {
-        return Unauthorized("User not logged in");
+        // Retrieve the user session key
+        string? userSession = HttpContext.Session.GetString("USER_SESSION_KEY");
+        if (string.IsNullOrWhiteSpace(userSession))
+        {
+            return Unauthorized("User not logged in");
+        }
+
+        // Get the user ID from the session
+        int? userId = await _eventsService.GetUserId(userSession);
+        if (userId == null)
+        {
+            return Unauthorized("User not found");
+        }
+
+        // Check if the user is an attendee of the event
+        bool isAttendee = await _attendEventService.IsUserAttendee(userId.Value, eventId);
+        if (!isAttendee)
+        {
+            return Unauthorized("User is not an attendee of this event");
+        }
+
+        // Get the list of attendees
+        var attendees = await _attendEventService.GetEventAttendees(eventId);
+        return Ok(attendees);
     }
-
-    // Get the user ID from the session
-    int? userId = await _eventsService.GetUserId(userSession);
-    if (userId == null)
-    {
-        return Unauthorized("User not found");
-    }
-
-    // Check if the user is an attendee of the event
-    bool isAttendee = await _dbContext.Event_Attendance
-        .AnyAsync(ea => ea.EventId == eventId && ea.UserId == userId);
-
-    if (!isAttendee)
-    {
-        return Unauthorized("User is not an attendee of this event");
-    }
-
-    // Get the list of attendees
-    var attendees = await _attendEventService.GetEventAttendees(eventId);
-    return Ok(attendees);
-}
 
 
     [HttpPost("CreateEventAttendance")]
