@@ -9,7 +9,6 @@ namespace StarterKit.Controllers;
 public class EventsController : Controller 
 {
     private readonly IEventsService _eventService;
-    private readonly DatabaseContext _dbContext;
 
     public EventsController(IEventsService eventService)
     {
