@@ -71,7 +71,7 @@ public class AttendEventService : IAttendEventService
         if (currentTime >= eventt.StartTime && currentTime < eventt.EndTime)
         {
             event_Attendance.Time = currentTime;
-            await _context.SaveChangesAsync(); // Save changes to database
+            await _dbcontext.SaveChangesAsync(); // Save changes to database
             return false;
         }
 
