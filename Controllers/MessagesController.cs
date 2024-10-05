@@ -17,7 +17,7 @@ public class MessagesController : Controller
     }
 
     
-    [HttpGet("GetMessage")]
+    [HttpGet]
     public async Task<IActionResult> GetMessage([FromQuery] int uid)
     {
         var mes = await _messageService.GetMessageById(uid);
@@ -26,7 +26,7 @@ public class MessagesController : Controller
     }
 
     
-    [HttpPut("UpdateMessage")]
+    [HttpPut]
     public async Task<IActionResult> UpdateMessageRead([FromQuery] int mid)
     {
         var (check, uid) = await _messageService.CheckLogin(HttpContext.Session.GetString("USER_SESSION_KEY"));
@@ -38,7 +38,7 @@ public class MessagesController : Controller
     }
 
     
-    [HttpPost("AddMessage")] //uid = user to send to
+    [HttpPost] //uid = user to send to
     public async Task<IActionResult> PostMessage([FromQuery] int uid, [FromBody] Message mes)
     {
         //checks if the user logged in and the id from message 
