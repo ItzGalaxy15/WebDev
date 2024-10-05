@@ -12,8 +12,8 @@ content-type: application/json
     "RecurringDays": "tu"
 }
 
-###
 // Revert changes
+###
 PUT http://localhost:5097/api/v1/Profile
 content-type: application/json
 
@@ -25,5 +25,14 @@ content-type: application/json
     "RecurringDays": "mo,tu,we"
 }
 ###
+POST http://localhost:5097/api/v1/login/login
+content-type: application/json
+
+{
+    "Username": "oliver@example.com",
+    "Password": "supersecret"
+}
+###
+
 
 

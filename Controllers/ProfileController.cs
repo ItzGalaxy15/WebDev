@@ -28,13 +28,13 @@ public class ProfileController : Controller
         // Log out user (if email or password was changed)
         if (edited.Password != null || edited.Email != null){
             HttpContext.Session.Remove("USER_SESSION_KEY");
-
             HttpContext.Response.Redirect("/api/v1/login/login", true);
             HttpContext.Response.StatusCode = 303;
             // HttpContext.Response.ContentType = "text/plain";
             // byte[] message = Encoding.UTF8.GetBytes("Please log in again");
             // await HttpContext.Response.Body.WriteAsync(message, 0, message.Length);
-            return (IActionResult)HttpContext.Response;
+            var empty = new EmptyResult();
+            return empty;
         }
 
         return Ok("Changed settings");

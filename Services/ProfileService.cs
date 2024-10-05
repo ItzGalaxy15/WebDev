@@ -37,8 +37,7 @@ public class ProfileService : IProfileService
         if (edited.FirstName is not null) user.FirstName = edited.FirstName;
         if (edited.LastName is not null) user.LastName = edited.LastName;
         if (edited.Email is not null) user.Email = edited.Email;
-        if (edited.Password is not null) user.Password = edited.Password;
-        //if (edited.RecurringDays is not null) user.RecuringDays = edited.RecurringDays;
+        if (edited.Password is not null) user.Password = Utils.EncryptionHelper.EncryptPassword(edited.Password);
 
         await _context.SaveChangesAsync();
         return true;
