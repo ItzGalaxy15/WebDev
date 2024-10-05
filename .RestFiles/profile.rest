@@ -1,0 +1,29 @@
+
+// Change user settings
+// redirects to login screen if email or password is changed, to re-login
+PUT http://localhost:5097/api/v1/Profile
+content-type: application/json
+
+{
+    "FirstName": "Oliver",
+    "LastName": "Breth",
+    "Email": "oliver@example.com",
+    "Password": "supersecret",
+    "RecurringDays": "tu"
+}
+
+###
+// Revert changes
+PUT http://localhost:5097/api/v1/Profile
+content-type: application/json
+
+{
+    "FirstName": "Max",
+    "LastName": "Bretherton",
+    "Email": "max@example.com",
+    "Password": "secret",
+    "RecurringDays": "mo,tu,we"
+}
+###
+
+

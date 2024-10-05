@@ -1,0 +1,41 @@
+// Get all events (and its Event_Attendees + review)
+GET http://localhost:5097/api/v1/events HTTP/1.1
+
+###
+
+// Get event (and its Event_Attendees + review) of specific event
+GET http://localhost:5097/api/v1/Events/1 HTTP/1.1
+
+###
+
+// Add a new event
+POST http://localhost:5097/api/v1/events HTTP/1.1
+content-type: application/json
+
+{
+    "Title": "Event 1",
+    "Description": "Event 1 Description",
+    "EventDate": "2021-12-12",
+    "StartTime": "12:00:00",
+    "EndTime": "14:00:00",
+    "Location": "Event 1 Location"
+}
+
+###
+
+// Delete an event with the given EventId
+DELETE http://localhost:5097/api/v1/events?eventId=3 HTTP/1.1
+
+###
+
+// Update event details
+PUT http://localhost:5097/api/v1/events?changed=Title&changed=Description HTTP/1.1
+content-type: application/json
+
+{
+    "EventId" : 1,
+    "Title": "Opening",
+    "Description": "First day"  
+}
+
+###
