@@ -27,6 +27,7 @@ namespace StarterKit
             builder.Services.AddScoped<IEventsService, EventsService>();
             builder.Services.AddScoped<IAttendEventService, AttendEventService>();
             builder.Services.AddScoped<IProfileService, ProfileService>();
+            builder.Services.AddScoped<IMessageService, MessageService>();
 
             builder.Services.AddDbContext<DatabaseContext>(
                 options => options.UseSqlite(builder.Configuration.GetConnectionString("SqlLiteDb")));

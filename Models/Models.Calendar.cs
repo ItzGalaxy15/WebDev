@@ -98,8 +98,9 @@ namespace StarterKit.Models
         public int MessageId { get; set; }
         public DateTime Date { get; set; }
         public required string Content { get; set; }
-        public required int ToUserId { get; set; }
-        public required int FromUserId { get; set; }
+        public int ToUserId { get; set; }
+        public int FromUserId { get; set; }
+        public bool BeenRead { get; set; }
     }
 }
 
