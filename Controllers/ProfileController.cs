@@ -19,6 +19,15 @@ public class ProfileController : Controller
         _profileService = profileService;
     }
 
+    [HttpGet("{name}")]
+    public async Task<IActionResult> ViewProfile(string name){
+        ProfilePage? profilePage = await _profileService.GetProfilePage(name, HttpContext.Session.GetString("USER_SESSION_KEY")!);
+        if (profilePage is null) return BadRequest("Profile does not exist");
+
+        return Ok(profilePage);
+    }
+
+
     [HttpPut]
     public async Task<IActionResult> EditProfile([FromBody] EditedProfile edited){
         bool successfullyChanged = await _profileService.ChangeSettings(edited, HttpContext.Session.GetString("USER_SESSION_KEY")!);
@@ -46,3 +55,10 @@ public record EditedProfile(
     string? FirstName = null, string? LastName = null, string? Email = null,
     string? Password = null, string? RecurringDays = null
 );
+
+
+public class ProfilePage{
+    public required User User { get; set; }
+    public required Event[] Events { get; set;}
+    public required bool ViewingOwnPage { get; set;}
+}
