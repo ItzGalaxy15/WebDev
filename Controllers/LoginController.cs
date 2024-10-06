@@ -16,6 +16,13 @@ public class LoginController : Controller
         _loginService = loginService;
     }
 
+    // This is the login page
+    [HttpGet]
+    public IActionResult Login()
+    {
+        return View();
+    }
+
 
     [HttpPost("Login")]
     public IActionResult Login([FromBody] LoginBody loginBody)

@@ -8,8 +8,9 @@ public class LoginRequiredMiddleware
         _next = next;
     }
 
-    private HashSet<string> _excludedPaths = new(){"/api/v1/login/login", "/api/v1/login/register", 
-                    "/api/v1/login/isuserloggedin", "/api/v1/login/isadminloggedin"};
+    // Maybe doesn't work the way its intended, because it checks get requests too (for login/login for example) i think
+    private readonly HashSet<string> _excludedPaths = new(){"/api/v1/login", "/api/v1/login/login", 
+                    "/api/v1/login/register", "/api/v1/login/isuserloggedin", "/api/v1/login/isadminloggedin"};
     public async Task InvokeAsync(HttpContext context)
     {
         // If the USER_SESSION_KEY is not set, no one is logged in
@@ -18,7 +19,7 @@ public class LoginRequiredMiddleware
         if (!_excludedPaths.Contains(context.Request.Path.ToString().ToLower()) && 
             string.IsNullOrWhiteSpace(userSession))
         {
-            context.Response.Redirect("/api/v1/login/login", true);
+            context.Response.Redirect("/api/v1/login", false);
             context.Response.StatusCode = 303;
             // context.Response.ContentType = "text/plain";
             // byte[] message = System.Text.Encoding.UTF8.GetBytes("Login required");
