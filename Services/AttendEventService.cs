@@ -72,7 +72,7 @@ public class AttendEventService : IAttendEventService
         {
             event_Attendance.Time = currentTime;
             await _context.SaveChangesAsync(); // Save changes to database
-            return false;
+            return true;
         }
 
         return false;

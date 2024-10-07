@@ -101,4 +101,22 @@ public async Task<IActionResult> GetEventAttendees([FromQuery] int eventId)
         if (check) return Ok("Event attendance deleted successfully.");
         else return NotFound("Event attendance does not exist");
     }
+
+
+    [HttpPost("SetEventAttendance")]
+    public async Task<IActionResult> SetEventAttendance([FromQuery] int eventId)
+    {
+        // Retrieve the user session key
+        string? userSession = HttpContext.Session.GetString("USER_SESSION_KEY");
+        if (string.IsNullOrWhiteSpace(userSession))
+        {
+            return Unauthorized("User not logged in");
+        }
+
+        bool check = await _attendEventService.SetEventAttendance(userSession, eventId);
+    
+        if (check) return Ok("Event Attendance is successfully set");
+        else return BadRequest("Couldn't set Event Attendance.");
+    }
+
 }
