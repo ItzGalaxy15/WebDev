@@ -19,11 +19,11 @@ public class LoginRequiredMiddleware
         if (!_excludedPaths.Contains(context.Request.Path.ToString().ToLower()) && 
             string.IsNullOrWhiteSpace(userSession))
         {
-            context.Response.Redirect("/api/v1/login", false);
-            context.Response.StatusCode = 303;
-            // context.Response.ContentType = "text/plain";
-            // byte[] message = System.Text.Encoding.UTF8.GetBytes("Login required");
-            // await context.Response.Body.WriteAsync(message, 0, message.Length);
+            // context.Response.Redirect("/api/v1/login", false);
+            context.Response.StatusCode = 401;
+            context.Response.ContentType = "text/plain";
+            byte[] message = System.Text.Encoding.UTF8.GetBytes("Login required");
+            await context.Response.Body.WriteAsync(message, 0, message.Length);
             return;
         }
 
