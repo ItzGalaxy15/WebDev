@@ -10,14 +10,12 @@ using Microsoft.EntityFrameworkCore;
 [Route("api/v1/AttendEvent")]
 public class AttendEventController : Controller 
 {
-    private readonly DatabaseContext _dbContext;
     private readonly IAttendEventService _attendEventService;
     private readonly IEventsService _eventsService;
 
-    public AttendEventController( IEventsService eventsService,DatabaseContext dbContext, IAttendEventService attendEventService)
+    public AttendEventController( IEventsService eventsService, IAttendEventService attendEventService)
     {
         _eventsService = eventsService;
-        _dbContext = dbContext;
         _attendEventService = attendEventService;
     }
 
