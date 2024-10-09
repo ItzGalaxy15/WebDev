@@ -11,7 +11,7 @@ public interface IEventsService {
 
     public Task<bool> DeleteEvent(int eventID);
 
-    public Task<int?> GetUserId(string? USER_SESSION_KEY);
+    public Task<int> GetUserId(string? USER_SESSION_KEY);
 
     public Task<(bool, int)> CheckUserAttendedEvent(string? USER_SESSION_KEY, int AttId);
 

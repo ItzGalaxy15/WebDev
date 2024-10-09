@@ -28,15 +28,6 @@ public class MessageService : IMessageService
                         .ToListAsync();
         
     }
-    public async Task<(bool, int)> CheckLogin(string? session)
-    {
-        var u = await _context.User.FirstOrDefaultAsync(user => user.Email == session);
-        if (u != null)
-        {
-            return (true, u.UserId);
-        }
-        return (false, 0);
-    }
 
     public async Task CreateMessage(Message mes, int To_id, int Current_id)
     {   

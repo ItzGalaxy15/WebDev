@@ -10,18 +10,22 @@ namespace StarterKit.Controllers;
 public class MessagesController : Controller 
 {
     private readonly IMessageService _messageService;
+    private readonly IEventsService _eventService;
 
-    public MessagesController(IMessageService messageService)
+    public MessagesController(IMessageService messageService, IEventsService eventService)
     {
         _messageService = messageService;
+        _eventService = eventService;
     }
 
-    
+
     [HttpGet]
-    public async Task<IActionResult> GetMessage([FromQuery] int uid)
+    public async Task<IActionResult> GetMessage([FromQuery] int GetFromUid)
     {
-        var mes = await _messageService.GetMessageById(uid);
-        if (mes == null) return NotFound("Messages not found.");
+        var CurrentUid = await _eventService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
+        if (GetFromUid != CurrentUid) return Unauthorized();
+        var mes = await _messageService.GetMessageById(GetFromUid);
+        if (mes == null) return NotFound("No messages were found.");
         return Ok(mes);
     }
 
@@ -29,24 +33,21 @@ public class MessagesController : Controller
     [HttpPut]
     public async Task<IActionResult> UpdateMessageRead([FromQuery] int mid)
     {
-        var (check, uid) = await _messageService.CheckLogin(HttpContext.Session.GetString("USER_SESSION_KEY"));
-        if (check == false) return Unauthorized("login is required.");
-
-        bool check2 = await _messageService.MessageRead(uid, mid);
-        if (check2) return Ok("Message read status has been updated");
+        var uid = await _eventService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
+        
+        bool check = await _messageService.MessageRead(uid, mid);
+        if (check) return Ok("Message read status has been updated");
         return BadRequest("Message read status has not been updated.");
     }
 
     
     [HttpPost] //uid = user to send to
-    public async Task<IActionResult> PostMessage([FromQuery] int uid, [FromBody] Message mes)
+    public async Task<IActionResult> PostMessage([FromQuery] int SendToUid, [FromBody] Message mes)
     {
-        //checks if the user logged in and the id from message 
-        var (check, Current_id) = await _messageService.CheckLogin(HttpContext.Session.GetString("USER_SESSION_KEY"));
-        if (check == false) return Unauthorized("login is required.");
-        if (Current_id == uid) return Unauthorized("Cant send a message to yourself.");
+        var CurrentUid = await _eventService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
+        if (CurrentUid == SendToUid) return Unauthorized("Cant send a message to yourself.");
 
-        await _messageService.CreateMessage(mes, uid, Current_id);
+        await _messageService.CreateMessage(mes, SendToUid, CurrentUid);
         return Ok("Message has been sent!");
 
     }

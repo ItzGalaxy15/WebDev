@@ -22,15 +22,8 @@ public class AttendEventController : Controller
     [HttpGet("GetEventAttendees")]
     public async Task<IActionResult> GetEventAttendees([FromQuery] int eventId)
     {
-        // Retrieve the user session key
-        string? userSession = HttpContext.Session.GetString("USER_SESSION_KEY");
-        if (string.IsNullOrWhiteSpace(userSession))
-        {
-            return Unauthorized("User not logged in");
-        }
-
         // Get the user ID from the session
-        int? userId = await _eventsService.GetUserId(userSession);
+        int? userId = await _eventsService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
         if (userId == null)
         {
             return Unauthorized("User not found");
@@ -102,14 +95,7 @@ public class AttendEventController : Controller
     [HttpPost("SetEventAttendance")]
     public async Task<IActionResult> SetEventAttendance([FromQuery] int eventId)
     {
-        // Retrieve the user session key
-        string? userSession = HttpContext.Session.GetString("USER_SESSION_KEY");
-        if (string.IsNullOrWhiteSpace(userSession))
-        {
-            return Unauthorized("User not logged in");
-        }
-
-        bool check = await _attendEventService.SetEventAttendance(userSession, eventId);
+        bool check = await _attendEventService.SetEventAttendance(HttpContext.Session.GetString("USER_SESSION_KEY")!, eventId);
     
         if (check) return Ok("Event Attendance is successfully set");
         else return BadRequest("Couldn't set Event Attendance.");

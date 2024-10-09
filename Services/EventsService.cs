@@ -123,7 +123,7 @@ public class EventsService : IEventsService
 
 
     // Should probably move to a different place
-    public async Task<int?> GetUserId(string? USER_SESSION_KEY){
-        return (await _context.User.FirstOrDefaultAsync(user => user.Email == USER_SESSION_KEY))?.UserId;
+    public async Task<int> GetUserId(string? USER_SESSION_KEY){
+        return (await _context.User.FirstOrDefaultAsync(user => user.Email == USER_SESSION_KEY))!.UserId;
     }
 }
