@@ -10,47 +10,43 @@ using Microsoft.EntityFrameworkCore;
 [Route("api/v1/AttendEvent")]
 public class AttendEventController : Controller 
 {
-    private readonly DatabaseContext _dbContext;
     private readonly IAttendEventService _attendEventService;
     private readonly IEventsService _eventsService;
 
-    public AttendEventController( IEventsService eventsService,DatabaseContext dbContext, IAttendEventService attendEventService)
+    public AttendEventController( IEventsService eventsService, IAttendEventService attendEventService)
     {
         _eventsService = eventsService;
-        _dbContext = dbContext;
         _attendEventService = attendEventService;
     }
 
     [HttpGet("GetEventAttendees")]
-public async Task<IActionResult> GetEventAttendees([FromQuery] int eventId)
-{
-    // Retrieve the user session key
-    string? userSession = HttpContext.Session.GetString("USER_SESSION_KEY");
-    if (string.IsNullOrWhiteSpace(userSession))
+    public async Task<IActionResult> GetEventAttendees([FromQuery] int eventId)
     {
-        return Unauthorized("User not logged in");
+        // Retrieve the user session key
+        string? userSession = HttpContext.Session.GetString("USER_SESSION_KEY");
+        if (string.IsNullOrWhiteSpace(userSession))
+        {
+            return Unauthorized("User not logged in");
+        }
+
+        // Get the user ID from the session
+        int? userId = await _eventsService.GetUserId(userSession);
+        if (userId == null)
+        {
+            return Unauthorized("User not found");
+        }
+
+        // Check if the user is an attendee of the event
+        bool isAttendee = await _attendEventService.IsUserAttendee(userId.Value, eventId);
+        if (!isAttendee)
+        {
+            return Unauthorized("User is not an attendee of this event");
+        }
+
+        // Get the list of attendees
+        var attendees = await _attendEventService.GetEventAttendees(eventId);
+        return Ok(attendees);
     }
-
-    // Get the user ID from the session
-    int? userId = await _eventsService.GetUserId(userSession);
-    if (userId == null)
-    {
-        return Unauthorized("User not found");
-    }
-
-    // Check if the user is an attendee of the event
-    bool isAttendee = await _dbContext.Event_Attendance
-        .AnyAsync(ea => ea.EventId == eventId && ea.UserId == userId);
-
-    if (!isAttendee)
-    {
-        return Unauthorized("User is not an attendee of this event");
-    }
-
-    // Get the list of attendees
-    var attendees = await _attendEventService.GetEventAttendees(eventId);
-    return Ok(attendees);
-}
 
 
     [HttpPost("CreateEventAttendance")]
@@ -101,4 +97,22 @@ public async Task<IActionResult> GetEventAttendees([FromQuery] int eventId)
         if (check) return Ok("Event attendance deleted successfully.");
         else return NotFound("Event attendance does not exist");
     }
+
+
+    [HttpPost("SetEventAttendance")]
+    public async Task<IActionResult> SetEventAttendance([FromQuery] int eventId)
+    {
+        // Retrieve the user session key
+        string? userSession = HttpContext.Session.GetString("USER_SESSION_KEY");
+        if (string.IsNullOrWhiteSpace(userSession))
+        {
+            return Unauthorized("User not logged in");
+        }
+
+        bool check = await _attendEventService.SetEventAttendance(userSession, eventId);
+    
+        if (check) return Ok("Event Attendance is successfully set");
+        else return BadRequest("Couldn't set Event Attendance.");
+    }
+
 }

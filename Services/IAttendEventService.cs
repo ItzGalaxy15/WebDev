@@ -12,5 +12,10 @@ public interface IAttendEventService
     //DeleteEventAttendance
     Task<bool> DeleteEventAttendance(int eventId, int userId);
 
+    //is uer attendee
+    Task<bool> IsUserAttendee(int eventId, int userId);
+
+     Task<bool> SetEventAttendance(string USER_SESSION_KEY, int eventId);
+
 }
 
