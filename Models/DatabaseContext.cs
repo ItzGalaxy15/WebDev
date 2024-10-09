@@ -54,10 +54,10 @@ namespace StarterKit.Models
         
         
             modelBuilder.Entity<Event>()
-                .HasData(new Event { EventId = 1, Title = "Opening", Description = "First day", EventDate = new DateOnly(2024, 9, 2),
+                .HasData(new Event { EventId = 1, Title = "Opening", Description = "First day", EventDate = new DateOnly(2024, 9, 2), Capacity = 100,
                 StartTime = new TimeSpan(10, 30, 0), EndTime = new TimeSpan(15, 0, 0), Location = "Hogeschool Rotterdam", AdminApproval = true, Event_Attendances = new() });
-            modelBuilder.Entity<Event>()
-                .HasData(new Event { EventId = 2, Title = "Final", Description = "Last day", EventDate = new DateOnly(2025, 6, 30),
+            modelBuilder.Entity<Event>() 
+                .HasData(new Event { EventId = 2, Title = "Final", Description = "Last day", EventDate = new DateOnly(2025, 6, 30), Capacity = 120,
                 StartTime = new TimeSpan(11, 0, 0), EndTime = new TimeSpan(12, 0, 0), Location = "Hogeschool Rotterdam", AdminApproval = true, Event_Attendances = new() });
 
 
@@ -80,6 +80,24 @@ namespace StarterKit.Models
            
             var user4 = new User { UserId = 4, FirstName = "Jordy", LastName = "Mahn", Email = "jordy@example.com", Password = EncryptionHelper.EncryptPassword("secret"), RecuringDays = "tu,we,th"};
             modelBuilder.Entity<User>().HasData(user4);
+
+
+            modelBuilder.Entity<Attendance>()
+                .HasIndex(u => u.AttendanceId).IsUnique();
+            modelBuilder.Entity<Attendance>()
+                .HasOne(e => e.User)
+                .WithOne(e => e.Attendance)
+                .HasForeignKey<Attendance>(e => e.UserId)
+                .IsRequired();
+
+            modelBuilder.Entity<Attendance>()
+                .HasData(new Attendance { AttendanceId = 1, UserId = 1});
+            modelBuilder.Entity<Attendance>()
+                .HasData(new Attendance { AttendanceId = 2, UserId = 2});
+            modelBuilder.Entity<Attendance>()
+                .HasData(new Attendance { AttendanceId = 3, UserId = 3});
+            modelBuilder.Entity<Attendance>()
+                .HasData(new Attendance { AttendanceId = 4, UserId = 4});
 
 
             modelBuilder.Entity<Event_Attendance>()

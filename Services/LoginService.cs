@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using StarterKit.Controllers;
 using StarterKit.Models;
 using StarterKit.Utils;
@@ -23,9 +24,18 @@ public class LoginService : ILoginService
             LastName = "DefaultLastName",
             RecuringDays = string.Empty
         };
+
         _context.User.Add(newUser);
         await _context.SaveChangesAsync();
+
+        await CreateAttendance((await _context.User.FirstAsync(u => u.Email == newUser.Email)).UserId);
+
         return RegistrationStatus.Success;
+    }
+
+    public async Task CreateAttendance(int userId){
+        _context.Attendance.Add(new Attendance {UserId = userId});
+        await _context.SaveChangesAsync();
     }
 
     private readonly DatabaseContext _context;

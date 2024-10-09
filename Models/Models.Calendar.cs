@@ -17,8 +17,8 @@ namespace StarterKit.Models
         // A comma sepparated string that could look like this: "mo,tu,we,th,fr"
         public required string RecuringDays { get; set; }
 
-
-        // We don't need / have a usage for these lists at the moment
+        [JsonIgnore]
+        public Attendance? Attendance { get; set; } = null;
 
         //public required List<Attendance> Attendances { get; set; }
 
@@ -29,9 +29,13 @@ namespace StarterKit.Models
     {
         public int AttendanceId { get; set; }
 
-        public DateTime AttendanceDate { get; set; }
+        public DateTime? TimeArrived { get; set; } = null;
 
-        public required User User { get; set; }
+        public required int UserId { get; set; }
+
+        [JsonIgnore]
+        public User? User { get; set; }
+
     }
 
     public class Event_Attendance
@@ -67,6 +71,8 @@ namespace StarterKit.Models
         public TimeSpan EndTime { get; set; }
 
         public required string Location { get; set; }
+
+        public required int Capacity { get; set;}
 
         public bool AdminApproval { get; set; }
 

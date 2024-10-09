@@ -89,9 +89,6 @@ namespace StarterKit.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("AttendanceDate")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
