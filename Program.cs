@@ -52,15 +52,25 @@ namespace StarterKit
             app.UseSession();
 
 
-            app.UseLoginRequired();
-            // app.Use(async (context, next) => {
-            //     await next.Invoke();
-            //     Console.WriteLine(context.Request.Path);
-            // });
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.Use(async (context, next) => {
+                await Console.Out.WriteLineAsync(
+                    $"Received request for {context.Request.Method} {context.Request.Path} | " +
+                    $"Time: {TimeOnly.FromDateTime(DateTime.Now)} |"
+                );
+                await next.Invoke();
+                await Console.Out.WriteLineAsync(
+                    $"Processed previous request | " +
+                    $"Time: {TimeOnly.FromDateTime(DateTime.Now)} | " +
+                    $"Status: {context.Response.StatusCode} |\n"
+                    );
+            });
+
+            app.UseLoginRequired();
 
             app.Run();
 
