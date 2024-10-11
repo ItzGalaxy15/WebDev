@@ -11,18 +11,18 @@ public enum ADMIN_SESSION_KEY { adminLoggedIn }
 
 public class LoginService : ILoginService
 {
-    public async Task<RegistrationStatus> RegisterUser(string email, string password)
+    public async Task<RegistrationStatus> RegisterUser(string email, string password, string firstName, string lastName, string recuringdays)
     {
-        if (!email.Contains("@")) return RegistrationStatus.Failure;
+        if (!email.Contains('@')) return RegistrationStatus.Failure;
 
         var encryptedPassword = EncryptionHelper.EncryptPassword(password);
         var newUser = new User 
         { 
             Email = email, 
             Password = encryptedPassword,
-            FirstName = "DefaultFirstName",
-            LastName = "DefaultLastName",
-            RecuringDays = string.Empty
+            FirstName = firstName,
+            LastName = lastName,
+            RecuringDays = recuringdays
         };
 
         _context.User.Add(newUser);
