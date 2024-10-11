@@ -17,5 +17,7 @@ public interface IAttendEventService
 
      Task<bool> SetEventAttendance(string USER_SESSION_KEY, int eventId);
 
+     Task<bool> CheckCapacity(int eventId);
+
 }
 

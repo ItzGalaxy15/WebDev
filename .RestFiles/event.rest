@@ -13,12 +13,13 @@ POST http://localhost:5097/api/v1/events HTTP/1.1
 content-type: application/json
 
 {
-    "Title": "Event 1",
-    "Description": "Event 1 Description",
-    "EventDate": "2021-12-12",
+    "Title": "Event 3",
+    "Description": "Event 3 Description",
+    "EventDate": "2024-12-12",
     "StartTime": "12:00:00",
     "EndTime": "14:00:00",
-    "Location": "Event 1 Location"
+    "Location": "Event 3 Location",
+    "Capacity": 1
 }
 
 ###

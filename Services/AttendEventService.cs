@@ -78,7 +78,6 @@ public class AttendEventService : IAttendEventService
         return false;
     }
 
-
     // GetEventAttendancees
 
     public async Task<List<User?>> GetEventAttendees(int eventId)
@@ -109,6 +108,14 @@ public class AttendEventService : IAttendEventService
         _dbcontext.Event_Attendance.Remove(eventAttendance);
         await _dbcontext.SaveChangesAsync();
         return true;
+    }
+
+    public async Task<bool> CheckCapacity(int eventId)
+    {
+        var CurrentAttendees = await _dbcontext.Event_Attendance.Where(ea => ea.EventId == eventId).CountAsync();
+        var CheckCap = await _dbcontext.Event.Where(e => e.EventId == eventId).Select(e => e.Capacity).FirstOrDefaultAsync();
+        if (CurrentAttendees >= CheckCap) return false;
+        else return true;
     }
 
 }
