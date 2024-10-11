@@ -74,7 +74,10 @@ Content-Type: application/json
 
 {
     "Username": "wowuser@example.com",
-    "Password": "securepassword123"
+    "Password": "securepassword123",
+    "FirstName": "Hank",
+    "LastName": "Doe",
+    "RecuringDays": "mo,tu,we"
 }
 
 ###

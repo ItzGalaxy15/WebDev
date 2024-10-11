@@ -50,6 +50,8 @@ public class AttendEventController : Controller
         // Should not be able to be null
         if (userId == null) return StatusCode(StatusCodes.Status500InternalServerError);
 
+        if (!await _attendEventService.CheckCapacity(eventId)) return BadRequest("Event is full");
+
         bool check = await _attendEventService.CreateEventAttendance(eventId, (int)userId);
 
         if (check) return Ok("Event attendance created successfully.");

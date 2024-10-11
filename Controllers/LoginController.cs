@@ -55,12 +55,12 @@ public class LoginController : Controller
     [HttpPost("Register")]
     public async Task<IActionResult> Register([FromBody] LoginBody registerBody)
     {
-        if (registerBody.Username is null || registerBody.Password is null)
+        if (registerBody.Username is null || registerBody.Password is null || registerBody.FirstName is null || registerBody.LastName is null || registerBody.RecuringDays is null)  
         {
-            return BadRequest("Email and password are required");
+            return BadRequest("All fields are required");
         }
 
-        var registrationResult = await _loginService.RegisterUser(registerBody.Username, registerBody.Password);
+        var registrationResult = await _loginService.RegisterUser(registerBody.Username, registerBody.Password, registerBody.FirstName, registerBody.LastName, registerBody.RecuringDays);
 
         return registrationResult switch
         {
@@ -109,6 +109,10 @@ public class LoginBody
 {
     public string? Username { get; set; }
     public string? Password { get; set; }
+
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+    public string? RecuringDays {get; set; }
 }
 
 public enum RegistrationStatus
