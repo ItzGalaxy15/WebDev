@@ -30,14 +30,17 @@ public class ProfileService : IProfileService
                             .ToArray();
         
         Event[] events = _context.Event
+                            .Where(ev => ev.EventDate < DateOnly.FromDateTime(DateTime.Now))
                             .Include(evnt => evnt.Event_Attendances.Where(evAtt => evAtt.UserId == user.UserId))
                             .ThenInclude(evAtt => evAtt.Reviews)
                             .AsNoTracking()
                             .ToArray();
 
         bool viewingOwnPage = USER_SESSION_KEY == user.Email;
+        Attendance attendance = await _context.Attendance.FirstAsync(att => att.UserId == user.UserId);
+        bool isAtOffice = attendance.TimeArrived is not null;
 
-        return new ProfilePage{ User = user, Events = events, ViewingOwnPage = viewingOwnPage };
+        return new ProfilePage{ User = user, Events = events, ViewingOwnPage = viewingOwnPage, IsAtOffice = isAtOffice};
     }
 
     public async Task<bool> ChangeSettings(EditedProfile edited, string USER_SESSION_KEY){
@@ -68,4 +71,36 @@ public class ProfileService : IProfileService
         return await _context.User.FirstOrDefaultAsync(u => 
             u.FirstName.ToLower() + u.LastName.ToLower() == name.ToLower());
     }
+
+
+    public async Task<bool> ArriveToOffice(string USER_SESSION_KEY)
+    {
+        int userId = await _eventsService.GetUserId(USER_SESSION_KEY);
+        Attendance attendance = await _context.Attendance.FirstAsync(att => att.UserId == userId);
+
+        if (attendance.TimeArrived == null)
+        {
+            attendance.TimeArrived = DateTime.Now;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        return false;
+    }
+
+    public async Task<bool> LeaveOffice(string USER_SESSION_KEY)
+    {
+        int userId = await _eventsService.GetUserId(USER_SESSION_KEY);
+        Attendance attendance = await _context.Attendance.FirstAsync(att => att.UserId == userId);
+
+        if (attendance.TimeArrived != null)
+        {
+            attendance.TimeArrived = null;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        return false;
+    }
+
+
 }

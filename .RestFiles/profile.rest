@@ -37,3 +37,14 @@ content-type: application/json
 
 // Get profile page
 GET http://localhost:5097/api/v1/Profile/maxbretherton HTTP/1.1
+####
+
+
+// arrive to the office
+PUT http://localhost:5097/api/v1/Profile/attendance/arrive HTTP/1.1
+####
+
+
+// leave the office
+PUT http://localhost:5097/api/v1/Profile/attendance/leave HTTP/1.1
+###

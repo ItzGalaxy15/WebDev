@@ -49,7 +49,28 @@ public class ProfileController : Controller
 
         return Ok("Changed settings");
     }
+
+    [HttpPut("attendance/leave")]
+    public async Task<IActionResult> LeaveOffice()
+    {
+        bool check = await _profileService.LeaveOffice(HttpContext.Session.GetString("USER_SESSION_KEY")!);
+
+        if (check) return Ok("left office!");
+        else return BadRequest("You are not even at the office!!");
+    }
+
+    [HttpPut("attendance/arrive")]
+    public async Task<IActionResult> ArriveToOffice()
+    {
+        bool check = await _profileService.ArriveToOffice(HttpContext.Session.GetString("USER_SESSION_KEY")!);
+
+        if (check) return Ok("You arrived to the office :)");
+        else return BadRequest("you already arrived to the office!");
+    }
+
 }
+
+
 
 
 public record EditedProfile(
@@ -62,4 +83,5 @@ public class ProfilePage{
     public required User User { get; set; }
     public required Event[] Events { get; set;}
     public required bool ViewingOwnPage { get; set;}
+    public required bool IsAtOffice { get ; set; }
 }
