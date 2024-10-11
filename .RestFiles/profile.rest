@@ -36,7 +36,7 @@ content-type: application/json
 
 
 // Get profile page
-GET http://localhost:5097/api/v1/Profile/maxbretherton HTTP/1.1
+GET http://localhost:5097/api/v1/Profile/max-bretherton-1 HTTP/1.1
 ####
 
 
@@ -47,4 +47,13 @@ PUT http://localhost:5097/api/v1/Profile/attendance/arrive HTTP/1.1
 
 // leave the office
 PUT http://localhost:5097/api/v1/Profile/attendance/leave HTTP/1.1
+###
+
+
+// Get all profiles for searching
+GET http://localhost:5097/api/v1/Profile/profiles/find HTTP/1.1
+###
+// Get filtered profiles for searching
+GET http://localhost:5097/api/v1/Profile/profiles/find?search=ma HTTP/1.1
+
 ###

@@ -19,9 +19,9 @@ public class ProfileController : Controller
         _profileService = profileService;
     }
 
-    [HttpGet("{name}")]
-    public async Task<IActionResult> ViewProfile(string name){
-        ProfilePage? profilePage = await _profileService.GetProfilePage(name, HttpContext.Session.GetString("USER_SESSION_KEY")!);
+    [HttpGet("{code}")]
+    public async Task<IActionResult> ViewProfile(string code){
+        ProfilePage? profilePage = await _profileService.GetProfilePage(code, HttpContext.Session.GetString("USER_SESSION_KEY")!);
         if (profilePage is null) return BadRequest("Profile does not exist");
 
         return Ok(profilePage);
@@ -68,6 +68,11 @@ public class ProfileController : Controller
         else return BadRequest("you already arrived to the office!");
     }
 
+    [HttpGet("profiles/find")]
+    public async Task<IActionResult> GetProfiles([FromQuery] string? search = null){
+        ProfileSearch[] profiles = await _profileService.GetProfiles(search?.ToLower() ?? "");
+        return Ok(profiles);
+    }
 }
 
 
@@ -78,10 +83,14 @@ public record EditedProfile(
     string? Password = null, string? RecurringDays = null
 );
 
-
-public class ProfilePage{
+public class ProfilePage {
     public required User User { get; set; }
     public required Event[] Events { get; set;}
     public required bool ViewingOwnPage { get; set;}
     public required bool IsAtOffice { get ; set; }
+}
+
+public class ProfileSearch {
+    public required string Name { get; set; }
+    public required string ProfileCode { get; set; }
 }

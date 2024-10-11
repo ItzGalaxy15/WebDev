@@ -19,8 +19,8 @@ public class ProfileService : IProfileService
         _eventsService = eventsService;
     }
 
-    public async Task<ProfilePage?> GetProfilePage(string name, string USER_SESSION_KEY){
-        User? user = await GetUserByProfileName(name);
+    public async Task<ProfilePage?> GetProfilePage(string code, string USER_SESSION_KEY){
+        User? user = await GetUserByProfileCode(code);
         if (user is null) return null;
         user.Password = "";
 
@@ -67,12 +67,6 @@ public class ProfileService : IProfileService
         return true;
     }
 
-    public async Task<User?> GetUserByProfileName(string name){
-        return await _context.User.FirstOrDefaultAsync(u => 
-            u.FirstName.ToLower() + u.LastName.ToLower() == name.ToLower());
-    }
-
-
     public async Task<bool> ArriveToOffice(string USER_SESSION_KEY)
     {
         int userId = await _eventsService.GetUserId(USER_SESSION_KEY);
@@ -102,5 +96,26 @@ public class ProfileService : IProfileService
         return false;
     }
 
+    public async Task<ProfileSearch[]> GetProfiles(string search){
+        // Get all users where search is included in first and last name
+        // Then create ProfileSearch objects for every user, where ProfileCode == FirstName-LastName-UserId
+        ProfileSearch[] profiles = await _context.User
+            .Where(u => (u.FirstName.ToLower() + u.LastName.ToLower()).Contains(search))
+            .Select(u => new ProfileSearch {
+                Name = $"{u.FirstName} {u.LastName}", 
+                ProfileCode = $"{u.FirstName}-{u.LastName}-{u.UserId}".ToLower()
+            }).ToArrayAsync();
 
+        return profiles;
+    }
+
+    public async Task<User?> GetUserByProfileCode(string code){
+        // Creates a warning in the terminal, because "ToLower()" can't get translated to an SQL query,
+        // meaning it will run slower. I do not have a better idea of how to do it
+        // https://learn.microsoft.com/en-us/ef/core/miscellaneous/collations-and-case-sensitivity
+        return await _context.User.FirstOrDefaultAsync(u =>
+            code.ToLower() ==
+            u.FirstName.ToLower() + "-" + u.LastName.ToLower() + "-" + u.UserId
+        );
+    }
 }
