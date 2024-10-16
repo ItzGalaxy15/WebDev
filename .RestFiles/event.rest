@@ -34,7 +34,7 @@ PUT http://localhost:5097/api/v1/events?changed=Title&changed=Description HTTP/1
 content-type: application/json
 
 {
-    "EventId" : 1,
+    "EventId" : 3,
     "Title": "Opening",
     "Description": "First day"  
 }
