@@ -79,8 +79,8 @@ public class AttendEventController : Controller
         }
     }
 
-    [HttpDelete("DeleteAttendance")]
-    public async Task<IActionResult> DeleteAttendance([FromQuery] int eventId)
+    [HttpDelete("DeleteEventAttendance")]
+    public async Task<IActionResult> DeleteEventAttendance([FromQuery] int eventId)
     {
         // if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Login required");
         int? userId = await _eventsService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));

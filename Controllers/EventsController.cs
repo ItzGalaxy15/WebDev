@@ -44,7 +44,7 @@ public class EventsController : Controller
         bool check = await _eventService.EditEvent(editedEventBody, changed);
 
         if (check) return Ok("Event has been successfully edited.");
-        return BadRequest("Couldn't edited the Event.");
+        return BadRequest("Event could not be edited.");
     }
 
     [AdminRequired]
