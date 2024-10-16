@@ -40,7 +40,8 @@ public class LoginController : Controller
         if (status == LoginStatus.Success) {
             if (!loginBody.Username.Contains("@")) 
                 HttpContext.Session.SetString("ADMIN_SESSION_KEY", loginBody.Username.ToString());
-            HttpContext.Session.SetString("USER_SESSION_KEY", loginBody.Username.ToString());
+            else
+                HttpContext.Session.SetString("USER_SESSION_KEY", loginBody.Username.ToString());
         }
 
         return status switch {
