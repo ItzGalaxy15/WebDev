@@ -2,6 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using StarterKit.Services;
 using StarterKit.Models;
+using Filter.UserRequired;
 using Microsoft.EntityFrameworkCore;
 
 //User can attend an event
@@ -40,7 +41,8 @@ public class AttendEventController : Controller
         var attendees = await _attendEventService.GetEventAttendees(eventId);
         return Ok(attendees);
     }
-
+    
+    [UserRequired]
 
     [HttpPost("CreateEventAttendance")]
     public async Task<IActionResult> CreateAttendenceEvent([FromQuery] int eventId)
@@ -58,6 +60,7 @@ public class AttendEventController : Controller
         else return Conflict("Event attendance already exist");
     }
 
+    [UserRequired]
     [HttpPut("AddReview")]
     public async Task<IActionResult> AddReview([FromBody] Review newReview)
     {
@@ -79,6 +82,7 @@ public class AttendEventController : Controller
         }
     }
 
+    [UserRequired]
     [HttpDelete("DeleteAttendance")]
     public async Task<IActionResult> DeleteAttendance([FromQuery] int eventId)
     {
@@ -93,7 +97,7 @@ public class AttendEventController : Controller
         else return NotFound("Event attendance does not exist");
     }
 
-
+    [UserRequired]
     [HttpPost("SetEventAttendance")]
     public async Task<IActionResult> SetEventAttendance([FromQuery] int eventId)
     {

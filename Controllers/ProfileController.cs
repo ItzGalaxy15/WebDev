@@ -2,6 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using StarterKit.Services;
 using StarterKit.Models;
+using Filter.UserRequired;
 using Middleware.LoginRequired;
 
 namespace StarterKit.Controllers;
@@ -27,7 +28,7 @@ public class ProfileController : Controller
         return Ok(profilePage);
     }
 
-
+    [UserRequired]
     [HttpPut]
     public async Task<IActionResult> EditProfile([FromBody] EditedProfile edited){
         bool successfullyChanged = await _profileService.ChangeSettings(edited, HttpContext.Session.GetString("USER_SESSION_KEY")!);
@@ -50,6 +51,7 @@ public class ProfileController : Controller
         return Ok("Changed settings");
     }
 
+    [UserRequired]
     [HttpPut("attendance/leave")]
     public async Task<IActionResult> LeaveOffice()
     {
@@ -59,6 +61,7 @@ public class ProfileController : Controller
         else return BadRequest("You are not even at the office!!");
     }
 
+    [UserRequired]
     [HttpPut("attendance/arrive")]
     public async Task<IActionResult> ArriveToOffice()
     {

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using StarterKit.Models;
 using StarterKit.Services;
 using Filter.AdminRequired;
+using Filter.UserRequired;
 
 namespace StarterKit.Controllers;
 
@@ -18,7 +19,7 @@ public class MessagesController : Controller
         _eventService = eventService;
     }
 
-
+    [UserRequired]
     [HttpGet]
     public async Task<IActionResult> GetMessage([FromQuery] int GetFromUid)
     {
@@ -29,7 +30,7 @@ public class MessagesController : Controller
         return Ok(mes);
     }
 
-    
+    [UserRequired]
     [HttpPut]
     public async Task<IActionResult> UpdateMessageRead([FromQuery] int mid)
     {
@@ -40,7 +41,7 @@ public class MessagesController : Controller
         return BadRequest("Message read status could not be updated.");
     }
 
-    
+    [UserRequired]
     [HttpPost] //uid = user to send to
     public async Task<IActionResult> PostMessage([FromQuery] int SendToUid, [FromBody] Message mes)
     {
