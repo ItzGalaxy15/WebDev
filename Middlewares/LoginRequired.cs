@@ -1,3 +1,5 @@
+using Microsoft.IdentityModel.Tokens;
+
 namespace Middleware.LoginRequired;
 
 public class LoginRequiredMiddleware
@@ -15,13 +17,13 @@ public class LoginRequiredMiddleware
     {
         // Is Admin Logged in
         string? adminSession = context.Session.GetString("USER_SESSION_KEY");
-        bool IsAdminLogged = (adminSession == null) ? false : true;
+        bool IsAdminLogged = adminSession.IsNullOrEmpty()? false : true;
 
         // If the USER_SESSION_KEY is not set, no one is logged in
         // It doesn't check the endpoints in excludedPaths, because they should be accessable for everyone
         // Is user Logged in
         string? userSession = context.Session.GetString("USER_SESSION_KEY");
-        bool IsUserLogged = (userSession == null) ? false : true;
+        bool IsUserLogged = userSession.IsNullOrEmpty()? false : true;
 
         if (!_excludedPaths.Contains(context.Request.Path.ToString().ToLower()) && 
             IsAdminLogged == false && IsUserLogged == false)
