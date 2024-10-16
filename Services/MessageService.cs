@@ -29,8 +29,10 @@ public class MessageService : IMessageService
         
     }
 
-    public async Task CreateMessage(Message mes, int To_id, int Current_id)
+    public async Task<bool> CreateMessage(Message mes, int To_id, int Current_id)
     {   
+        if (!_context.User.Any(u => u.UserId == To_id)) return false;
+
         DateTime now = DateTime.Now;
         DateTime formatedTimeNow = new DateTime(
             now.Year,
@@ -48,6 +50,7 @@ public class MessageService : IMessageService
 
         _context.Message.Add(mes);
         await _context.SaveChangesAsync();
+        return true;
     }
 
     public async Task<bool> MessageRead(int uid, int mid)
