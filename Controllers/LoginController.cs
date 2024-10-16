@@ -31,7 +31,7 @@ public class LoginController : Controller
         // and it's more like a dictionary where you store "SetString()" and retrieve data "GetString()" using keys.
         if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") != null ||
             HttpContext.Session.GetString("USER_SESSION_KEY") != null)
-            return Ok("You are already logged in");
+            return Ok(false);
 
         if (loginBody.Username is null) return Unauthorized("Incorrect username");
 
@@ -77,8 +77,9 @@ public class LoginController : Controller
     public IActionResult IsAdminLoggedIn()
     {
         string? username = HttpContext.Session.GetString("ADMIN_SESSION_KEY");
-        string message = username == null ? "You are not logged in" : $"{username} is logged in";
-        return Ok(message);
+        //string message = username == null ? "You are not logged in" : $"{username} is logged in";
+        if(username == null) return Ok(false);
+        return Ok(true);
     }
 
 
@@ -87,8 +88,9 @@ public class LoginController : Controller
     public IActionResult IsUserLoggedIn()
     {
         string? username = HttpContext.Session.GetString("USER_SESSION_KEY");
-        string message = username == null ? "You are not logged in" : $"{username} is logged in";
-        return Ok(message);
+        //string message = username == null ? "You are not logged in" : $"{username} is logged in";
+        if(username == null) return Ok(false);
+        return Ok(true);
     }
     
 
@@ -101,7 +103,7 @@ public class LoginController : Controller
         HttpContext.Session.Remove("ADMIN_SESSION_KEY");
         HttpContext.Session.Remove("USER_SESSION_KEY");
 
-        return Ok($"Logged out");
+        return Ok(true);
     }
 
 }

@@ -25,7 +25,7 @@ public class MessagesController : Controller
         var CurrentUid = await _eventService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
         if (GetFromUid != CurrentUid) return Unauthorized();
         var mes = await _messageService.GetMessageById(GetFromUid);
-        if (mes == null) return NotFound("No messages were found.");
+        if (mes == null) return NoContent();
         return Ok(mes);
     }
 
@@ -37,7 +37,7 @@ public class MessagesController : Controller
         
         bool check = await _messageService.MessageRead(uid, mid);
         if (check) return Ok("Message read status has been updated");
-        return BadRequest("Message read status has not been updated.");
+        return BadRequest("Message read status could not be updated.");
     }
 
     
@@ -45,10 +45,9 @@ public class MessagesController : Controller
     public async Task<IActionResult> PostMessage([FromQuery] int SendToUid, [FromBody] Message mes)
     {
         var CurrentUid = await _eventService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
-        if (CurrentUid == SendToUid) return Unauthorized("Cant send a message to yourself.");
+        if (CurrentUid == SendToUid) return BadRequest("Cant send a message to yourself.");
 
-        await _messageService.CreateMessage(mes, SendToUid, CurrentUid);
-        return Ok("Message has been sent!");
-
+        bool success = await _messageService.CreateMessage(mes, SendToUid, CurrentUid);
+        return success ? Ok("Message has been sent!") : BadRequest("User doesn't exist");
     }
 }
