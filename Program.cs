@@ -3,6 +3,8 @@ using StarterKit.Models;
 using StarterKit.Services;
 
 using  Middleware.LoginRequired;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace StarterKit
 {
@@ -29,6 +31,8 @@ namespace StarterKit
             builder.Services.AddScoped<IProfileService, ProfileService>();
             builder.Services.AddScoped<IMessageService, MessageService>();
 
+            builder.Services.Configure<LogFileOptions>(builder.Configuration.GetSection("LogFile"));
+
             builder.Services.AddDbContext<DatabaseContext>(
                 options => options.UseSqlite(builder.Configuration.GetConnectionString("SqlLiteDb")));
 
@@ -51,23 +55,24 @@ namespace StarterKit
 
             app.UseSession();
 
-
-
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
+
             app.Use(async (context, next) => {
-                await Console.Out.WriteLineAsync(
-                    $"Received request for {context.Request.Method} {context.Request.Path} | " +
-                    $"Time: {TimeOnly.FromDateTime(DateTime.Now)} |"
+                var logFileOptions = context.RequestServices.GetService<IOptions<LogFileOptions>>()?.Value ??
+                    new LogFileOptions { LogPath = "Logs/RequestLogs.txt"};
+                if (!File.Exists(logFileOptions.LogPath)) await File.WriteAllTextAsync(logFileOptions.LogPath, "");
+                await File.AppendAllTextAsync(logFileOptions.LogPath,
+                    $"\n{DateTime.Now} - {context.Connection.RemoteIpAddress} requested {context.Request.Method} {context.Request.GetDisplayUrl()}"
                 );
+
                 await next.Invoke();
-                await Console.Out.WriteLineAsync(
-                    $"Processed previous request | " +
-                    $"Time: {TimeOnly.FromDateTime(DateTime.Now)} | " +
-                    $"Status: {context.Response.StatusCode} |\n"
-                    );
+
+                await File.AppendAllTextAsync(logFileOptions.LogPath,
+                    $"\t | \tResponded with status code: {context.Response.StatusCode}"
+                );
             });
 
             app.UseLoginRequired();
