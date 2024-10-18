@@ -49,7 +49,7 @@ public class EventsController : Controller
 
     [AdminRequired]
     [HttpDelete]
-    public async Task<IActionResult> GetDelete([FromQuery] int eventId)
+    public async Task<IActionResult> Delete([FromQuery] int eventId)
     {
         bool deleteEvent = await _eventService.DeleteEvent(eventId); // calls a method to check if the given Event_Id indeed exist
         return deleteEvent ? Ok($"Event {eventId} has been deleted") : BadRequest($"Event {eventId} not found");

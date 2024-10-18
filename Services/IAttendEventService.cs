@@ -15,9 +15,10 @@ public interface IAttendEventService
     //is uer attendee
     Task<bool> IsUserAttendee(int eventId, int userId);
 
-     Task<bool> SetEventAttendance(string USER_SESSION_KEY, int eventId);
+    Task<bool> SetEventAttendance(string USER_SESSION_KEY, int eventId);
 
-     Task<bool> CheckCapacity(int eventId);
+    Task<bool> CheckCapacity(int eventId);
 
+    Task<int> CheckUserAttendedEvent(string? USER_SESSION_KEY, int AttId);
 }
 

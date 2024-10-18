@@ -9,7 +9,7 @@ public class AttendEventService : IAttendEventService
 {
     private readonly IEventsService _eventsService;
     private readonly DatabaseContext _dbcontext;
-     public readonly HashSet<int> ValidRating = new(){0, 1, 2, 3, 4, 5};
+    public readonly HashSet<int> ValidRating = new(){0, 1, 2, 3, 4, 5};
     public AttendEventService(DatabaseContext context, IEventsService eventsService)
     {
         _dbcontext = context;
@@ -18,8 +18,7 @@ public class AttendEventService : IAttendEventService
     public async Task<bool> CreateEventAttendance(int eventId, int userId)
     {
         // Check if the user and event actually exist
-        //if (_context.User.Any(user => user.UserId == newEventAttendance.UserId) == false) return false;
-        if (_dbcontext.Event.Any(_event => _event.EventId == eventId) == false) return false;
+        if (await _dbcontext.Event.AnyAsync(_event => _event.EventId == eventId) == false) return false;
         
         // if the Event_Attendance already exists
         if (await _dbcontext.Event_Attendance.AnyAsync(evAtt => evAtt.EventId == eventId && evAtt.UserId == userId)) return false;
@@ -36,6 +35,7 @@ public class AttendEventService : IAttendEventService
         {
             return false;
         }
+
         //adding Event_AttendanceId for the foreignkeys
         newReview.Event_AttendanceId = AttId;
         
@@ -44,12 +44,33 @@ public class AttendEventService : IAttendEventService
         return true;
     }
     
+    public async Task<int> CheckUserAttendedEvent(string? USER_SESSION_KEY, int EventId)
+    {
+        //with users email checks if it matches the session
+        User? uid = await _dbcontext.User.FirstOrDefaultAsync(u => u.Email == USER_SESSION_KEY);
+
+        if (uid is null) return -1;
+
+        foreach(Event_Attendance att in _dbcontext.Event_Attendance)
+        {
+            //goes through event attendance to check if eventid and user id matches
+            if (att.EventId == EventId && att.UserId == uid.UserId)
+            {
+                if (att.Time is null) return -1;
+
+                //sends that the correct into has been found along with the attendance id
+                return att.Event_AttendanceId;
+            }
+        }
+        return -1;
+    }
+
     // It tries to set currentTime to event_Attendance.Time property
     public async Task<bool> SetEventAttendance(string USER_SESSION_KEY, int eventId)
     {
         // checks if the user is registered for the specific event
-        (bool check, int event_AttendanceId)  = await _eventsService.CheckUserAttendedEvent(USER_SESSION_KEY, eventId);
-        if (check == false) return false;
+        int event_AttendanceId = await CheckUserAttendedEvent(USER_SESSION_KEY, eventId);
+        if (event_AttendanceId == -1) return false;
 
         // Gets event_Attendance object based on event_AttendanceId
         Event_Attendance? event_Attendance = await _dbcontext.Event_Attendance.FirstOrDefaultAsync(e_a => e_a.Event_AttendanceId == event_AttendanceId);
@@ -79,7 +100,6 @@ public class AttendEventService : IAttendEventService
     }
 
     // GetEventAttendancees
-
     public async Task<List<User?>> GetEventAttendees(int eventId)
     {
         return await _dbcontext.Event_Attendance
@@ -102,8 +122,9 @@ public class AttendEventService : IAttendEventService
         var eventAttendance = await _dbcontext.Event_Attendance
             .Where(ea => ea.EventId == eventId && ea.UserId == userId)
             .FirstOrDefaultAsync();
-
         if (eventAttendance == null) return false;
+
+        if (eventAttendance.Time != null) return false;
 
         _dbcontext.Event_Attendance.Remove(eventAttendance);
         await _dbcontext.SaveChangesAsync();

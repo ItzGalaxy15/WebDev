@@ -11,9 +11,19 @@ public enum ADMIN_SESSION_KEY { adminLoggedIn }
 
 public class LoginService : ILoginService
 {
+
+    private readonly DatabaseContext _context;
+
+    public LoginService(DatabaseContext context)
+    {
+        _context = context;
+    }
+
     public async Task<RegistrationStatus> RegisterUser(string email, string password, string firstName, string lastName, string recuringdays)
     {
         if (!email.Contains('@')) return RegistrationStatus.Failure;
+
+        if (await _context.User.AnyAsync(u => u.Email == email)) return RegistrationStatus.EmailAlreadyExists;
 
         var encryptedPassword = EncryptionHelper.EncryptPassword(password);
         var newUser = new User 
@@ -36,13 +46,6 @@ public class LoginService : ILoginService
     public async Task CreateAttendance(int userId){
         _context.Attendance.Add(new Attendance {UserId = userId});
         await _context.SaveChangesAsync();
-    }
-
-    private readonly DatabaseContext _context;
-
-    public LoginService(DatabaseContext context)
-    {
-        _context = context;
     }
 
     public LoginStatus CheckPassword(string username, string inputPassword)

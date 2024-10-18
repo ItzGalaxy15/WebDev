@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using StarterKit.Models;
 using StarterKit.Utils;
 using StarterKit.Controllers;
+using System.Text.RegularExpressions;
+using Filter.UserRequired;
 
 namespace StarterKit.Services;
 
@@ -20,9 +22,11 @@ public class ProfileService : IProfileService
     }
 
     public async Task<ProfilePage?> GetProfilePage(string code, string USER_SESSION_KEY){
-        User? user = await GetUserByProfileCode(code);
-        if (user is null) return null;
-        user.Password = "";
+        User? userRef = await GetUserByProfileCode(code);
+        if (userRef is null) return null;
+
+        User user = new User{ UserId = userRef.UserId, FirstName = userRef.FirstName, LastName = userRef.LastName,
+            Email = userRef.Email, Password = "", RecuringDays = userRef.RecuringDays};
 
         int[] eventIds = _context.Event_Attendance
                             .Where(evAtt => evAtt.UserId == user.UserId)
@@ -52,6 +56,8 @@ public class ProfileService : IProfileService
 
         if (edited.RecurringDays is not null){
             string[] days = edited.RecurringDays.Split(',');
+            if (days.ToHashSet().Count != days.Count()) return false;
+
             foreach (string day in days){
                 if (!_validDays.Contains(day)) return false;
             }
@@ -97,6 +103,9 @@ public class ProfileService : IProfileService
     }
 
     public async Task<ProfileSearch[]> GetProfiles(string search){
+        // Remove all whitespaces in search string
+        Regex.Replace(search, @"\s+", "");
+
         // Get all users where search is included in first and last name
         // Then create ProfileSearch objects for every user, where ProfileCode == FirstName-LastName-UserId
         ProfileSearch[] profiles = await _context.User

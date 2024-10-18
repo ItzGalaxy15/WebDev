@@ -8,11 +8,6 @@ namespace StarterKit.Services;
 
 public class MessageService : IMessageService 
 {
-    //public readonly HashSet<int> ValidRating = new(){0, 1, 2, 3, 4, 5};
-    //public readonly HashSet<string> ValidEventBody = new() {"Title", "Description", "EventDate",
-    //"StartTime", "EndTime", "Location", "AdminApproval"};
-    //public const char SplitCharacter = '|';
-
     private readonly DatabaseContext _context;
 
     public MessageService(DatabaseContext context)
@@ -20,18 +15,17 @@ public class MessageService : IMessageService
         _context = context;
     }
 
-    public async Task<List<Message>> GetMessageById(int id)
+    public async Task<List<Message>> GetMessagesByUserId(int userId)
     {
         return await _context.Message
-                        .Where(mes => mes.FromUserId == id)
-                        //.Select(mes => mes.Content)
+                        .Where(mes => mes.FromUserId == userId && mes.ToUserId == userId)
                         .ToListAsync();
         
     }
 
-    public async Task<bool> CreateMessage(Message mes, int To_id, int Current_id)
+    public async Task<bool> CreateMessage(Message mes, int toId, int currentId)
     {   
-        if (!_context.User.Any(u => u.UserId == To_id)) return false;
+        if (!_context.User.Any(u => u.UserId == toId)) return false;
 
         DateTime now = DateTime.Now;
         DateTime formatedTimeNow = new DateTime(
@@ -43,8 +37,8 @@ public class MessageService : IMessageService
             now.Second
             );
 
-        mes.FromUserId = Current_id;
-        mes.ToUserId = To_id;
+        mes.FromUserId = currentId;
+        mes.ToUserId = toId;
         mes.Date = formatedTimeNow;
         mes.BeenRead = false;
 

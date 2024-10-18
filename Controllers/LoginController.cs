@@ -16,13 +16,6 @@ public class LoginController : Controller
         _loginService = loginService;
     }
 
-    // This is the login page
-    [HttpGet]
-    public IActionResult Login()
-    {
-        return View();
-    }
-
 
     [HttpPost("Login")]
     public IActionResult Login([FromBody] LoginBody loginBody)
@@ -38,21 +31,20 @@ public class LoginController : Controller
         LoginStatus status = _loginService.CheckPassword(loginBody.Username, loginBody.Password ?? "");
 
         if (status == LoginStatus.Success) {
-            if (!loginBody.Username.Contains("@")) 
-                HttpContext.Session.SetString("ADMIN_SESSION_KEY", loginBody.Username.ToString());
-            else
+            if (loginBody.Username.Contains("@")) 
                 HttpContext.Session.SetString("USER_SESSION_KEY", loginBody.Username.ToString());
+            else
+                HttpContext.Session.SetString("ADMIN_SESSION_KEY", loginBody.Username.ToString());
         }
 
         return status switch {
             LoginStatus.Success => Ok($"Logged in {loginBody.Username}."),
             LoginStatus.IncorrectUsername => Unauthorized("Incorrect username"),
             LoginStatus.IncorrectPassword => Unauthorized("Incorrect password"),
-            _ => BadRequest("")
+            _ => StatusCode(500)
         };
     }
 
-    // registerBody has the same structure as loginBody, but the username will be set to email in the database
     [HttpPost("Register")]
     public async Task<IActionResult> Register([FromBody] LoginBody registerBody)
     {
@@ -72,23 +64,21 @@ public class LoginController : Controller
     }
 
 
-    [HttpGet("IsAdminLoggedIn")]
     // checks if the caller is an admin
+    [HttpGet("IsAdminLoggedIn")]
     public IActionResult IsAdminLoggedIn()
     {
         string? username = HttpContext.Session.GetString("ADMIN_SESSION_KEY");
-        //string message = username == null ? "You are not logged in" : $"{username} is logged in";
         if(username == null) return Ok(false);
         return Ok(true);
     }
 
 
-    [HttpGet("IsUserLoggedIn")]
     // checks if the caller is a user
+    [HttpGet("IsUserLoggedIn")]
     public IActionResult IsUserLoggedIn()
     {
         string? username = HttpContext.Session.GetString("USER_SESSION_KEY");
-        //string message = username == null ? "You are not logged in" : $"{username} is logged in";
         if(username == null) return Ok(false);
         return Ok(true);
     }
@@ -97,9 +87,6 @@ public class LoginController : Controller
     [HttpGet("Logout")]
     public IActionResult Logout()
     {
-        // string? username = HttpContext.Session.GetString("ADMIN_SESSION_KEY");
-        // string? email = HttpContext.Session.GetString("USER_SESSION_KEY");
-        // if (username == null && email == null) return BadRequest("You are not logged in");
         HttpContext.Session.Remove("ADMIN_SESSION_KEY");
         HttpContext.Session.Remove("USER_SESSION_KEY");
 

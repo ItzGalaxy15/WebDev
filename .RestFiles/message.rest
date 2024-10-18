@@ -1,6 +1,6 @@
 
 //get message from user id 1
-GET http://localhost:5097/api/v1/Message?uid=1 HTTP/1.1
+GET http://localhost:5097/api/v1/Message HTTP/1.1
 
 
 ###
@@ -27,6 +27,6 @@ content-type: application/json
 ###
 
 //Update message read status for current user
-PUT http://localhost:5097/api/v1/Message?mid=3  HTTP/1.1
+PUT http://localhost:5097/api/v1/Message?mId=3  HTTP/1.1
 
 ###

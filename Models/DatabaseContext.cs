@@ -137,7 +137,7 @@ namespace StarterKit.Models
                 .HasData(new Models.Message { MessageId = 1, Content = "Hello Amer!", Date = new DateTime(2024, 10, 4, 16, 15, 0), FromUserId = 1, ToUserId = 2, BeenRead = true});
             modelBuilder.Entity<Message>()
                 .HasData(new Models.Message { MessageId = 2, Content = "Hello Max!", Date = new DateTime(2024, 10, 4, 16, 20, 0), FromUserId = 2, ToUserId = 1, BeenRead = false});
-         modelBuilder.Entity<Message>()
+            modelBuilder.Entity<Message>()
                 .HasData(new Models.Message { MessageId = 3, Content = "ohio", Date = new DateTime(2024, 10, 4, 16, 20, 0), FromUserId = 2, ToUserId = 4, BeenRead = false});
         }
         

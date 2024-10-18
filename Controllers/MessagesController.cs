@@ -21,22 +21,21 @@ public class MessagesController : Controller
 
     [UserRequired]
     [HttpGet]
-    public async Task<IActionResult> GetMessage([FromQuery] int GetFromUid)
+    public async Task<IActionResult> GetMessage()
     {
-        var CurrentUid = await _eventService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
-        if (GetFromUid != CurrentUid) return Unauthorized();
-        var mes = await _messageService.GetMessageById(GetFromUid);
+        var userId = await _eventService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
+        var mes = await _messageService.GetMessagesByUserId(userId);
         if (mes == null) return NoContent();
         return Ok(mes);
     }
 
     [UserRequired]
     [HttpPut]
-    public async Task<IActionResult> UpdateMessageRead([FromQuery] int mid)
+    public async Task<IActionResult> UpdateMessageRead([FromQuery] int mId)
     {
         var uid = await _eventService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
         
-        bool check = await _messageService.MessageRead(uid, mid);
+        bool check = await _messageService.MessageRead(uid, mId);
         if (check) return Ok("Message read status has been updated");
         return BadRequest("Message read status could not be updated.");
     }

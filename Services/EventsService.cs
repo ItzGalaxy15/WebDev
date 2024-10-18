@@ -7,10 +7,8 @@ namespace StarterKit.Services;
 
 public class EventsService : IEventsService 
 {
-    public readonly HashSet<int> ValidRating = new(){0, 1, 2, 3, 4, 5};
     public readonly HashSet<string> ValidEventBody = new() {"Title", "Description", "EventDate",
     "StartTime", "EndTime", "Location", "AdminApproval"};
-    public const char SplitCharacter = '|';
 
     private readonly DatabaseContext _context;
 
@@ -19,6 +17,8 @@ public class EventsService : IEventsService
         _context = context;
     }
 
+    // AsNoTracking() makes it so there is no link to the database, 
+    // which is optimized if you know the object wont be modified
    public async Task<Event[]> GetAllEvents()
     {
         return await Task.FromResult(_context.Event
@@ -80,27 +80,6 @@ public class EventsService : IEventsService
     }
 
 
-    public async Task<(bool, int)> CheckUserAttendedEvent(string? USER_SESSION_KEY, int EventId)
-    {
-        //with users email checks if it matches the session
-        User? uid = await _context.User.FirstOrDefaultAsync(u => u.Email == USER_SESSION_KEY);
-        if (uid != null)
-        {
-            foreach(Event_Attendance att in _context.Event_Attendance)
-            {
-                //goes through event attendance to check if eventid and user id matches
-                if (att.EventId == EventId && att.UserId == uid.UserId)
-                {
-                    //sends that the correct into has been found along with the attendance id
-                    return (true, att.Event_AttendanceId);
-                }
-            }
-            return (false, 0);
-        }
-        return (false, 0);
-    }
-
-
     public async Task<bool> DeleteEvent(int eventId)
     {
         Console.WriteLine(eventId);
@@ -122,7 +101,6 @@ public class EventsService : IEventsService
     }
 
 
-    // Should probably move to a different place
     public async Task<int> GetUserId(string? USER_SESSION_KEY){
         return (await _context.User.FirstOrDefaultAsync(user => user.Email == USER_SESSION_KEY))!.UserId;
     }

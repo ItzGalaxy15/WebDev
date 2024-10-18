@@ -5,9 +5,6 @@ using StarterKit.Models;
 using Filter.UserRequired;
 using Microsoft.EntityFrameworkCore;
 
-//User can attend an event
-//User can subscribe to an event
-
 [Route("api/v1/AttendEvent")]
 public class AttendEventController : Controller 
 {
@@ -37,20 +34,17 @@ public class AttendEventController : Controller
             return Unauthorized("User is not an attendee of this event");
         }
 
-        // Get the list of attendees
+        // Get the list of event attendees
         var attendees = await _attendEventService.GetEventAttendees(eventId);
         return Ok(attendees);
     }
-    
-    [UserRequired]
 
+    [UserRequired]
     [HttpPost("CreateEventAttendance")]
     public async Task<IActionResult> CreateAttendenceEvent([FromQuery] int eventId)
     {
-        // if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Log in required");
         int? userId = await _eventsService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
-        // Should not be able to be null
-        if (userId == null) return StatusCode(StatusCodes.Status500InternalServerError);
+        if (userId == null) return Unauthorized("User not found");
 
         if (!await _attendEventService.CheckCapacity(eventId)) return BadRequest("Event is full");
 
@@ -64,9 +58,8 @@ public class AttendEventController : Controller
     [HttpPut("AddReview")]
     public async Task<IActionResult> AddReview([FromBody] Review newReview)
     {
-        // if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Login required");
-        var (attended, AttId) = await _eventsService.CheckUserAttendedEvent(HttpContext.Session.GetString("USER_SESSION_KEY"), newReview.EventId);
-        if(!attended)
+        var AttId = await _attendEventService.CheckUserAttendedEvent(HttpContext.Session.GetString("USER_SESSION_KEY"), newReview.EventId);
+        if(AttId == -1)
         {
             return Unauthorized("You didn't attend this event.");
         }
@@ -86,10 +79,8 @@ public class AttendEventController : Controller
     [HttpDelete("DeleteEventAttendance")]
     public async Task<IActionResult> DeleteEventAttendance([FromQuery] int eventId)
     {
-        // if (HttpContext.Session.GetString("USER_SESSION_KEY") == null) return Unauthorized("Login required");
         int? userId = await _eventsService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
-        // Should not be able to be null
-        if (userId == null) return StatusCode(StatusCodes.Status500InternalServerError);
+        if (userId == null) return Unauthorized("User not found");
 
         bool check = await _attendEventService.DeleteEventAttendance(eventId, (int)userId);
 
