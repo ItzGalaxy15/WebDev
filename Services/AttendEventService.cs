@@ -56,7 +56,7 @@ public class AttendEventService : IAttendEventService
             //goes through event attendance to check if eventid and user id matches
             if (att.EventId == EventId && att.UserId == uid.UserId)
             {
-                if (att.Time is null) return -1;
+                if (att.Time is not null) return -1;
 
                 //sends that the correct into has been found along with the attendance id
                 return att.Event_AttendanceId;
