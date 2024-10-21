@@ -20,18 +20,20 @@ public class AttendEventController : Controller
     [HttpGet("GetEventAttendees")]
     public async Task<IActionResult> GetEventAttendees([FromQuery] int eventId)
     {
-        // Get the user ID from the session
-        int? userId = await _eventsService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
-        if (userId == null)
-        {
-            return Unauthorized("User not found");
-        }
+        if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") == null){
+            // Get the user ID from the session
+            int? userId = await _eventsService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
+            if (userId == null)
+            {
+                return Unauthorized("User not found");
+            }
 
-        // Check if the user is an attendee of the event
-        bool isAttendee = await _attendEventService.IsUserAttendee(userId.Value, eventId);
-        if (!isAttendee)
-        {
-            return Unauthorized("User is not an attendee of this event");
+            // Check if the user is an attendee of the event
+            bool isAttendee = await _attendEventService.IsUserAttendee(userId.Value, eventId);
+            if (!isAttendee)
+            {
+                return Unauthorized("User is not an attendee of this event");
+            }
         }
 
         // Get the list of event attendees
@@ -46,7 +48,7 @@ public class AttendEventController : Controller
         int? userId = await _eventsService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
         if (userId == null) return Unauthorized("User not found");
 
-        if (!await _attendEventService.CheckCapacity(eventId)) return BadRequest("Event is full");
+        if (!await _attendEventService.CheckCapacity(eventId)) return BadRequest("Event is full or not found");
 
         bool check = await _attendEventService.CreateEventAttendance(eventId, (int)userId);
 

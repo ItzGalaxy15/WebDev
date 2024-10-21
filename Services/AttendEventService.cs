@@ -102,10 +102,13 @@ public class AttendEventService : IAttendEventService
     // GetEventAttendancees
     public async Task<List<User?>> GetEventAttendees(int eventId)
     {
-        return await _dbcontext.Event_Attendance
+        List<User?> users = await _dbcontext.Event_Attendance
             .Where(ea => ea.EventId == eventId)
+            .Include(ea => ea.User)
             .Select(ea => ea.User)
             .ToListAsync();
+        users.ForEach(user => user!.Password = "");
+        return users;
     }
 
 

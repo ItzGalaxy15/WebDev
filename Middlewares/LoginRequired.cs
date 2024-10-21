@@ -16,7 +16,7 @@ public class LoginRequiredMiddleware
     public async Task InvokeAsync(HttpContext context)
     {
         // Is Admin Logged in
-        string? adminSession = context.Session.GetString("USER_SESSION_KEY");
+        string? adminSession = context.Session.GetString("ADMIN_SESSION_KEY");
         bool IsAdminLogged = adminSession.IsNullOrEmpty()? false : true;
 
         // If the USER_SESSION_KEY is not set, no one is logged in
