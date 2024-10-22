@@ -24,7 +24,7 @@ public class LoginController : Controller
         // and it's more like a dictionary where you store "SetString()" and retrieve data "GetString()" using keys.
         if (HttpContext.Session.GetString("ADMIN_SESSION_KEY") != null ||
             HttpContext.Session.GetString("USER_SESSION_KEY") != null)
-            return Ok(false);
+            return Conflict("You are already logged in");
 
         if (loginBody.Username is null) return Unauthorized("Incorrect username");
 

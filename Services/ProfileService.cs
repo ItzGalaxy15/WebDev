@@ -28,13 +28,16 @@ public class ProfileService : IProfileService
         User user = new User{ UserId = userRef.UserId, FirstName = userRef.FirstName, LastName = userRef.LastName,
             Email = userRef.Email, Password = "", RecuringDays = userRef.RecuringDays};
 
-        int[] eventIds = _context.Event_Attendance
+        HashSet<int> eventIds = _context.Event_Attendance
                             .Where(evAtt => evAtt.UserId == user.UserId)
                             .Select(evAtt => evAtt.EventId)
-                            .ToArray();
+                            .ToHashSet<int>();
         
         Event[] events = _context.Event
-                            .Where(ev => ev.EventDate < DateOnly.FromDateTime(DateTime.Now))
+                            .Where(ev => (
+                                eventIds.Contains(ev.EventId) &&
+                                ev.EventDate < DateOnly.FromDateTime(DateTime.Now)
+                                ))
                             .Include(evnt => evnt.Event_Attendances.Where(evAtt => evAtt.UserId == user.UserId))
                             .ThenInclude(evAtt => evAtt.Reviews)
                             .AsNoTracking()

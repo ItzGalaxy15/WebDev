@@ -18,7 +18,7 @@ public class MessageService : IMessageService
     public async Task<List<Message>> GetMessagesByUserId(int userId)
     {
         return await _context.Message
-                        .Where(mes => mes.FromUserId == userId && mes.ToUserId == userId)
+                        .Where(mes => mes.FromUserId == userId || mes.ToUserId == userId)
                         .ToListAsync();
         
     }
