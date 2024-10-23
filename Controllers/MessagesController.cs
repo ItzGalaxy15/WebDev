@@ -31,11 +31,11 @@ public class MessagesController : Controller
 
     [UserRequired]
     [HttpPut]
-    public async Task<IActionResult> UpdateMessageRead([FromQuery] int mId)
+    public async Task<IActionResult> UpdateMessageRead([FromQuery] int messageId)
     {
-        var uid = await _eventService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
+        var userId = await _eventService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
         
-        bool check = await _messageService.MessageRead(uid, mId);
+        bool check = await _messageService.MessageRead(userId, messageId);
         if (check) return Ok("Message read status has been updated");
         return BadRequest("Message read status could not be updated.");
     }

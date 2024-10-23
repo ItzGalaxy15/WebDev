@@ -6,7 +6,7 @@ GET http://localhost:5097/api/v1/Message HTTP/1.1
 ###
 
 //Post new message to user id 1
-POST http://localhost:5097/api/v1/Message?uid=1 HTTP/1.1
+POST http://localhost:5097/api/v1/Message?SendToUid=1 HTTP/1.1
 content-type: application/json
 
 {
@@ -16,7 +16,7 @@ content-type: application/json
 ###
 
 //Post new message to user id 4
-POST http://localhost:5097/api/v1/Message?uid=4 HTTP/1.1
+POST http://localhost:5097/api/v1/Message?SendToUid=4 HTTP/1.1
 content-type: application/json
 
 {
@@ -27,6 +27,6 @@ content-type: application/json
 ###
 
 //Update message read status for current user
-PUT http://localhost:5097/api/v1/Message?mId=3  HTTP/1.1
+PUT http://localhost:5097/api/v1/Message?messageId=4  HTTP/1.1
 
 ###

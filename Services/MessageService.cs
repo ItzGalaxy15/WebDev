@@ -47,10 +47,10 @@ public class MessageService : IMessageService
         return true;
     }
 
-    public async Task<bool> MessageRead(int uid, int mid)
+    public async Task<bool> MessageRead(int userId, int messageId)
     {
-        var message = await _context.Message.FirstOrDefaultAsync(m => m.MessageId == mid);
-        if (message == null || message.BeenRead || message.ToUserId != uid) return false;
+        var message = await _context.Message.FirstOrDefaultAsync(m => m.MessageId == messageId);
+        if (message == null || message.BeenRead || message.ToUserId != userId) return false;
         
         message.BeenRead = true;
         await _context.SaveChangesAsync();
