@@ -77,7 +77,7 @@ namespace StarterKit
 
             app.UseLoginRequired();
 
-            app.Run();
+            app.Run("http://localhost:5097");
 
         }
     }
