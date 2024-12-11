@@ -46,7 +46,7 @@ var Home = /*#__PURE__*/function (_ref) {
     value: function render() {
       var _this2 = this;
       if (this.state.view === "home") {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, "Welcome to our home page", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, "Welcome to my home page", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
           onClick: function onClick(e) {
             return _this2.setState(_this2.state.updateViewState("registration"));
           }
