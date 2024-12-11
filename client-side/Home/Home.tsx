@@ -15,7 +15,7 @@ export class Home extends React.Component<{},HomeState>
         if (this.state.view === "home"){
             return(
                 <div>
-                    Welcome to my home page
+                    Welcome to y home page
                     <div>
                         <button
                             onClick={e=>this.setState(this.state.updateViewState("registration"))}
