@@ -35,3 +35,11 @@
 12/11/2024 1:27:57 PM - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
 12/11/2024 1:27:57 PM - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
 12/11/2024 1:28:12 PM - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
+12/11/2024 1:36:31 PM - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
+12/11/2024 1:37:22 PM - ::1 requested POST http://localhost:5097/api/v1/Login/Login	 | 	Responded with status code: 401
+12/11/2024 1:38:11 PM - 127.0.0.1 requested POST http://localhost:5097/api/v1/login/login	 | 	Responded with status code: 200
+12/11/2024 1:38:19 PM - ::1 requested POST http://localhost:5097/api/v1/Login/Login	 | 	Responded with status code: 200
+12/11/2024 1:38:52 PM - ::1 requested POST http://localhost:5097/api/v1/Login/Login	 | 	Responded with status code: 409
+12/11/2024 1:40:54 PM - ::1 requested POST http://localhost:5097/api/v1/Login/Login	 | 	Responded with status code: 409
+12/11/2024 1:41:11 PM - ::1 requested POST http://localhost:5097/api/v1/Login/Login	 | 	Responded with status code: 409
+12/11/2024 1:41:13 PM - ::1 requested POST http://localhost:5097/api/v1/Login/Login	 | 	Responded with status code: 409
