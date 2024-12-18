@@ -7,3 +7,5 @@ webdev.db-wal
 webdev.sqlite
 webdev.sqlite-shm
 webdev.sqlite-wal
+wwwroot/spa.bundle.js
+wwwroot/spa.bundle.js.map

@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using StarterKit.Models;
 using StarterKit.Services;
 
-using  Middleware.LoginRequired;
+using Middleware.LoginRequired;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http.Extensions;
 
@@ -46,7 +46,7 @@ namespace StarterKit
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -77,7 +77,7 @@ namespace StarterKit
 
             app.UseLoginRequired();
 
-            app.Run();
+            app.Run("http://localhost:5097");
 
         }
     }

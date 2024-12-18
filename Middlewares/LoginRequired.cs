@@ -12,7 +12,7 @@ public class LoginRequiredMiddleware
 
     // Maybe doesn't work the way its intended, because it checks get requests too (for login/login for example) i think
     private readonly HashSet<string> _excludedPaths = new(){"/api/v1/login", "/api/v1/login/login", 
-                    "/api/v1/login/register", "/api/v1/login/isuserloggedin", "/api/v1/login/isadminloggedin"};
+                    "/api/v1/login/register", "/api/v1/login/isuserloggedin", "/api/v1/login/isadminloggedin", "/"};
     public async Task InvokeAsync(HttpContext context)
     {
         // Is Admin Logged in
