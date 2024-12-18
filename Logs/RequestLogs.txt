@@ -43,3 +43,9 @@
 12/11/2024 1:40:54 PM - ::1 requested POST http://localhost:5097/api/v1/Login/Login	 | 	Responded with status code: 409
 12/11/2024 1:41:11 PM - ::1 requested POST http://localhost:5097/api/v1/Login/Login	 | 	Responded with status code: 409
 12/11/2024 1:41:13 PM - ::1 requested POST http://localhost:5097/api/v1/Login/Login	 | 	Responded with status code: 409
+18/12/2024 18:10:14 - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
+18/12/2024 18:10:51 - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
+18/12/2024 18:12:15 - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
+18/12/2024 18:17:00 - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
+18/12/2024 18:18:20 - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
+18/12/2024 18:21:09 - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
