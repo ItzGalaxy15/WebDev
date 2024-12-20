@@ -2,7 +2,7 @@ import React from "react";
 import { HomeState, initHomeState } from './home.state';
 import { RegistrationForm } from "../registration/registration";
 import { OverviewPage } from "../Overview/overview";
-import Login from "../Login/login"; // Import the Login component
+import Login from "../Login/Login"; // Import the Login component
 
 export class Home extends React.Component<{}, HomeState> {
   constructor(props: {}) {
