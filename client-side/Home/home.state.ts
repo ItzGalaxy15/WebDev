@@ -1,4 +1,4 @@
-export type ViewState = "home" | "registration" | "overview" | "login";
+export type ViewState = "home" | "registration" | "overview" | "login" | "admindashboard";
 
 export interface Person {
   name: string;
@@ -8,6 +8,7 @@ export interface Person {
 
 export interface HomeState {
   view: ViewState;
+  isAdmin?: boolean;
   updateViewState: (view: ViewState) => (state: HomeState) => HomeState;
 }
 

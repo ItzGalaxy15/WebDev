@@ -2,6 +2,49 @@ var spa;
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./Admindashboard/admindashboard.tsx":
+/*!*******************************************!*\
+  !*** ./Admindashboard/admindashboard.tsx ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AdminDashBoard: () => (/* binding */ AdminDashBoard)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+
+
+
+function _callSuper(t, o, e) { return o = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(o), (0,_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(t).constructor) : o.apply(t, e)); }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+
+var AdminDashBoard = /*#__PURE__*/function (_React$Component) {
+  function AdminDashBoard(props) {
+    (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, AdminDashBoard);
+    return _callSuper(this, AdminDashBoard, [props]);
+  }
+  (0,_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(AdminDashBoard, _React$Component);
+  return (0,_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(AdminDashBoard, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, "Welcome to the admin dashboard page."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", null, "View all events"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
+        onClick: this.props.backToHome
+      }, "Back")));
+    }
+  }]);
+}(react__WEBPACK_IMPORTED_MODULE_5__.Component);
+/* unused harmony default export */ var __WEBPACK_DEFAULT_EXPORT__ = (AdminDashBoard);
+
+/***/ }),
+
 /***/ "./Home/Home.tsx":
 /*!***********************!*\
   !*** ./Home/Home.tsx ***!
@@ -17,10 +60,14 @@ var spa;
 /* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
 /* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _home_state__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./home.state */ "./Home/home.state.ts");
-/* harmony import */ var _registration_registration__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../registration/registration */ "./registration/registration.tsx");
-/* harmony import */ var _Overview_overview__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Overview/overview */ "./Overview/overview.tsx");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _home_state__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./home.state */ "./Home/home.state.ts");
+/* harmony import */ var _registration_registration__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../registration/registration */ "./registration/registration.tsx");
+/* harmony import */ var _Overview_overview__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Overview/overview */ "./Overview/overview.tsx");
+/* harmony import */ var _Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Admindashboard/admindashboard */ "./Admindashboard/admindashboard.tsx");
+/* harmony import */ var _Login_Login__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../Login/Login */ "./Login/Login.tsx");
+
 
 
 
@@ -32,45 +79,77 @@ function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.
 
 
 
-var Home = /*#__PURE__*/function (_ref) {
+
+ // Import the Login component
+
+var Home = /*#__PURE__*/function (_React$Component) {
   function Home(props) {
     var _this;
     (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, Home);
     _this = _callSuper(this, Home, [props]);
-    _this.state = _home_state__WEBPACK_IMPORTED_MODULE_6__.initHomeState;
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5__["default"])(_this, "setAdminStatus", function (status) {
+      _this.setState({
+        isAdmin: status
+      });
+    });
+    console.log("Home component initialized");
+    _this.state = _home_state__WEBPACK_IMPORTED_MODULE_7__.initHomeState;
     return _this;
   }
-  (0,_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(Home, _ref);
+  (0,_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(Home, _React$Component);
   return (0,_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(Home, [{
     key: "render",
     value: function render() {
       var _this2 = this;
+      console.log("Rendering buttons for state:", this.state.view);
       if (this.state.view === "home") {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, "Welcome to my home page", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
-          onClick: function onClick(e) {
+        console.log("Rendering home view");
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("div", null, "Welcome to our home page", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
+          onClick: function onClick() {
             return _this2.setState(_this2.state.updateViewState("registration"));
           }
-        }, "Registration"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
-          onClick: function onClick(e) {
+        }, "Registration"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
+          onClick: function onClick() {
             return _this2.setState(_this2.state.updateViewState("overview"));
           }
-        }, "Overview")));
-      } else if (this.state.view == "registration") {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(_registration_registration__WEBPACK_IMPORTED_MODULE_7__.RegistrationForm, {
+        }, "Overview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
+          onClick: function onClick() {
+            return _this2.setState(_this2.state.updateViewState("login"));
+          }
+        }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
+          onClick: function onClick() {
+            return _this2.setState(_this2.state.updateViewState("admindashboard"));
+          }
+        }, "Admin Dashboard")));
+      } else if (this.state.view === "registration") {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_registration_registration__WEBPACK_IMPORTED_MODULE_8__.RegistrationForm, {
           backToHome: function backToHome() {
             return _this2.setState(_this2.state.updateViewState("home"));
           }
-          // insertPerson={(person: Person)=>this.setState(this.state.insertPerson(person))}
-          // testVal = {this.state.test}
-          // testName = {this.state.testName}
-          // updateTest={(num:number) => this.state.updateTest(444)}
-          // updateTest={(num:number) => this.setState(this.state.updateTest(555))}
-          // resetFields={()=>this.setState(this.state.resetFields())}
         });
+      } else if (this.state.view === "login") {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_Login_Login__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          backToHome: function backToHome() {
+            return _this2.setState(_this2.state.updateViewState("home"));
+          },
+          setAdminStatus: this.setAdminStatus
+        });
+      } else if (this.state.view === "admindashboard") {
+        if (this.state.isAdmin) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_10__.AdminDashBoard, {
+            backToHome: function backToHome() {
+              return _this2.setState(_this2.state.updateViewState("home"));
+            }
+          });
+        } else {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("p", null, "Access Denied: Admins only"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
+            onClick: function onClick() {
+              return _this2.setState(_this2.state.updateViewState("home"));
+            }
+          }, "Back to Home"));
+        }
       } else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(_Overview_overview__WEBPACK_IMPORTED_MODULE_8__.OverviewPage
-        // storageToShow={this.state.storage}
-        , {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_Overview_overview__WEBPACK_IMPORTED_MODULE_9__.OverviewPage, {
           backToHome: function backToHome() {
             return _this2.setState(_this2.state.updateViewState("home"));
           }
@@ -78,7 +157,7 @@ var Home = /*#__PURE__*/function (_ref) {
       }
     }
   }]);
-}(react__WEBPACK_IMPORTED_MODULE_5__.Component);
+}(react__WEBPACK_IMPORTED_MODULE_6__.Component);
 
 /***/ }),
 
@@ -98,11 +177,6 @@ function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbol
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var initHomeState = {
   view: "home",
-  // storage: new Map<number, Person>(),
-  // test: 999,
-  id: 0,
-  // testName: "Bob",
-
   updateViewState: function updateViewState(view) {
     return function (state) {
       return _objectSpread(_objectSpread({}, state), {}, {
@@ -110,25 +184,249 @@ var initHomeState = {
       });
     };
   }
+};
 
-  // insertPerson: (person: Person) => (state: HomeState): HomeState => {
-  //     return {
-  //         ...state,
-  //         id: state.id+1,
-  //         storage: state.storage.set(state.id, {
-  //             name: person.name, 
-  //             lastname: person.lastname, 
-  //             age: person.age})
+/***/ }),
 
-  //     }
-  // },
+/***/ "./Login/Login.tsx":
+/*!*************************!*\
+  !*** ./Login/Login.tsx ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-  // updateTest : (num: number) => (state: HomeState) : HomeState => {
-  //     return {
-  //         ...state,
-  //         test: num
-  //     };
-  // },
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* unused harmony export Login */
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _login_state__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./login.state */ "./Login/login.state.ts");
+/* harmony import */ var _login_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./login.api */ "./Login/login.api.ts");
+
+
+
+
+
+
+
+
+function _callSuper(t, o, e) { return o = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(o), (0,_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__["default"])(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(t).constructor) : o.apply(t, e)); }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+
+
+
+
+var Login = /*#__PURE__*/function (_React$Component) {
+  function Login(props) {
+    var _this;
+    (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, Login);
+    _this = _callSuper(this, Login, [props]);
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(_this, "handleLogin", /*#__PURE__*/(0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default().mark(function _callee() {
+      var message, adminStatus;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return (0,_login_api__WEBPACK_IMPORTED_MODULE_10__.login)(_this.state.username, _this.state.password);
+          case 2:
+            message = _context.sent;
+            _this.setState(_this.state.updateMessage(message));
+            if (!message.includes("Success")) {
+              _context.next = 9;
+              break;
+            }
+            _context.next = 7;
+            return (0,_login_api__WEBPACK_IMPORTED_MODULE_10__.isAdmin)();
+          case 7:
+            adminStatus = _context.sent;
+            if (adminStatus) {
+              _this.props.setAdminStatus(true);
+            }
+          case 9:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee);
+    })));
+    _this.state = _login_state__WEBPACK_IMPORTED_MODULE_9__.initLoginState;
+    return _this;
+  }
+  (0,_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(Login, _React$Component);
+  return (0,_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(Login, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, "Welcome to our Login page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, "Username:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("input", {
+        value: this.state.username,
+        onChange: function onChange(e) {
+          return _this2.setState(_this2.state.updateUsername(e.currentTarget.value));
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), "Password:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("input", {
+        type: "password",
+        value: this.state.password,
+        onChange: function onChange(e) {
+          return _this2.setState(_this2.state.updatePassword(e.currentTarget.value));
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+        onClick: this.handleLogin
+      }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), this.state.message && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, this.state.message), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+        onClick: this.props.backToHome
+      }, "Back")));
+    }
+  }]);
+}(react__WEBPACK_IMPORTED_MODULE_8__.Component);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Login);
+
+/***/ }),
+
+/***/ "./Login/login.api.ts":
+/*!****************************!*\
+  !*** ./Login/login.api.ts ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   isAdmin: () => (/* binding */ isAdmin),
+/* harmony export */   login: () => (/* binding */ login)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var login = /*#__PURE__*/function () {
+  var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(username, password) {
+    var response, result;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return fetch("/api/v1/Login/Login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              username: username,
+              password: password
+            })
+          });
+        case 2:
+          response = _context.sent;
+          _context.next = 5;
+          return response.text();
+        case 5:
+          result = _context.sent;
+          if (!response.ok) {
+            _context.next = 10;
+            break;
+          }
+          return _context.abrupt("return", "Success: ".concat(result));
+        case 10:
+          return _context.abrupt("return", "Error: ".concat(result));
+        case 11:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee);
+  }));
+  return function login(_x, _x2) {
+    return _ref.apply(this, arguments);
+  };
+}();
+var isAdmin = /*#__PURE__*/function () {
+  var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee2() {
+    var adminResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return fetch('/api/v1/login/IsAdminLoggedIn', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+        case 2:
+          adminResponse = _context2.sent;
+          if (!adminResponse.ok) {
+            _context2.next = 7;
+            break;
+          }
+          return _context2.abrupt("return", true);
+        case 7:
+          return _context2.abrupt("return", false);
+        case 8:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2);
+  }));
+  return function isAdmin() {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
+/***/ "./Login/login.state.ts":
+/*!******************************!*\
+  !*** ./Login/login.state.ts ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   initLoginState: () => (/* binding */ initLoginState)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+var initLoginState = {
+  username: "",
+  password: "",
+  message: "",
+  updateUsername: function updateUsername(username) {
+    return function (state) {
+      return _objectSpread(_objectSpread({}, state), {}, {
+        username: username
+      });
+    };
+  },
+  updatePassword: function updatePassword(password) {
+    return function (state) {
+      return _objectSpread(_objectSpread({}, state), {}, {
+        password: password
+      });
+    };
+  },
+  updateMessage: function updateMessage(message) {
+    return function (state) {
+      return _objectSpread(_objectSpread({}, state), {}, {
+        message: message
+      });
+    };
+  },
+  clearContents: function clearContents() {
+    return function (state) {
+      return _objectSpread(_objectSpread({}, state), {}, {
+        username: "",
+        password: "",
+        message: ""
+      });
+    };
+  }
 };
 
 /***/ }),

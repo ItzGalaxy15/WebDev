@@ -14,3 +14,18 @@ export const login = async (username: string, password: string): Promise<string>
     return `Error: ${result}`;
   }
 };
+
+export const isAdmin = async (): Promise<boolean> => {
+  const adminResponse = await fetch('/api/v1/login/IsAdminLoggedIn', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (adminResponse.ok) {
+    return true;
+  } else {
+    return false;
+  }
+}

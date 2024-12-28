@@ -4,7 +4,8 @@
   "description": "Basis webpack,react, and typescript pipeline.",
   "scripts": {
     "fe": "webpack --config webpack.config.js",
-    "fe-watch": "webpack --config webpack.config.js --watch"
+    "fe-watch": "webpack --config webpack.config.js --watch",
+    "build": "webpack --config webpack.config.js"
   },
   "keywords": [
     "react",
