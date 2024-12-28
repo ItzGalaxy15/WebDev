@@ -4,6 +4,7 @@ import { AdminDashBoardState, initAdminDashBoardState, Event } from "./admindash
 import AddEvent from "./addevent";
 import EditEvent from "./editevent";
 import DeleteEvent from "./deleteevent";
+import EventAttendees from "./eventattendees";
 
 export interface AdminDashBoardProps {
   backToHome: () => void;
@@ -32,6 +33,12 @@ export class AdminDashBoard extends React.Component<AdminDashBoardProps, AdminDa
     this.setState({ view: "deleteEvent", editEventId: eventId });
   };
 
+  handleViewAttendees = (e: React.FormEvent) => {
+    e.preventDefault();
+    const eventId = parseInt((e.target as HTMLFormElement).eventId.value, 10);
+    this.setState({ view: "viewAttendees", editEventId: eventId });
+  };
+
   render(): JSX.Element {
     if (this.state.view === "addEvent") {
       return <AddEvent backToDashboard={() => this.setState({ view: "dashboard" })} />;
@@ -43,6 +50,10 @@ export class AdminDashBoard extends React.Component<AdminDashBoardProps, AdminDa
 
     if (this.state.view === "deleteEvent" && this.state.editEventId !== null) {
       return <DeleteEvent backToDashboard={() => this.setState({ view: "dashboard" })} />;
+    }
+
+    if (this.state.view === "viewAttendees" && this.state.editEventId !== null) {
+      return <EventAttendees backToDashboard={() => this.setState({ view: "dashboard" })} eventId={this.state.editEventId} />;
     }
 
     return (
@@ -71,6 +82,12 @@ export class AdminDashBoard extends React.Component<AdminDashBoardProps, AdminDa
             <input type="number" name="eventId" placeholder="Enter event ID" required />
             <button type="submit">
               Delete event
+            </button>
+          </form>
+          <form onSubmit={this.handleViewAttendees}>
+            <input type="number" name="eventId" placeholder="Enter event ID" required />
+            <button type="submit">
+              See event attendees
             </button>
           </form>
           <button
