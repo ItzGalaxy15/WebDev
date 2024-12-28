@@ -1,9 +1,11 @@
 import React from "react";
 import { initLoginState, LoginState } from "./login.state";
 import { login } from "./login.api";
+import { isAdmin } from "./login.api";
 
 export interface LoginProps {
   backToHome: () => void;
+  setAdminStatus: (status: boolean) => void;
 }
 
 export class Login extends React.Component<LoginProps, LoginState> {
@@ -15,6 +17,12 @@ export class Login extends React.Component<LoginProps, LoginState> {
   handleLogin = async () => {
     const message = await login(this.state.username, this.state.password);
     this.setState(this.state.updateMessage(message));
+    if (message.includes("Success")) {
+      const adminStatus = await isAdmin();
+      if (adminStatus) {
+        this.props.setAdminStatus(true);
+      }
+    }
   };
 
   render(): JSX.Element {
