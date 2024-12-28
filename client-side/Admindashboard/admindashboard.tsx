@@ -1,4 +1,5 @@
 import React from "react";
+import { getAllEvents } from "./admindashboard.api";
 
 export interface AdminDashBoardProps {
   backToHome: () => void;
@@ -9,6 +10,11 @@ export class AdminDashBoard extends React.Component<AdminDashBoardProps, {}> {
     super(props);
   }
 
+  printEvents = async () => {
+    const message = await getAllEvents();
+    console.log(message);
+  };
+
   render(): JSX.Element {
     return (
       <div>
@@ -17,7 +23,7 @@ export class AdminDashBoard extends React.Component<AdminDashBoardProps, {}> {
         </div>
         <div>
           <button
-          
+            onClick={this.printEvents}
           >
             View all events
           </button>

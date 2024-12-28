@@ -2,6 +2,60 @@ var spa;
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./Admindashboard/admindashboard.api.ts":
+/*!**********************************************!*\
+  !*** ./Admindashboard/admindashboard.api.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getAllEvents: () => (/* binding */ getAllEvents)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var getAllEvents = /*#__PURE__*/function () {
+  var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee() {
+    var response, result;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return fetch("api/v1/Events", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          });
+        case 2:
+          response = _context.sent;
+          _context.next = 5;
+          return response.text();
+        case 5:
+          result = _context.sent;
+          if (!response.ok) {
+            _context.next = 10;
+            break;
+          }
+          return _context.abrupt("return", "Success: ".concat(result));
+        case 10:
+          return _context.abrupt("return", "Error: ".concat(result));
+        case 11:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee);
+  }));
+  return function getAllEvents() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
 /***/ "./Admindashboard/admindashboard.tsx":
 /*!*******************************************!*\
   !*** ./Admindashboard/admindashboard.tsx ***!
@@ -12,35 +66,64 @@ var spa;
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   AdminDashBoard: () => (/* binding */ AdminDashBoard)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _admindashboard_api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./admindashboard.api */ "./Admindashboard/admindashboard.api.ts");
 
 
 
 
 
-function _callSuper(t, o, e) { return o = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(o), (0,_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(t).constructor) : o.apply(t, e)); }
+
+
+
+function _callSuper(t, o, e) { return o = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(o), (0,_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__["default"])(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(t).constructor) : o.apply(t, e)); }
 function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+
 
 var AdminDashBoard = /*#__PURE__*/function (_React$Component) {
   function AdminDashBoard(props) {
-    (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, AdminDashBoard);
-    return _callSuper(this, AdminDashBoard, [props]);
+    var _this;
+    (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, AdminDashBoard);
+    _this = _callSuper(this, AdminDashBoard, [props]);
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(_this, "printEvents", /*#__PURE__*/(0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default().mark(function _callee() {
+      var message;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return (0,_admindashboard_api__WEBPACK_IMPORTED_MODULE_9__.getAllEvents)();
+          case 2:
+            message = _context.sent;
+            console.log(message);
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee);
+    })));
+    return _this;
   }
-  (0,_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(AdminDashBoard, _React$Component);
-  return (0,_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(AdminDashBoard, [{
+  (0,_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(AdminDashBoard, _React$Component);
+  return (0,_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(AdminDashBoard, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, "Welcome to the admin dashboard page."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", null, "View all events"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, "Welcome to the admin dashboard page."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+        onClick: this.printEvents
+      }, "View all events"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
         onClick: this.props.backToHome
       }, "Back")));
     }
   }]);
-}(react__WEBPACK_IMPORTED_MODULE_5__.Component);
+}(react__WEBPACK_IMPORTED_MODULE_8__.Component);
 /* unused harmony default export */ var __WEBPACK_DEFAULT_EXPORT__ = (AdminDashBoard);
 
 /***/ }),
@@ -92,7 +175,6 @@ var Home = /*#__PURE__*/function (_React$Component) {
         isAdmin: status
       });
     });
-    console.log("Home component initialized");
     _this.state = _home_state__WEBPACK_IMPORTED_MODULE_7__.initHomeState;
     return _this;
   }
@@ -101,9 +183,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var _this2 = this;
-      console.log("Rendering buttons for state:", this.state.view);
       if (this.state.view === "home") {
-        console.log("Rendering home view");
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("div", null, "Welcome to our home page", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
           onClick: function onClick() {
             return _this2.setState(_this2.state.updateViewState("registration"));
@@ -225,6 +305,8 @@ function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.
 
 
 
+
+
 var Login = /*#__PURE__*/function (_React$Component) {
   function Login(props) {
     var _this;
@@ -257,6 +339,34 @@ var Login = /*#__PURE__*/function (_React$Component) {
         }
       }, _callee);
     })));
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(_this, "handleLogout", /*#__PURE__*/(0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default().mark(function _callee2() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return (0,_login_api__WEBPACK_IMPORTED_MODULE_10__.isSomeoneLoggedIn)();
+          case 2:
+            response = _context2.sent;
+            if (!response) {
+              _context2.next = 10;
+              break;
+            }
+            _context2.next = 6;
+            return (0,_login_api__WEBPACK_IMPORTED_MODULE_10__.logout)();
+          case 6:
+            _this.setState(_this.state.updateMessage("Logged out"));
+            _this.props.setAdminStatus(false);
+            _context2.next = 11;
+            break;
+          case 10:
+            _this.setState(_this.state.updateMessage("No one is logged in"));
+          case 11:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2);
+    })));
     _this.state = _login_state__WEBPACK_IMPORTED_MODULE_9__.initLoginState;
     return _this;
   }
@@ -278,7 +388,9 @@ var Login = /*#__PURE__*/function (_React$Component) {
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
         onClick: this.handleLogin
-      }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), this.state.message && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, this.state.message), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+      }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+        onClick: this.handleLogout
+      }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), this.state.message && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, this.state.message), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
         onClick: this.props.backToHome
       }, "Back")));
     }
@@ -297,7 +409,9 @@ var Login = /*#__PURE__*/function (_React$Component) {
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isAdmin: () => (/* binding */ isAdmin),
-/* harmony export */   login: () => (/* binding */ login)
+/* harmony export */   isSomeoneLoggedIn: () => (/* binding */ isSomeoneLoggedIn),
+/* harmony export */   login: () => (/* binding */ login),
+/* harmony export */   logout: () => (/* binding */ logout)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
@@ -346,7 +460,7 @@ var login = /*#__PURE__*/function () {
 }();
 var isAdmin = /*#__PURE__*/function () {
   var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee2() {
-    var adminResponse;
+    var adminResponse, _isAdmin;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
@@ -360,13 +474,17 @@ var isAdmin = /*#__PURE__*/function () {
         case 2:
           adminResponse = _context2.sent;
           if (!adminResponse.ok) {
-            _context2.next = 7;
+            _context2.next = 10;
             break;
           }
-          return _context2.abrupt("return", true);
-        case 7:
+          _context2.next = 6;
+          return adminResponse.json();
+        case 6:
+          _isAdmin = _context2.sent;
+          return _context2.abrupt("return", _isAdmin);
+        case 10:
           return _context2.abrupt("return", false);
-        case 8:
+        case 11:
         case "end":
           return _context2.stop();
       }
@@ -374,6 +492,83 @@ var isAdmin = /*#__PURE__*/function () {
   }));
   return function isAdmin() {
     return _ref2.apply(this, arguments);
+  };
+}();
+var isSomeoneLoggedIn = /*#__PURE__*/function () {
+  var _ref3 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee3() {
+    var responseAdmin, responseUser, _isAdmin2, isUser;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return fetch('/api/v1/login/isadminloggedin', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+        case 2:
+          responseAdmin = _context3.sent;
+          _context3.next = 5;
+          return fetch('/api/v1/login/isuserloggedin', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+        case 5:
+          responseUser = _context3.sent;
+          if (!responseAdmin.ok) {
+            _context3.next = 13;
+            break;
+          }
+          _context3.next = 9;
+          return responseAdmin.json();
+        case 9:
+          _isAdmin2 = _context3.sent;
+          return _context3.abrupt("return", _isAdmin2);
+        case 13:
+          if (!responseUser.ok) {
+            _context3.next = 20;
+            break;
+          }
+          _context3.next = 16;
+          return responseUser.json();
+        case 16:
+          isUser = _context3.sent;
+          return _context3.abrupt("return", isUser);
+        case 20:
+          return _context3.abrupt("return", false);
+        case 21:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3);
+  }));
+  return function isSomeoneLoggedIn() {
+    return _ref3.apply(this, arguments);
+  };
+}();
+var logout = /*#__PURE__*/function () {
+  var _ref4 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee4() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.next = 2;
+          return fetch('/api/v1/login/logout', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+        case 2:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4);
+  }));
+  return function logout() {
+    return _ref4.apply(this, arguments);
   };
 }();
 

@@ -2,6 +2,8 @@ import React from "react";
 import { initLoginState, LoginState } from "./login.state";
 import { login } from "./login.api";
 import { isAdmin } from "./login.api";
+import { logout } from "./login.api";
+import { isSomeoneLoggedIn } from "./login.api";
 
 export interface LoginProps {
   backToHome: () => void;
@@ -24,6 +26,17 @@ export class Login extends React.Component<LoginProps, LoginState> {
       }
     }
   };
+
+  handleLogout = async () => {
+    const response = await isSomeoneLoggedIn();
+    if (response) {
+      await logout();
+      this.setState(this.state.updateMessage("Logged out"));
+      this.props.setAdminStatus(false);
+    } else {
+      this.setState(this.state.updateMessage("No one is logged in"));
+    }
+  };  
 
   render(): JSX.Element {
     return (
@@ -50,6 +63,11 @@ export class Login extends React.Component<LoginProps, LoginState> {
             onClick={this.handleLogin}
           >
             Login
+          </button>
+          <button
+            onClick={this.handleLogout}
+          >
+            Logout
           </button>
           <br />
           {this.state.message && <div>{this.state.message}</div>}

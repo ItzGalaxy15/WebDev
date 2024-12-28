@@ -8,7 +8,6 @@ import Login from "../Login/Login"; // Import the Login component
 export class Home extends React.Component<{}, HomeState> {
   constructor(props: {}) {
     super(props);
-    console.log("Home component initialized");
     this.state = initHomeState;
   }
 
@@ -17,9 +16,7 @@ export class Home extends React.Component<{}, HomeState> {
   };
 
   render(): JSX.Element {
-    console.log("Rendering buttons for state:", this.state.view);
     if (this.state.view === "home") {
-      console.log("Rendering home view");
       return (
         <div>
           Welcome to our home page

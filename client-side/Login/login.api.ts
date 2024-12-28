@@ -24,8 +24,44 @@ export const isAdmin = async (): Promise<boolean> => {
   });
 
   if (adminResponse.ok) {
-    return true;
+    const isAdmin = await adminResponse.json();
+    return isAdmin;
   } else {
     return false;
   }
+}
+
+export const isSomeoneLoggedIn = async (): Promise<boolean> => {
+  const responseAdmin = await fetch('/api/v1/login/isadminloggedin', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const responseUser = await fetch('/api/v1/login/isuserloggedin', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (responseAdmin.ok) {
+    const isAdmin = await responseAdmin.json();
+    return isAdmin;
+  } else if (responseUser.ok) {
+    const isUser = await responseUser.json();
+    return isUser;
+  } else {
+    return false;
+  }
+}
+
+export const logout = async (): Promise<void> => {
+  await fetch('/api/v1/login/logout', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 }
