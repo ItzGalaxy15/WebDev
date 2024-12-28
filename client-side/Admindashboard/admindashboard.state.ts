@@ -28,6 +28,7 @@ export interface Event {
     events: Event[];
     showEvents: boolean;
     view: string;
+    editEventId: number | null;
     updateEvents: (events: Event[]) => (state: AdminDashBoardState) => AdminDashBoardState;
     toggleShowEvents: () => (state: AdminDashBoardState) => AdminDashBoardState;
     clearEvents: () => (state: AdminDashBoardState) => AdminDashBoardState;
@@ -37,6 +38,7 @@ export interface Event {
     events: [],
     showEvents: false,
     view: "dashboard",
+    editEventId: null,
   
     updateEvents: (events: Event[]) => (state: AdminDashBoardState): AdminDashBoardState => {
       return {

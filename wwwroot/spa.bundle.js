@@ -208,6 +208,7 @@ var initAdminDashBoardState = {
   events: [],
   showEvents: false,
   view: "dashboard",
+  editEventId: null,
   updateEvents: function updateEvents(events) {
     return function (state) {
       return _objectSpread(_objectSpread({}, state), {}, {
@@ -258,6 +259,7 @@ var initAdminDashBoardState = {
 /* harmony import */ var _admindashboard_api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./admindashboard.api */ "./Admindashboard/admindashboard.api.ts");
 /* harmony import */ var _admindashboard_state__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./admindashboard.state */ "./Admindashboard/admindashboard.state.ts");
 /* harmony import */ var _addevent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./addevent */ "./Admindashboard/addevent.tsx");
+/* harmony import */ var _editevent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./editevent */ "./Admindashboard/editevent.tsx");
 
 
 
@@ -265,11 +267,10 @@ var initAdminDashBoardState = {
 
 
 
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 
 function _callSuper(t, o, e) { return o = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(o), (0,_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__["default"])(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(t).constructor) : o.apply(t, e)); }
 function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+
 
 
 
@@ -289,16 +290,21 @@ var AdminDashBoard = /*#__PURE__*/function (_React$Component) {
           case 2:
             events = _context.sent;
             _this.setState(_this.state.updateEvents(events));
-            if (events.length === 0) alert("No events found.");
-          case 5:
+          case 4:
           case "end":
             return _context.stop();
         }
       }, _callee);
     })));
-    _this.state = _objectSpread(_objectSpread({}, _admindashboard_state__WEBPACK_IMPORTED_MODULE_10__.initAdminDashBoardState), {}, {
-      view: "dashboard"
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(_this, "handleEditEvent", function (e) {
+      e.preventDefault();
+      var eventId = parseInt(e.target.eventId.value, 10);
+      _this.setState({
+        view: "editEvent",
+        editEventId: eventId
+      });
     });
+    _this.state = _admindashboard_state__WEBPACK_IMPORTED_MODULE_10__.initAdminDashBoardState;
     return _this;
   }
   (0,_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(AdminDashBoard, _React$Component);
@@ -315,6 +321,16 @@ var AdminDashBoard = /*#__PURE__*/function (_React$Component) {
           }
         });
       }
+      if (this.state.view === "editEvent" && this.state.editEventId !== null) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_editevent__WEBPACK_IMPORTED_MODULE_12__["default"], {
+          backToDashboard: function backToDashboard() {
+            return _this2.setState({
+              view: "dashboard"
+            });
+          },
+          eventId: this.state.editEventId
+        });
+      }
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, "Welcome to the admin dashboard page."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
         onClick: this.printEvents
       }, "View all events"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
@@ -323,7 +339,16 @@ var AdminDashBoard = /*#__PURE__*/function (_React$Component) {
             view: "addEvent"
           });
         }
-      }, "Add new event"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+      }, "Add new event"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("form", {
+        onSubmit: this.handleEditEvent
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("input", {
+        type: "number",
+        name: "eventId",
+        placeholder: "Enter event ID",
+        required: true
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+        type: "submit"
+      }, "Edit event")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
         onClick: this.props.backToHome
       }, "Back")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, this.state.showEvents ? this.state.events.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("ul", null, this.state.events.map(function (event) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("li", {
@@ -342,6 +367,184 @@ var AdminDashBoard = /*#__PURE__*/function (_React$Component) {
   }]);
 }(react__WEBPACK_IMPORTED_MODULE_8__.Component);
 /* unused harmony default export */ var __WEBPACK_DEFAULT_EXPORT__ = (AdminDashBoard);
+
+/***/ }),
+
+/***/ "./Admindashboard/editevent.tsx":
+/*!**************************************!*\
+  !*** ./Admindashboard/editevent.tsx ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+
+
+var EditEvent = function EditEvent(_ref) {
+  var backToDashboard = _ref.backToDashboard,
+    eventId = _ref.eventId;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(null),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState, 2),
+    event = _useState2[0],
+    setEvent = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(new Set()),
+    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState3, 2),
+    modifiedFields = _useState4[0],
+    setModifiedFields = _useState4[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    var fetchEvent = /*#__PURE__*/function () {
+      var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().mark(function _callee() {
+        var response, _event;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return fetch("/api/v1/Events/".concat(eventId));
+            case 2:
+              response = _context.sent;
+              if (!response.ok) {
+                _context.next = 10;
+                break;
+              }
+              _context.next = 6;
+              return response.json();
+            case 6:
+              _event = _context.sent;
+              setEvent(_event);
+              _context.next = 11;
+              break;
+            case 10:
+              console.error('Failed to fetch event');
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee);
+      }));
+      return function fetchEvent() {
+        return _ref2.apply(this, arguments);
+      };
+    }();
+    fetchEvent();
+  }, [eventId]);
+  var handleChange = function handleChange(e) {
+    if (event) {
+      var _e$target = e.target,
+        name = _e$target.name,
+        value = _e$target.value;
+      setEvent(_objectSpread(_objectSpread({}, event), {}, (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, name, value)));
+      setModifiedFields(function (prev) {
+        return new Set(prev).add(name);
+      });
+    }
+  };
+  var handleSubmit = /*#__PURE__*/function () {
+    var _ref3 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().mark(function _callee2(e) {
+      var formattedEvent, queryParams, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            e.preventDefault();
+            if (!event) {
+              _context2.next = 9;
+              break;
+            }
+            formattedEvent = {
+              eventId: eventId
+            };
+            modifiedFields.forEach(function (field) {
+              if (event[field] !== undefined) {
+                formattedEvent[field] = event[field];
+              }
+            });
+            queryParams = Array.from(modifiedFields).map(function (field) {
+              return "changed=".concat(field);
+            }).join('&');
+            _context2.next = 7;
+            return fetch("/api/v1/Events?".concat(queryParams), {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(formattedEvent)
+            });
+          case 7:
+            response = _context2.sent;
+            if (response.ok) {
+              backToDashboard();
+            } else {
+              console.error('Failed to update event');
+            }
+          case 9:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2);
+    }));
+    return function handleSubmit(_x) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+  if (!event) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", null, "Loading...");
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("h2", null, "Edit Event"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("label", null, "Title:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("input", {
+    type: "text",
+    name: "Title",
+    value: event.Title,
+    onChange: handleChange
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("label", null, "Description:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("textarea", {
+    name: "Description",
+    value: event.Description,
+    onChange: handleChange
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("label", null, "Event Date:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("input", {
+    type: "date",
+    name: "EventDate",
+    value: event.EventDate,
+    onChange: handleChange
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("label", null, "Start Time:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("input", {
+    type: "time",
+    name: "StartTime",
+    value: event.StartTime,
+    onChange: handleChange
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("label", null, "End Time:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("input", {
+    type: "time",
+    name: "EndTime",
+    value: event.EndTime,
+    onChange: handleChange
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("label", null, "Location:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("input", {
+    type: "text",
+    name: "Location",
+    value: event.Location,
+    onChange: handleChange
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("label", null, "Capacity:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("input", {
+    type: "number",
+    name: "Capacity",
+    value: event.Capacity,
+    onChange: handleChange
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("button", {
+    type: "submit"
+  }, "Save Event"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("button", {
+    type: "button",
+    onClick: backToDashboard
+  }, "Cancel")));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditEvent);
 
 /***/ }),
 

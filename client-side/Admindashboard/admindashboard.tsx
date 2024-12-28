@@ -2,6 +2,7 @@ import React from "react";
 import { getAllEvents } from "./admindashboard.api";
 import { AdminDashBoardState, initAdminDashBoardState, Event } from "./admindashboard.state";
 import AddEvent from "./addevent";
+import EditEvent from "./editevent";
 
 export interface AdminDashBoardProps {
   backToHome: () => void;
@@ -10,22 +11,27 @@ export interface AdminDashBoardProps {
 export class AdminDashBoard extends React.Component<AdminDashBoardProps, AdminDashBoardState> {
   constructor(props: AdminDashBoardProps) {
     super(props);
-    this.state = {
-      ...initAdminDashBoardState,
-      view: "dashboard",
-    }
+    this.state = initAdminDashBoardState;
   }
 
   printEvents = async () => {
     const events: Event[] = await getAllEvents();
     this.setState(this.state.updateEvents(events));
-    if (events.length === 0)
-      alert("No events found.");
+  };
+
+  handleEditEvent = (e: React.FormEvent) => {
+    e.preventDefault();
+    const eventId = parseInt((e.target as HTMLFormElement).eventId.value, 10);
+    this.setState({ view: "editEvent", editEventId: eventId });
   };
 
   render(): JSX.Element {
     if (this.state.view === "addEvent") {
       return <AddEvent backToDashboard={() => this.setState({ view: "dashboard" })} />;
+    }
+
+    if (this.state.view === "editEvent" && this.state.editEventId !== null) {
+      return <EditEvent backToDashboard={() => this.setState({ view: "dashboard" })} eventId={this.state.editEventId} />;
     }
 
     return (
@@ -41,9 +47,15 @@ export class AdminDashBoard extends React.Component<AdminDashBoardProps, AdminDa
           </button>
           <button 
             onClick={() => this.setState({ view: "addEvent" })}
-            >
+          >
             Add new event
           </button>
+          <form onSubmit={this.handleEditEvent}>
+            <input type="number" name="eventId" placeholder="Enter event ID" required />
+            <button type="submit">
+              Edit event
+            </button>
+          </form>
           <button
             onClick={this.props.backToHome}
           >
