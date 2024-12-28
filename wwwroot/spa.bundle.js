@@ -260,6 +260,7 @@ var initAdminDashBoardState = {
 /* harmony import */ var _admindashboard_state__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./admindashboard.state */ "./Admindashboard/admindashboard.state.ts");
 /* harmony import */ var _addevent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./addevent */ "./Admindashboard/addevent.tsx");
 /* harmony import */ var _editevent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./editevent */ "./Admindashboard/editevent.tsx");
+/* harmony import */ var _deleteevent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./deleteevent */ "./Admindashboard/deleteevent.tsx");
 
 
 
@@ -270,6 +271,7 @@ var initAdminDashBoardState = {
 
 function _callSuper(t, o, e) { return o = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(o), (0,_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__["default"])(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(t).constructor) : o.apply(t, e)); }
 function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+
 
 
 
@@ -304,6 +306,14 @@ var AdminDashBoard = /*#__PURE__*/function (_React$Component) {
         editEventId: eventId
       });
     });
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(_this, "handleDeleteEvent", function (e) {
+      e.preventDefault();
+      var eventId = parseInt(e.target.eventId.value, 10);
+      _this.setState({
+        view: "deleteEvent",
+        editEventId: eventId
+      });
+    });
     _this.state = _admindashboard_state__WEBPACK_IMPORTED_MODULE_10__.initAdminDashBoardState;
     return _this;
   }
@@ -331,6 +341,15 @@ var AdminDashBoard = /*#__PURE__*/function (_React$Component) {
           eventId: this.state.editEventId
         });
       }
+      if (this.state.view === "deleteEvent" && this.state.editEventId !== null) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_deleteevent__WEBPACK_IMPORTED_MODULE_13__["default"], {
+          backToDashboard: function backToDashboard() {
+            return _this2.setState({
+              view: "dashboard"
+            });
+          }
+        });
+      }
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, "Welcome to the admin dashboard page."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
         onClick: this.printEvents
       }, "View all events"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
@@ -348,7 +367,16 @@ var AdminDashBoard = /*#__PURE__*/function (_React$Component) {
         required: true
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
         type: "submit"
-      }, "Edit event")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+      }, "Edit event")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("form", {
+        onSubmit: this.handleDeleteEvent
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("input", {
+        type: "number",
+        name: "eventId",
+        placeholder: "Enter event ID",
+        required: true
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+        type: "submit"
+      }, "Delete event")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
         onClick: this.props.backToHome
       }, "Back")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, this.state.showEvents ? this.state.events.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("ul", null, this.state.events.map(function (event) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("li", {
@@ -367,6 +395,105 @@ var AdminDashBoard = /*#__PURE__*/function (_React$Component) {
   }]);
 }(react__WEBPACK_IMPORTED_MODULE_8__.Component);
 /* unused harmony default export */ var __WEBPACK_DEFAULT_EXPORT__ = (AdminDashBoard);
+
+/***/ }),
+
+/***/ "./Admindashboard/deleteevent.tsx":
+/*!****************************************!*\
+  !*** ./Admindashboard/deleteevent.tsx ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+
+
+var DeleteEvent = function DeleteEvent(_ref) {
+  var backToDashboard = _ref.backToDashboard;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(null),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState, 2),
+    eventId = _useState2[0],
+    setEventId = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
+    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState3, 2),
+    showConfirmation = _useState4[0],
+    setShowConfirmation = _useState4[1];
+  var handleChange = function handleChange(e) {
+    setEventId(parseInt(e.target.value, 10));
+  };
+  var handleDelete = /*#__PURE__*/function () {
+    var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default().mark(function _callee() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            if (!(eventId !== null)) {
+              _context.next = 5;
+              break;
+            }
+            _context.next = 3;
+            return fetch("/api/v1/Events?eventId=".concat(eventId), {
+              method: 'DELETE'
+            });
+          case 3:
+            response = _context.sent;
+            if (response.ok) {
+              alert('Event deleted successfully');
+              backToDashboard();
+            } else {
+              console.error('Failed to delete event');
+            }
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee);
+    }));
+    return function handleDelete() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    setShowConfirmation(true);
+  };
+  var confirmDelete = function confirmDelete() {
+    setShowConfirmation(false);
+    handleDelete();
+  };
+  var cancelDelete = function cancelDelete() {
+    setShowConfirmation(false);
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("h2", null, "Delete Event"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("label", null, "Event ID:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("input", {
+    type: "number",
+    name: "eventId",
+    onChange: handleChange,
+    required: true
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("button", {
+    type: "submit"
+  }, "Delete Event"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("button", {
+    type: "button",
+    onClick: backToDashboard
+  }, "Cancel")), showConfirmation && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", {
+    className: "confirmation-popup"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("p", null, "Are you sure you want to delete this event?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("button", {
+    onClick: confirmDelete
+  }, "Yes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("button", {
+    onClick: cancelDelete
+  }, "No")));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DeleteEvent);
 
 /***/ }),
 

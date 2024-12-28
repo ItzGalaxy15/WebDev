@@ -82,8 +82,6 @@ public class EventsService : IEventsService
 
     public async Task<bool> DeleteEvent(int eventId)
     {
-        Console.WriteLine(eventId);
-        
         // Instead of removing the event, put the event on disabled, so references to the event wont break
         bool IsDeleted = false;
         foreach (Event ev in _context.Event)
