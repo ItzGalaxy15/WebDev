@@ -58,6 +58,10 @@ export class Home extends React.Component<{}, HomeState> {
         />
       );
     } else if (this.state.view === "admindashboard") {
+      <Login
+      backToHome={() => this.setState(this.state.updateViewState("home"))}
+      setAdminStatus={this.setAdminStatus}
+      />
       if (this.state.isAdmin) {
         return (
           <AdminDashBoard

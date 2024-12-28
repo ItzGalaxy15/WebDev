@@ -16,14 +16,18 @@ export class Login extends React.Component<LoginProps, LoginState> {
     this.state = initLoginState;
   }
 
+  handleIsAdmin = async () => {
+    const adminStatus = await isAdmin();
+    if (adminStatus) {
+      this.props.setAdminStatus(true);
+    }
+  }
+
   handleLogin = async () => {
     const message = await login(this.state.username, this.state.password);
     this.setState(this.state.updateMessage(message));
     if (message.includes("Success")) {
-      const adminStatus = await isAdmin();
-      if (adminStatus) {
-        this.props.setAdminStatus(true);
-      }
+      this.handleIsAdmin();
     }
   };
 

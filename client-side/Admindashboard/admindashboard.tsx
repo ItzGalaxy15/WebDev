@@ -1,6 +1,7 @@
 import React from "react";
 import { getAllEvents } from "./admindashboard.api";
 import { AdminDashBoardState, initAdminDashBoardState, Event } from "./admindashboard.state";
+import AddEvent from "./addevent";
 
 export interface AdminDashBoardProps {
   backToHome: () => void;
@@ -9,15 +10,24 @@ export interface AdminDashBoardProps {
 export class AdminDashBoard extends React.Component<AdminDashBoardProps, AdminDashBoardState> {
   constructor(props: AdminDashBoardProps) {
     super(props);
-    this.state = initAdminDashBoardState;
+    this.state = {
+      ...initAdminDashBoardState,
+      view: "dashboard",
+    }
   }
 
   printEvents = async () => {
     const events: Event[] = await getAllEvents();
     this.setState(this.state.updateEvents(events));
+    if (events.length === 0)
+      alert("No events found.");
   };
 
   render(): JSX.Element {
+    if (this.state.view === "addEvent") {
+      return <AddEvent backToDashboard={() => this.setState({ view: "dashboard" })} />;
+    }
+
     return (
       <div>
         <div>
@@ -28,6 +38,11 @@ export class AdminDashBoard extends React.Component<AdminDashBoardProps, AdminDa
             onClick={this.printEvents}
           >
             View all events
+          </button>
+          <button 
+            onClick={() => this.setState({ view: "addEvent" })}
+            >
+            Add new event
           </button>
           <button
             onClick={this.props.backToHome}
