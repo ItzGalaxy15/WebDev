@@ -1,4 +1,6 @@
-export const getAllEvents = async (): Promise<string> => {
+import { Event } from "./admindashboard.state";
+
+export const getAllEvents = async (): Promise<Event[]> => {
     const response = await fetch("api/v1/Events", {
         method: "GET",
         headers: {
@@ -6,10 +8,10 @@ export const getAllEvents = async (): Promise<string> => {
         },
     });
   
-    const result = await response.text();
+    const result = await response.json();
     if (response.ok) {
-      return `Success: ${result}`;
+      return result;
     } else {
-      return `Error: ${result}`;
+      throw new Error(`Error: no events found`);
     }
   };

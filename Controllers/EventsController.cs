@@ -18,7 +18,9 @@ public class EventsController : Controller
     [HttpGet]
     public async Task<IActionResult> GetEvents()
     {
-        return Ok(await _eventService.GetAllEvents());
+        var events = await _eventService.GetAllEvents();
+        if (events == null) return NotFound();
+        return Ok(events);
     }
 
     [HttpGet("{id}")]
