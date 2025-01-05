@@ -5,8 +5,15 @@ import { OverviewPage } from "../Overview/overview";
 import { AdminDashBoard } from "../Admindashboard/admindashboard";
 import Login from "../Login/Login"; // Import the Login component
 
-export class Home extends React.Component<{}, HomeState> {
-  constructor(props: {}) {
+
+export interface HomeProps {
+  backToMainHome: () => void;
+  setAdminStatus: (status: boolean) => void;
+}
+
+
+export class Home extends React.Component<HomeProps, HomeState> {
+  constructor(props: HomeProps) {
     super(props);
     this.state = initHomeState;
   }
@@ -21,47 +28,53 @@ export class Home extends React.Component<{}, HomeState> {
         <div>
           Welcome to our home page
           <div>
-            <button
+            {/* <button
               onClick={() => this.setState(this.state.updateViewState("registration"))}
             >
               Registration
-            </button>
+            </button> */}
             <button
               onClick={() => this.setState(this.state.updateViewState("overview"))}
             >
               Overview
             </button>
-            <button
+            {/* <button
               onClick={() => this.setState(this.state.updateViewState("login"))}
             >
               Login
-            </button>
+            </button> */}
             <button
               onClick={() => this.setState(this.state.updateViewState("admindashboard"))}
             >
               Admin Dashboard
             </button>
+            <button
+              onClick={this.props.backToMainHome}
+            >
+              Log out
+            </button>
+
           </div>
         </div>
       );
-    } else if (this.state.view === "registration") {
-      return (
-        <RegistrationForm
-          backToHome={() => this.setState(this.state.updateViewState("home"))}
-        />
-      );
-    } else if (this.state.view === "login") {
-      return (
-        <Login
-          backToHome={() => this.setState(this.state.updateViewState("home"))}
-          setAdminStatus={this.setAdminStatus}
-        />
-      );
+    // } else if (this.state.view === "registration") {
+    //   return (
+    //     <RegistrationForm
+    //       backToHome={() => this.setState(this.state.updateViewState("home"))}
+    //     />
+    //   );
+    // } else if (this.state.view === "login") {
+    //   return (
+    //     <Login
+    //       backToHome={() => this.setState(this.state.updateViewState("home"))}
+    //       setAdminStatus={this.setAdminStatus}
+    //     />
+    //   );
     } else if (this.state.view === "admindashboard") {
-      <Login
-      backToHome={() => this.setState(this.state.updateViewState("home"))}
-      setAdminStatus={this.setAdminStatus}
-      />
+      // <Login
+      // backToMainHome={() => this.setState(this.state.updateViewState("home"))}
+      // setAdminStatus={this.setAdminStatus}
+      // />
       if (this.state.isAdmin) {
         return (
           <AdminDashBoard

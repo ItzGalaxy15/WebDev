@@ -1,4 +1,8 @@
-export interface LoginState {
+
+export type ViewLoginState = "login" |  "loggedin"  | "loggedout"
+
+export type LoginState = {
+  viewLoginState : ViewLoginState,
   username: string;
   password: string;
   message: string;
@@ -6,9 +10,11 @@ export interface LoginState {
   updatePassword: (password: string) => (state: LoginState) => LoginState;
   updateMessage: (message: string) => (state: LoginState) => LoginState;
   clearContents: () => (state: LoginState) => LoginState;
+  updateViewLoginState: (view: ViewLoginState) => (state: LoginState) => LoginState;
 }
 
 export const initLoginState: LoginState = {
+  viewLoginState: "login",
   username: "",
   password: "",
   message: "",
@@ -40,6 +46,12 @@ export const initLoginState: LoginState = {
       username: "",
       password: "",
       message: "",
+    };
+  },
+  updateViewLoginState: (view: ViewLoginState) => (state: LoginState): LoginState => {
+    return {
+      ...state,
+      viewLoginState: view,
     };
   },
 };

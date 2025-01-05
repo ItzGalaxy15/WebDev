@@ -5,7 +5,7 @@ import { submit } from './registration.api';
 
 
 export interface RegisterationProps{
-    backToHome :()=>void
+    backToMainHome :()=>void
     // insertPerson: (person: Person)=>void
     // testVal: number
     // testName: string
@@ -78,7 +78,7 @@ export class RegistrationForm extends React.Component<RegisterationProps,Registe
                     </button>
                     <br />
                     <button
-                        onClick={e=>this.props.backToHome()}
+                        onClick={e=>this.props.backToMainHome()}
                     >
                         Back
                     </button>

@@ -1,4 +1,4 @@
-export type ViewState = "home" | "registration" | "overview" | "login" | "admindashboard";
+export type ViewState = "home" |  "admindashboard"  | "overview" /*| "login" | "registration";*/
 
 export interface Person {
   name: string;

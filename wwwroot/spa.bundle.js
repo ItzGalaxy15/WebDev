@@ -799,10 +799,8 @@ var EventAttendees = function EventAttendees(_ref) {
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _home_state__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./home.state */ "./Home/home.state.ts");
-/* harmony import */ var _registration_registration__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../registration/registration */ "./registration/registration.tsx");
-/* harmony import */ var _Overview_overview__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Overview/overview */ "./Overview/overview.tsx");
-/* harmony import */ var _Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Admindashboard/admindashboard */ "./Admindashboard/admindashboard.tsx");
-/* harmony import */ var _Login_Login__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../Login/Login */ "./Login/Login.tsx");
+/* harmony import */ var _Overview_overview__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Overview/overview */ "./Overview/overview.tsx");
+/* harmony import */ var _Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Admindashboard/admindashboard */ "./Admindashboard/admindashboard.tsx");
 
 
 
@@ -815,8 +813,7 @@ function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.
 
 
 
-
- // Import the Login component
+// Import the Login component
 
 var Home = /*#__PURE__*/function (_React$Component) {
   function Home(props) {
@@ -839,43 +836,35 @@ var Home = /*#__PURE__*/function (_React$Component) {
       if (this.state.view === "home") {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("div", null, "Welcome to our home page", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
           onClick: function onClick() {
-            return _this2.setState(_this2.state.updateViewState("registration"));
-          }
-        }, "Registration"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
-          onClick: function onClick() {
             return _this2.setState(_this2.state.updateViewState("overview"));
           }
         }, "Overview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
           onClick: function onClick() {
-            return _this2.setState(_this2.state.updateViewState("login"));
-          }
-        }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
-          onClick: function onClick() {
             return _this2.setState(_this2.state.updateViewState("admindashboard"));
           }
-        }, "Admin Dashboard")));
-      } else if (this.state.view === "registration") {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_registration_registration__WEBPACK_IMPORTED_MODULE_8__.RegistrationForm, {
-          backToHome: function backToHome() {
-            return _this2.setState(_this2.state.updateViewState("home"));
-          }
-        });
-      } else if (this.state.view === "login") {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_Login_Login__WEBPACK_IMPORTED_MODULE_11__["default"], {
-          backToHome: function backToHome() {
-            return _this2.setState(_this2.state.updateViewState("home"));
-          },
-          setAdminStatus: this.setAdminStatus
-        });
+        }, "Admin Dashboard"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
+          onClick: this.props.backToMainHome
+        }, "Log out")));
+        // } else if (this.state.view === "registration") {
+        //   return (
+        //     <RegistrationForm
+        //       backToHome={() => this.setState(this.state.updateViewState("home"))}
+        //     />
+        //   );
+        // } else if (this.state.view === "login") {
+        //   return (
+        //     <Login
+        //       backToHome={() => this.setState(this.state.updateViewState("home"))}
+        //       setAdminStatus={this.setAdminStatus}
+        //     />
+        //   );
       } else if (this.state.view === "admindashboard") {
-        /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_Login_Login__WEBPACK_IMPORTED_MODULE_11__["default"], {
-          backToHome: function backToHome() {
-            return _this2.setState(_this2.state.updateViewState("home"));
-          },
-          setAdminStatus: this.setAdminStatus
-        });
+        // <Login
+        // backToMainHome={() => this.setState(this.state.updateViewState("home"))}
+        // setAdminStatus={this.setAdminStatus}
+        // />
         if (this.state.isAdmin) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_10__.AdminDashBoard, {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_9__.AdminDashBoard, {
             backToHome: function backToHome() {
               return _this2.setState(_this2.state.updateViewState("home"));
             }
@@ -888,7 +877,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
           }, "Back to Home"));
         }
       } else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_Overview_overview__WEBPACK_IMPORTED_MODULE_9__.OverviewPage, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_Overview_overview__WEBPACK_IMPORTED_MODULE_8__.OverviewPage, {
           backToHome: function backToHome() {
             return _this2.setState(_this2.state.updateViewState("home"));
           }
@@ -914,6 +903,8 @@ var Home = /*#__PURE__*/function (_React$Component) {
 
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+/*| "login" | "registration";*/
+
 var initHomeState = {
   view: "home",
   updateViewState: function updateViewState(view) {
@@ -950,6 +941,8 @@ var initHomeState = {
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _login_state__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./login.state */ "./Login/login.state.ts");
 /* harmony import */ var _login_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./login.api */ "./Login/login.api.ts");
+/* harmony import */ var _Home_Home__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../Home/Home */ "./Home/Home.tsx");
+/* harmony import */ var _MainHome_MainHome__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../MainHome/MainHome */ "./MainHome/MainHome.tsx");
 
 
 
@@ -960,6 +953,8 @@ var initHomeState = {
 
 function _callSuper(t, o, e) { return o = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(o), (0,_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__["default"])(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(t).constructor) : o.apply(t, e)); }
 function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+
+
 
 
 
@@ -1002,7 +997,8 @@ var Login = /*#__PURE__*/function (_React$Component) {
             if (message.includes("Success")) {
               _this.handleIsAdmin();
             }
-          case 5:
+            _this.setState(_this.state.updateViewLoginState("loggedin"));
+          case 6:
           case "end":
             return _context2.stop();
         }
@@ -1018,7 +1014,7 @@ var Login = /*#__PURE__*/function (_React$Component) {
           case 2:
             response = _context3.sent;
             if (!response) {
-              _context3.next = 10;
+              _context3.next = 11;
               break;
             }
             _context3.next = 6;
@@ -1026,11 +1022,12 @@ var Login = /*#__PURE__*/function (_React$Component) {
           case 6:
             _this.setState(_this.state.updateMessage("Logged out"));
             _this.props.setAdminStatus(false);
-            _context3.next = 11;
+            _this.setState(_this.state.updateViewLoginState("loggedout"));
+            _context3.next = 12;
             break;
-          case 10:
-            _this.setState(_this.state.updateMessage("No one is logged in"));
           case 11:
+            _this.setState(_this.state.updateMessage("No one is logged in"));
+          case 12:
           case "end":
             return _context3.stop();
         }
@@ -1044,24 +1041,33 @@ var Login = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var _this2 = this;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, "Welcome to our Login page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, "Username:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("input", {
-        value: this.state.username,
-        onChange: function onChange(e) {
-          return _this2.setState(_this2.state.updateUsername(e.currentTarget.value));
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), "Password:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("input", {
-        type: "password",
-        value: this.state.password,
-        onChange: function onChange(e) {
-          return _this2.setState(_this2.state.updatePassword(e.currentTarget.value));
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
-        onClick: this.handleLogin
-      }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
-        onClick: this.handleLogout
-      }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), this.state.message && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, this.state.message), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
-        onClick: this.props.backToHome
-      }, "Back")));
+      if (this.state.viewLoginState === "login") {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, "Welcome to our Login page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, "Username:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("input", {
+          value: this.state.username,
+          onChange: function onChange(e) {
+            return _this2.setState(_this2.state.updateUsername(e.currentTarget.value));
+          }
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), "Password:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("input", {
+          type: "password",
+          value: this.state.password,
+          onChange: function onChange(e) {
+            return _this2.setState(_this2.state.updatePassword(e.currentTarget.value));
+          }
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+          onClick: this.handleLogin
+        }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+          onClick: this.handleLogout
+        }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), this.state.message && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, this.state.message), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+          onClick: this.props.backToMainHome
+        }, "Back")));
+      } else if (this.state.viewLoginState === "loggedin") {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_Home_Home__WEBPACK_IMPORTED_MODULE_11__.Home, {
+          backToMainHome: this.handleLogout,
+          setAdminStatus: this.props.setAdminStatus
+        });
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_MainHome_MainHome__WEBPACK_IMPORTED_MODULE_12__.MainHome, null);
+      }
     }
   }]);
 }(react__WEBPACK_IMPORTED_MODULE_8__.Component);
@@ -1258,6 +1264,7 @@ var logout = /*#__PURE__*/function () {
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var initLoginState = {
+  viewLoginState: "login",
   username: "",
   password: "",
   message: "",
@@ -1288,6 +1295,120 @@ var initLoginState = {
         username: "",
         password: "",
         message: ""
+      });
+    };
+  },
+  updateViewLoginState: function updateViewLoginState(view) {
+    return function (state) {
+      return _objectSpread(_objectSpread({}, state), {}, {
+        viewLoginState: view
+      });
+    };
+  }
+};
+
+/***/ }),
+
+/***/ "./MainHome/MainHome.tsx":
+/*!*******************************!*\
+  !*** ./MainHome/MainHome.tsx ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   MainHome: () => (/* binding */ MainHome)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _mainhome_state__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./mainhome.state */ "./MainHome/mainhome.state.ts");
+/* harmony import */ var _registration_registration__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../registration/registration */ "./registration/registration.tsx");
+/* harmony import */ var _Login_Login__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Login/Login */ "./Login/Login.tsx");
+
+
+
+
+
+
+function _callSuper(t, o, e) { return o = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(o), (0,_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(t).constructor) : o.apply(t, e)); }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+
+
+
+
+var MainHome = /*#__PURE__*/function (_React$Component) {
+  function MainHome(props) {
+    var _this;
+    (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, MainHome);
+    _this = _callSuper(this, MainHome, [props]);
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5__["default"])(_this, "setAdminStatus", function (status) {
+      _this.setState({
+        isAdmin: status
+      });
+    });
+    _this.state = _mainhome_state__WEBPACK_IMPORTED_MODULE_7__.initMainHomeState;
+    return _this;
+  }
+  (0,_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(MainHome, _React$Component);
+  return (0,_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(MainHome, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+      if (this.state.view === "mainHome") {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("div", null, "Welcome to the Office Calendar", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
+          onClick: function onClick() {
+            return _this2.setState(_this2.state.updateViewState("registration"));
+          }
+        }, "Registration"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
+          onClick: function onClick() {
+            return _this2.setState(_this2.state.updateViewState("login"));
+          }
+        }, "Login")));
+      } else if (this.state.view === "registration") {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_registration_registration__WEBPACK_IMPORTED_MODULE_8__.RegistrationForm, {
+          backToMainHome: function backToMainHome() {
+            return _this2.setState(_this2.state.updateViewState("mainHome"));
+          }
+        });
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_Login_Login__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          backToMainHome: function backToMainHome() {
+            return _this2.setState(_this2.state.updateViewState("mainHome"));
+          },
+          setAdminStatus: this.setAdminStatus
+        });
+      }
+    }
+  }]);
+}(react__WEBPACK_IMPORTED_MODULE_6__.Component);
+
+/***/ }),
+
+/***/ "./MainHome/mainhome.state.ts":
+/*!************************************!*\
+  !*** ./MainHome/mainhome.state.ts ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   initMainHomeState: () => (/* binding */ initMainHomeState)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+var initMainHomeState = {
+  view: "mainHome",
+  updateViewState: function updateViewState(view) {
+    return function (state) {
+      return _objectSpread(_objectSpread({}, state), {}, {
+        view: view
       });
     };
   }
@@ -1507,7 +1628,7 @@ var RegistrationForm = /*#__PURE__*/function (_React$Component) {
         }
       }, "Submit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
         onClick: function onClick(e) {
-          return _this2.props.backToHome();
+          return _this2.props.backToMainHome();
         }
       }, "Back")));
     }
@@ -30897,13 +31018,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var _Home_Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Home/Home */ "./Home/Home.tsx");
+/* harmony import */ var _MainHome_MainHome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MainHome/MainHome */ "./MainHome/MainHome.tsx");
 
 
 
 var main = function main() {
   var rootElement = document.querySelector('#root');
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Home_Home__WEBPACK_IMPORTED_MODULE_2__.Home, null), rootElement);
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MainHome_MainHome__WEBPACK_IMPORTED_MODULE_2__.MainHome, null), rootElement);
 };
 })();
 
