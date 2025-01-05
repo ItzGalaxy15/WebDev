@@ -813,6 +813,8 @@ var EventAttendees = function EventAttendees(_ref) {
 
 
 
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _callSuper(t, o, e) { return o = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(o), (0,_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__["default"])(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(t).constructor) : o.apply(t, e)); }
 function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
 
@@ -835,14 +837,48 @@ var Home = /*#__PURE__*/function (_React$Component) {
             return (0,_home_api__WEBPACK_IMPORTED_MODULE_12__.getAllEvents)();
           case 2:
             events = _context.sent;
-            _this.setState(_this.state.getEvents(events));
+            _this.setState(_objectSpread(_objectSpread({}, _this.state), {}, {
+              events: events
+            }));
           case 4:
           case "end":
             return _context.stop();
         }
       }, _callee);
     })));
-    _this.state = _home_state__WEBPACK_IMPORTED_MODULE_9__.initHomeState;
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(_this, "selectEvent", function (eventId) {
+      _this.setState(_objectSpread(_objectSpread({}, _this.state), {}, {
+        selectedEventId: eventId
+      }));
+    });
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(_this, "renderEventList", function () {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("ul", null, _this.state.events.map(function (event, index) {
+        return (
+          /*#__PURE__*/
+          //  "selecting" an event when you click on it. 
+          react__WEBPACK_IMPORTED_MODULE_8__.createElement("li", {
+            key: event.eventId,
+            onClick: function onClick() {
+              return _this.selectEvent(event.eventId);
+            }
+          }, "Event", index + 1, ": ", event.title)
+        );
+      }));
+    });
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(_this, "renderEventDetails", function (event) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("h3", null, "Title: ", event.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Description: ", event.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Date: ", event.eventDate), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Time: ", event.startTime, " - ", event.endTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Location: ", event.location), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Capacity: ", event.capacity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Admin Approval: ", event.adminApproval ? "Yes" : "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Deleted: ", event["delete"] ? "Yes" : "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("h4", null, "Attendances:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("ul", null, event.event_Attendances.map(function (attendance) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("li", {
+          key: attendance.event_AttendanceId
+        }, "User ID: ", attendance.userId, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("ul", null, attendance.reviews.map(function (review) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("li", {
+            key: review.reviewId
+          }, "Feedback: ", review.feedback, ", Rating: ", review.rating);
+        })));
+      })));
+    });
+    _this.state = _objectSpread(_objectSpread({}, _home_state__WEBPACK_IMPORTED_MODULE_9__.initHomeState), {}, {
+      selectedEventId: null
+    });
     return _this;
   }
   (0,_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(Home, _React$Component);
@@ -851,27 +887,22 @@ var Home = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       this.printEvents();
     }
-    // setAdminStatus = (status: boolean) => {
-    //   this.setState({ isAdmin: status });
-    // };
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
+      var _this$state = this.state,
+        view = _this$state.view,
+        selectedEventId = _this$state.selectedEventId;
+      var selectedEvent = this.state.events.find(function (event) {
+        return event.eventId === selectedEventId;
+      });
       if (this.state.view === "home") {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, "Welcome to our home page", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, this.state.showEvents ? this.state.events.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("ul", null, this.state.events.map(function (event) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("li", {
-            key: event.eventId
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("h3", null, event.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, event.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Date: ", event.eventDate), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Time: ", event.startTime, " - ", event.endTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Location: ", event.location), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Capacity: ", event.capacity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Admin Approval: ", event.adminApproval ? "Yes" : "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Deleted: ", event["delete"] ? "Yes" : "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("h4", null, "Attendances:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("ul", null, event.event_Attendances.map(function (attendance) {
-            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("li", {
-              key: attendance.event_AttendanceId
-            }, "User ID: ", attendance.userId, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("ul", null, attendance.reviews.map(function (review) {
-              return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("li", {
-                key: review.reviewId
-              }, "Feedback: ", review.feedback, ", Rating: ", review.rating);
-            })));
-          })));
-        })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "No events available.") : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, "Welcome to our home page", this.state.showEvents && !selectedEvent && this.renderEventList(), selectedEvent && this.renderEventDetails(selectedEvent), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+          onClick: function onClick() {
+            return _this2.selectEvent(null);
+          }
+        }, "Back to home page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
           onClick: function onClick() {
             return _this2.setState(_this2.state.updateViewState("overview"));
           }
@@ -882,24 +913,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
         }, "Admin Dashboard"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
           onClick: this.props.backToMainHome
         }, "Log out")));
-        // } else if (this.state.view === "registration") {
-        //   return (
-        //     <RegistrationForm
-        //       backToHome={() => this.setState(this.state.updateViewState("home"))}
-        //     />
-        //   );
-        // } else if (this.state.view === "login") {
-        //   return (
-        //     <Login
-        //       backToHome={() => this.setState(this.state.updateViewState("home"))}
-        //       setAdminStatus={this.setAdminStatus}
-        //     />
-        //   );
       } else if (this.state.view === "admindashboard") {
-        // <Login
-        // backToMainHome={() => this.setState(this.state.updateViewState("home"))}
-        // setAdminStatus={this.setAdminStatus}
-        // />
         if (this.props.IsAdmin) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_11__.AdminDashBoard, {
             backToHome: function backToHome() {

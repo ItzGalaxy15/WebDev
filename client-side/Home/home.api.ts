@@ -1,7 +1,6 @@
 import { HomeEvent } from "./home.state";
 
 
-
 export const getAllEvents = async (): Promise<HomeEvent[]> => {
     const response = await fetch("api/v1/Events", {
         method: "GET",
