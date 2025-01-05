@@ -1296,7 +1296,7 @@ var isAdmin = /*#__PURE__*/function () {
 }();
 var isSomeoneLoggedIn = /*#__PURE__*/function () {
   var _ref3 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee3() {
-    var responseAdmin, responseUser, _isAdmin2, isUser;
+    var responseAdmin, responseUser, isAdmin, isUser;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
@@ -1319,27 +1319,38 @@ var isSomeoneLoggedIn = /*#__PURE__*/function () {
         case 5:
           responseUser = _context3.sent;
           if (!responseAdmin.ok) {
-            _context3.next = 13;
+            _context3.next = 12;
             break;
           }
           _context3.next = 9;
           return responseAdmin.json();
         case 9:
-          _isAdmin2 = _context3.sent;
-          return _context3.abrupt("return", _isAdmin2);
+          _context3.t0 = _context3.sent;
+          _context3.next = 13;
+          break;
+        case 12:
+          _context3.t0 = false;
         case 13:
+          isAdmin = _context3.t0;
           if (!responseUser.ok) {
             _context3.next = 20;
             break;
           }
-          _context3.next = 16;
+          _context3.next = 17;
           return responseUser.json();
-        case 16:
-          isUser = _context3.sent;
-          return _context3.abrupt("return", isUser);
+        case 17:
+          _context3.t1 = _context3.sent;
+          _context3.next = 21;
+          break;
         case 20:
-          return _context3.abrupt("return", false);
+          _context3.t1 = false;
         case 21:
+          isUser = _context3.t1;
+          return _context3.abrupt("return", {
+            isAdmin: isAdmin,
+            isUser: isUser
+          });
+        case 23:
         case "end":
           return _context3.stop();
       }
@@ -1351,17 +1362,35 @@ var isSomeoneLoggedIn = /*#__PURE__*/function () {
 }();
 var logout = /*#__PURE__*/function () {
   var _ref4 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee4() {
+    var _yield$isSomeoneLogge, isAdmin, isUser;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
           _context4.next = 2;
+          return isSomeoneLoggedIn();
+        case 2:
+          _yield$isSomeoneLogge = _context4.sent;
+          isAdmin = _yield$isSomeoneLogge.isAdmin;
+          isUser = _yield$isSomeoneLogge.isUser;
+          if (!(isAdmin || isUser)) {
+            _context4.next = 12;
+            break;
+          }
+          _context4.next = 8;
           return fetch('/api/v1/login/logout', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'
             }
           });
-        case 2:
+        case 8:
+          console.log('Logout successful');
+          window.location.href = '/'; // Redirect to homepage after logout
+          _context4.next = 13;
+          break;
+        case 12:
+          console.log('No one is logged in, cannot logout');
+        case 13:
         case "end":
           return _context4.stop();
       }
