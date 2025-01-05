@@ -10,9 +10,9 @@ export class MainHome extends React.Component<{}, MainHomeState> {
     this.state = initMainHomeState;
   }
 
-  setAdminStatus = (status: boolean) => {
-    this.setState({ isAdmin: status });
-  };
+  // setAdminStatus = (status: boolean) => {
+  //   this.setState({ isAdmin: status });
+  // };
 
   render(): JSX.Element {
     if (this.state.view === "mainHome") {
@@ -43,7 +43,7 @@ export class MainHome extends React.Component<{}, MainHomeState> {
         return (
             <Login
             backToMainHome={() => this.setState(this.state.updateViewState("mainHome"))}
-            setAdminStatus={this.setAdminStatus}
+            // setAdminStatus={this.setAdminStatus}
             />
         );
     }

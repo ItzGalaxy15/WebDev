@@ -8,7 +8,7 @@ import Login from "../Login/Login"; // Import the Login component
 
 export interface HomeProps {
   backToMainHome: () => void;
-  setAdminStatus: (status: boolean) => void;
+  IsAdmin: boolean;
 }
 
 
@@ -18,9 +18,9 @@ export class Home extends React.Component<HomeProps, HomeState> {
     this.state = initHomeState;
   }
 
-  setAdminStatus = (status: boolean) => {
-    this.setState({ isAdmin: status });
-  };
+  // setAdminStatus = (status: boolean) => {
+  //   this.setState({ isAdmin: status });
+  // };
 
   render(): JSX.Element {
     if (this.state.view === "home") {
@@ -75,7 +75,7 @@ export class Home extends React.Component<HomeProps, HomeState> {
       // backToMainHome={() => this.setState(this.state.updateViewState("home"))}
       // setAdminStatus={this.setAdminStatus}
       // />
-      if (this.state.isAdmin) {
+      if (this.props.IsAdmin) {
         return (
           <AdminDashBoard
             backToHome={() => this.setState(this.state.updateViewState("home"))}

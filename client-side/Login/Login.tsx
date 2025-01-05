@@ -7,9 +7,10 @@ import { isSomeoneLoggedIn } from "./login.api";
 import { Home } from "../Home/Home";
 import { MainHome } from "../MainHome/MainHome";
 
+
+
 export interface LoginProps {
   backToMainHome: () => void;
-  setAdminStatus: (status: boolean) => void;
 }
 
 export class Login extends React.Component<LoginProps, LoginState> {
@@ -18,10 +19,15 @@ export class Login extends React.Component<LoginProps, LoginState> {
     this.state = initLoginState;
   }
 
+  setAdminStatus = (status: boolean) => {
+    this.setState({ isAdmin: status });
+  };
+  
+
   handleIsAdmin = async () => {
     const adminStatus = await isAdmin();
     if (adminStatus) {
-      this.props.setAdminStatus(true);
+      this.setAdminStatus(true);
     }
   }
 
@@ -39,7 +45,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
     if (response) {
       await logout();
       this.setState(this.state.updateMessage("Logged out"));
-      this.props.setAdminStatus(false);
+      this.setAdminStatus(false);
       this.setState(this.state.updateViewLoginState("loggedout"))
     } else {
       this.setState(this.state.updateMessage("No one is logged in"));
@@ -93,7 +99,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
         return (
           <Home
             backToMainHome={this.handleLogout}
-            setAdminStatus={this.props.setAdminStatus}
+            IsAdmin= {this.state.isAdmin}
           />
         );
     } else {

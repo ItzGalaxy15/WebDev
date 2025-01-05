@@ -3,6 +3,7 @@ export type ViewLoginState = "login" |  "loggedin"  | "loggedout"
 
 export type LoginState = {
   viewLoginState : ViewLoginState,
+  isAdmin: boolean;
   username: string;
   password: string;
   message: string;
@@ -15,6 +16,7 @@ export type LoginState = {
 
 export const initLoginState: LoginState = {
   viewLoginState: "login",
+  isAdmin: false,
   username: "",
   password: "",
   message: "",

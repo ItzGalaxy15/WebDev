@@ -8,7 +8,7 @@ export interface Person {
 
 export interface HomeState {
   view: ViewState;
-  isAdmin?: boolean;
+  // isAdmin?: boolean;
   updateViewState: (view: ViewState) => (state: HomeState) => HomeState;
 }
 
