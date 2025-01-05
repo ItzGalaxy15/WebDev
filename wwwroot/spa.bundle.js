@@ -791,21 +791,29 @@ var EventAttendees = function EventAttendees(_ref) {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Home: () => (/* binding */ Home)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _home_state__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./home.state */ "./Home/home.state.ts");
-/* harmony import */ var _Overview_overview__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Overview/overview */ "./Overview/overview.tsx");
-/* harmony import */ var _Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Admindashboard/admindashboard */ "./Admindashboard/admindashboard.tsx");
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _home_state__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./home.state */ "./Home/home.state.ts");
+/* harmony import */ var _Overview_overview__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Overview/overview */ "./Overview/overview.tsx");
+/* harmony import */ var _Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../Admindashboard/admindashboard */ "./Admindashboard/admindashboard.tsx");
+/* harmony import */ var _home_api__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./home.api */ "./Home/home.api.ts");
 
 
 
 
 
-function _callSuper(t, o, e) { return o = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(o), (0,_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(t).constructor) : o.apply(t, e)); }
+
+
+
+function _callSuper(t, o, e) { return o = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(o), (0,_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__["default"])(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(t).constructor) : o.apply(t, e)); }
 function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
 
 
@@ -816,30 +824,62 @@ function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.
 var Home = /*#__PURE__*/function (_React$Component) {
   function Home(props) {
     var _this;
-    (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, Home);
+    (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, Home);
     _this = _callSuper(this, Home, [props]);
-    _this.state = _home_state__WEBPACK_IMPORTED_MODULE_6__.initHomeState;
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(_this, "printEvents", /*#__PURE__*/(0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default().mark(function _callee() {
+      var events;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return (0,_home_api__WEBPACK_IMPORTED_MODULE_12__.getAllEvents)();
+          case 2:
+            events = _context.sent;
+            _this.setState(_this.state.getEvents(events));
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee);
+    })));
+    _this.state = _home_state__WEBPACK_IMPORTED_MODULE_9__.initHomeState;
     return _this;
   }
-
-  // setAdminStatus = (status: boolean) => {
-  //   this.setState({ isAdmin: status });
-  // };
-  (0,_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(Home, _React$Component);
-  return (0,_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(Home, [{
+  (0,_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(Home, _React$Component);
+  return (0,_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(Home, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.printEvents();
+    }
+    // setAdminStatus = (status: boolean) => {
+    //   this.setState({ isAdmin: status });
+    // };
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
       if (this.state.view === "home") {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, "Welcome to our home page", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, "Welcome to our home page", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, this.state.showEvents ? this.state.events.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("ul", null, this.state.events.map(function (event) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("li", {
+            key: event.eventId
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("h3", null, event.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, event.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Date: ", event.eventDate), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Time: ", event.startTime, " - ", event.endTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Location: ", event.location), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Capacity: ", event.capacity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Admin Approval: ", event.adminApproval ? "Yes" : "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Deleted: ", event["delete"] ? "Yes" : "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("h4", null, "Attendances:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("ul", null, event.event_Attendances.map(function (attendance) {
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("li", {
+              key: attendance.event_AttendanceId
+            }, "User ID: ", attendance.userId, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("ul", null, attendance.reviews.map(function (review) {
+              return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("li", {
+                key: review.reviewId
+              }, "Feedback: ", review.feedback, ", Rating: ", review.rating);
+            })));
+          })));
+        })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "No events available.") : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
           onClick: function onClick() {
             return _this2.setState(_this2.state.updateViewState("overview"));
           }
-        }, "Overview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
+        }, "Overview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
           onClick: function onClick() {
             return _this2.setState(_this2.state.updateViewState("admindashboard"));
           }
-        }, "Admin Dashboard"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
+        }, "Admin Dashboard"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
           onClick: this.props.backToMainHome
         }, "Log out")));
         // } else if (this.state.view === "registration") {
@@ -861,20 +901,20 @@ var Home = /*#__PURE__*/function (_React$Component) {
         // setAdminStatus={this.setAdminStatus}
         // />
         if (this.props.IsAdmin) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(_Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_8__.AdminDashBoard, {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_11__.AdminDashBoard, {
             backToHome: function backToHome() {
               return _this2.setState(_this2.state.updateViewState("home"));
             }
           });
         } else {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("p", null, "Access Denied: Admins only"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Access Denied: Admins only"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
             onClick: function onClick() {
               return _this2.setState(_this2.state.updateViewState("home"));
             }
           }, "Back to Home"));
         }
       } else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(_Overview_overview__WEBPACK_IMPORTED_MODULE_7__.OverviewPage, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_Overview_overview__WEBPACK_IMPORTED_MODULE_10__.OverviewPage, {
           backToHome: function backToHome() {
             return _this2.setState(_this2.state.updateViewState("home"));
           }
@@ -882,7 +922,67 @@ var Home = /*#__PURE__*/function (_React$Component) {
       }
     }
   }]);
-}(react__WEBPACK_IMPORTED_MODULE_5__.Component);
+}(react__WEBPACK_IMPORTED_MODULE_8__.Component);
+
+/***/ }),
+
+/***/ "./Home/home.api.ts":
+/*!**************************!*\
+  !*** ./Home/home.api.ts ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getAllEvents: () => (/* binding */ getAllEvents)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var getAllEvents = /*#__PURE__*/function () {
+  var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee() {
+    var response, result, currentDate, futureEvents;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return fetch("api/v1/Events", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          });
+        case 2:
+          response = _context.sent;
+          _context.next = 5;
+          return response.json();
+        case 5:
+          result = _context.sent;
+          if (!response.ok) {
+            _context.next = 12;
+            break;
+          }
+          // Get the current date and time
+          currentDate = new Date(); // Filter events to include only those that are in the future
+          futureEvents = result.filter(function (event) {
+            var eventDateTime = new Date("".concat(event.eventDate, "T").concat(event.startTime));
+            return eventDateTime > currentDate;
+          });
+          return _context.abrupt("return", futureEvents);
+        case 12:
+          throw new Error("Error: no events found");
+        case 13:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee);
+  }));
+  return function getAllEvents() {
+    return _ref.apply(this, arguments);
+  };
+}();
 
 /***/ }),
 
@@ -903,11 +1003,20 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 /*| "login" | "registration";*/
 
 var initHomeState = {
+  events: [],
+  showEvents: true,
   view: "home",
   updateViewState: function updateViewState(view) {
     return function (state) {
       return _objectSpread(_objectSpread({}, state), {}, {
         view: view
+      });
+    };
+  },
+  getEvents: function getEvents(events) {
+    return function (state) {
+      return _objectSpread(_objectSpread({}, state), {}, {
+        events: events
       });
     };
   }
