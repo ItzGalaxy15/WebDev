@@ -52,8 +52,8 @@ public class AttendEventController : Controller
 
         bool check = await _attendEventService.CreateEventAttendance(eventId, (int)userId);
 
-        if (check) return Ok("Event attendance created successfully.");
-        else return Conflict("Event attendance already exist");
+        if (check) return Ok(new { message = "Event attendance created successfully." });
+        else return Conflict(new { message = "Event attendance already exist" });
     }
 
     [UserRequired]
