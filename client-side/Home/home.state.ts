@@ -1,4 +1,4 @@
-export type ViewState = "home" |  "admindashboard"  | "overview" /*| "login" | "registration";*/
+export type ViewState = "home" |  "admindashboard"  | "overview" | "eventdetails" /*| "login" | "registration";*/
 
 export interface HomeEvent {
   eventId: number;
@@ -33,6 +33,7 @@ export interface Person {
 }
 
 export interface HomeState {
+  selectedEventId: number | null;
   events: HomeEvent[];
   showEvents: boolean;
   view: ViewState;
@@ -43,6 +44,7 @@ export interface HomeState {
 
 
 export const initHomeState: HomeState = {
+  selectedEventId: null,
   events: [],
   showEvents: true,
   view: "home",
