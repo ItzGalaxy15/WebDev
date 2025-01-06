@@ -1,5 +1,7 @@
 import React from "react";
 import { HomeEvent } from "../Home/home.state";
+import EventAttendanceForm from "../EventAttendanceForm/EventAttendanceForm";
+
 
 interface EventDetailsProps {
   event: HomeEvent;
@@ -32,6 +34,11 @@ const EventDetails: React.FC<EventDetailsProps> = ({ event, backToHome }) => {
           </li>
         ))}
       </ul>
+      <EventAttendanceForm 
+        eventId={event.eventId}
+        onSuccess={() => alert('Successfully registered for the event!')}
+        onFailure={(error) => alert(error)}
+      />
       <button onClick={backToHome}>Back to home page</button>
     </div>
   );

@@ -781,6 +781,88 @@ var EventAttendees = function EventAttendees(_ref) {
 
 /***/ }),
 
+/***/ "./EventAttendanceForm/EventAttendanceForm.tsx":
+/*!*****************************************************!*\
+  !*** ./EventAttendanceForm/EventAttendanceForm.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+
+var EventAttendanceForm = function EventAttendanceForm(_ref) {
+  var eventId = _ref.eventId,
+    onSuccess = _ref.onSuccess,
+    onFailure = _ref.onFailure;
+  var handleSubmit = /*#__PURE__*/function () {
+    var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(e) {
+      var response, result, textResult;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            e.preventDefault();
+            _context.prev = 1;
+            _context.next = 4;
+            return fetch("api/v1/AttendEvent/CreateEventAttendance?eventId=".concat(eventId - 1), {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              }
+            });
+          case 4:
+            response = _context.sent;
+            if (!response.ok) {
+              _context.next = 12;
+              break;
+            }
+            _context.next = 8;
+            return response.json();
+          case 8:
+            result = _context.sent;
+            onSuccess();
+            _context.next = 16;
+            break;
+          case 12:
+            _context.next = 14;
+            return response.text();
+          case 14:
+            textResult = _context.sent;
+            onFailure(textResult);
+          case 16:
+            _context.next = 21;
+            break;
+          case 18:
+            _context.prev = 18;
+            _context.t0 = _context["catch"](1);
+            onFailure(_context.t0.message);
+          case 21:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[1, 18]]);
+    }));
+    return function handleSubmit(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("button", {
+    type: "submit"
+  }, "Attend this Event"));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EventAttendanceForm);
+
+/***/ }),
+
 /***/ "./EventDetails/EventDetails.tsx":
 /*!***************************************!*\
   !*** ./EventDetails/EventDetails.tsx ***!
@@ -792,6 +874,8 @@ var EventAttendees = function EventAttendees(_ref) {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _EventAttendanceForm_EventAttendanceForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../EventAttendanceForm/EventAttendanceForm */ "./EventAttendanceForm/EventAttendanceForm.tsx");
+
 
 var EventDetails = function EventDetails(_ref) {
   var event = _ref.event,
@@ -804,7 +888,15 @@ var EventDetails = function EventDetails(_ref) {
         key: review.reviewId
       }, "Feedback: ", review.feedback, ", Rating: ", review.rating);
     })));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_EventAttendanceForm_EventAttendanceForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    eventId: event.eventId,
+    onSuccess: function onSuccess() {
+      return alert('Successfully registered for the event!');
+    },
+    onFailure: function onFailure(error) {
+      return alert(error);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     onClick: backToHome
   }, "Back to home page"));
 };
