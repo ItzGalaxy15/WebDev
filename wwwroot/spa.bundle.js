@@ -781,6 +781,37 @@ var EventAttendees = function EventAttendees(_ref) {
 
 /***/ }),
 
+/***/ "./EventDetails/EventDetails.tsx":
+/*!***************************************!*\
+  !*** ./EventDetails/EventDetails.tsx ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var EventDetails = function EventDetails(_ref) {
+  var event = _ref.event,
+    backToHome = _ref.backToHome;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Title: ", event.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Description: ", event.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Date: ", event.eventDate), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Time: ", event.startTime, " - ", event.endTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Location: ", event.location), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Capacity: ", event.capacity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Admin Approval: ", event.adminApproval ? "Yes" : "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Deleted: ", event["delete"] ? "Yes" : "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Attendances:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, event.event_Attendances.map(function (attendance) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+      key: attendance.event_AttendanceId
+    }, "User ID: ", attendance.userId, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, attendance.reviews.map(function (review) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        key: review.reviewId
+      }, "Feedback: ", review.feedback, ", Rating: ", review.rating);
+    })));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    onClick: backToHome
+  }, "Back to home page"));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EventDetails);
+
+/***/ }),
+
 /***/ "./Home/Home.tsx":
 /*!***********************!*\
   !*** ./Home/Home.tsx ***!
@@ -805,6 +836,7 @@ var EventAttendees = function EventAttendees(_ref) {
 /* harmony import */ var _Overview_overview__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Overview/overview */ "./Overview/overview.tsx");
 /* harmony import */ var _Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../Admindashboard/admindashboard */ "./Admindashboard/admindashboard.tsx");
 /* harmony import */ var _home_api__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./home.api */ "./Home/home.api.ts");
+/* harmony import */ var _EventDetails_EventDetails__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../EventDetails/EventDetails */ "./EventDetails/EventDetails.tsx");
 
 
 
@@ -822,6 +854,7 @@ function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.
 
 
 // Import the Login component
+
 
 var Home = /*#__PURE__*/function (_React$Component) {
   function Home(props) {
@@ -859,26 +892,18 @@ var Home = /*#__PURE__*/function (_React$Component) {
           react__WEBPACK_IMPORTED_MODULE_8__.createElement("li", {
             key: event.eventId,
             onClick: function onClick() {
-              return _this.selectEvent(event.eventId);
+              _this.selectEvent(event.eventId);
+              _this.setState(_this.state.updateViewState("eventdetails"));
             }
           }, "Event", index + 1, ": ", event.title)
         );
       }));
     });
-    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(_this, "renderEventDetails", function (event) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("h3", null, "Title: ", event.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Description: ", event.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Date: ", event.eventDate), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Time: ", event.startTime, " - ", event.endTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Location: ", event.location), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Capacity: ", event.capacity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Admin Approval: ", event.adminApproval ? "Yes" : "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Deleted: ", event["delete"] ? "Yes" : "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("h4", null, "Attendances:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("ul", null, event.event_Attendances.map(function (attendance) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("li", {
-          key: attendance.event_AttendanceId
-        }, "User ID: ", attendance.userId, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("ul", null, attendance.reviews.map(function (review) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("li", {
-            key: review.reviewId
-          }, "Feedback: ", review.feedback, ", Rating: ", review.rating);
-        })));
-      })));
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(_this, "handleEventNotFound", function () {
+      _this.setState(_this.state.updateViewState("home"));
+      _this.selectEvent(null);
     });
-    _this.state = _objectSpread(_objectSpread({}, _home_state__WEBPACK_IMPORTED_MODULE_9__.initHomeState), {}, {
-      selectedEventId: null
-    });
+    _this.state = _objectSpread({}, _home_state__WEBPACK_IMPORTED_MODULE_9__.initHomeState);
     return _this;
   }
   (0,_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(Home, _React$Component);
@@ -898,7 +923,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
         return event.eventId === selectedEventId;
       });
       if (this.state.view === "home") {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, "Welcome to our home page", this.state.showEvents && !selectedEvent && this.renderEventList(), selectedEvent && this.renderEventDetails(selectedEvent), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, "Welcome to our home page", this.state.showEvents && !selectedEvent && this.renderEventList(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
           onClick: function onClick() {
             return _this2.selectEvent(null);
           }
@@ -927,6 +952,25 @@ var Home = /*#__PURE__*/function (_React$Component) {
             }
           }, "Back to Home"));
         }
+      } else if (this.state.view === "eventdetails") {
+        var event = this.state.events.find(function (event) {
+          return event.eventId === selectedEventId;
+        });
+        if (event) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_EventDetails_EventDetails__WEBPACK_IMPORTED_MODULE_13__["default"], {
+            event: event,
+            backToHome: function backToHome() {
+              _this2.selectEvent(null); // Reset selected event
+              _this2.setState(_this2.state.updateViewState("home"));
+            }
+          });
+        } else {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Event not found"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
+            onClick: function onClick() {
+              return _this2.setState(_this2.state.updateViewState("home"));
+            }
+          }, "Back to Home"));
+        }
       } else {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_Overview_overview__WEBPACK_IMPORTED_MODULE_10__.OverviewPage, {
           backToHome: function backToHome() {
@@ -937,6 +981,74 @@ var Home = /*#__PURE__*/function (_React$Component) {
     }
   }]);
 }(react__WEBPACK_IMPORTED_MODULE_8__.Component);
+
+// renderEventDetails = (event: HomeEvent) => (
+//   <div>
+//     <h3>Title: {event.title}</h3>
+//     <p>Description: {event.description}</p>
+//     <p>Date: {event.eventDate}</p>
+//     <p>Time: {event.startTime} - {event.endTime}</p>
+//     <p>Location: {event.location}</p>
+//     <p>Capacity: {event.capacity}</p>
+//     <p>Admin Approval: {event.adminApproval ? "Yes" : "No"}</p>
+//     <p>Deleted: {event.delete ? "Yes" : "No"}</p>
+//     <h4>Attendances:</h4>
+//     <ul>
+//       {event.event_Attendances.map(attendance => (
+//         <li key={attendance.event_AttendanceId}>
+//           User ID: {attendance.userId}
+//           <ul>
+//             {attendance.reviews.map(review => (
+//               <li key={review.reviewId}>
+//                 Feedback: {review.feedback}, Rating: {review.rating}
+//               </li>
+//             ))}
+//           </ul>
+//         </li>
+//       ))}
+//     </ul>
+//     {/* <EventAttendanceForm 
+//       eventId={event.eventId}
+//       onSuccess={() => alert('Successfully registered for the event!')}
+//       onFailure={(error) => alert(error)}
+//     /> */}
+//   </div>
+// );
+
+// interface EventAttendanceFormProps {
+//   eventId: number;
+//   onSuccess: () => void; // Callback function to update the UI upon success
+//   onFailure: (error: string) => void; // Callback function to handle errors
+// }
+
+// function EventAttendanceForm({ eventId, onSuccess, onFailure }: EventAttendanceFormProps) {
+//   const handleSubmit = async (e: React.FormEvent) => {
+//     e.preventDefault();
+//     try {
+//       const response = await fetch(`api/v1/AttendEvent/CreateEventAttendance?eventId=${eventId -1}`, {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       });
+//       if (response.ok) {
+//         const result = await response.json();
+//         onSuccess();
+//       } else {
+//         const textResult = await response.text();
+//         onFailure(textResult);
+//       }
+//     } catch (error: any) {
+//       onFailure(error.message);
+//   }
+// };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <button type="submit">Attend this Event</button>
+//     </form>
+//   );
+// }
 
 /***/ }),
 
@@ -1017,6 +1129,7 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 /*| "login" | "registration";*/
 
 var initHomeState = {
+  selectedEventId: null,
   events: [],
   showEvents: true,
   view: "home",
@@ -1110,7 +1223,7 @@ var Login = /*#__PURE__*/function (_React$Component) {
       }, _callee);
     })));
     (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(_this, "handleLogin", /*#__PURE__*/(0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default().mark(function _callee2() {
-      var message;
+      var message, checkIsAdmin;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
@@ -1119,11 +1232,17 @@ var Login = /*#__PURE__*/function (_React$Component) {
           case 2:
             message = _context2.sent;
             _this.setState(_this.state.updateMessage(message));
-            if (message.includes("Success")) {
+            if (message.includes("Logged in")) {
+              _this.setState(_this.state.updateViewLoginState("loggedin"));
+            }
+            _context2.next = 7;
+            return (0,_login_api__WEBPACK_IMPORTED_MODULE_10__.isAdmin)();
+          case 7:
+            checkIsAdmin = _context2.sent;
+            if (checkIsAdmin) {
               _this.handleIsAdmin();
             }
-            _this.setState(_this.state.updateViewLoginState("loggedin"));
-          case 6:
+          case 9:
           case "end":
             return _context2.stop();
         }

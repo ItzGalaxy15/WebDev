@@ -1,6 +1,6 @@
 // Get all events (and its Event_Attendees + review)
 GET http://localhost:5097/api/v1/events HTTP/1.1
-
+# Cookie: .AspNetCore.Session=CfDJ8DixO4nfmd5GtQiH8vMwoGAN0CJWcEa38AlAR1I2P7lNsVLCBDAGN0P7r8p9hoq8qZ24XnFW%2B9f7v%2BAPLKBq86lL5ry2kAfxAF8l%2FPxFRtkXRgax8N5a2fbKnxSAPLzrwYtlwp%2ByStM%2BXZgPi0uq4Pk57LEKG1TuzxvdXcJ7ogYQ
 ###
 
 // Get event (and its Event_Attendees + review) of specific event
@@ -15,7 +15,7 @@ content-type: application/json
 {
     "Title": "Event 3",
     "Description": "Event 3 Description",
-    "EventDate": "2024-12-12",
+    "EventDate": "2025-12-12",
     "StartTime": "12:00:00",
     "EndTime": "14:00:00",
     "Location": "Event 3 Location",

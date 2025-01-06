@@ -37,5 +37,5 @@ POST http://localhost:5097/api/v1/AttendEvent/SetEventAttendance?eventId=1 HTTP/
 ###
 
 // Create an Event_Attendance, for specific user and event. add event 3 first before running this.
-POST  http://localhost:5097/api/v1/AttendEvent/CreateEventAttendance?EventId=3 HTTP/1.1
+POST  http://localhost:5097/api/v1/AttendEvent/CreateEventAttendance?eventId=3 HTTP/1.1
 content-type: application/json
