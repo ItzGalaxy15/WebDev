@@ -2,6 +2,7 @@ import React from "react";
 import { initMyEventState, MyEvent, MyEventState } from "./myEvents.state";
 import { getMyEvents } from "./myEvents.api";
 import MyEventDetails from "../MyEventDetails/MyEventDetails";
+import { unattendMyEvent } from "../UnattendMyEvent/unattendMyEvent.api";
 
 export interface MyEventProps {
     // onSuccess: () => void;
@@ -45,6 +46,21 @@ export class MyEvents extends React.Component<MyEventProps, MyEventState> {
     </ul>
   );
 
+
+  handleUnattendEvent = async (event: MyEvent) => {
+    try {
+        await unattendMyEvent(event);
+        this.setState(prevState => ({
+            ...prevState,
+            events: prevState.events.filter(e => e.eventId !== event.eventId),
+            selectedEventId: null,
+            view: "home",
+        }));
+    } catch (error) {
+        console.error("Failed to unattend the event", error);
+    }
+  };
+
   render(): JSX.Element {
     const { view, selectedEventId } = this.state;
     const selectedEvent = this.state.events.find(event => event.eventId === this.state.selectedEventId);
@@ -70,6 +86,7 @@ export class MyEvents extends React.Component<MyEventProps, MyEventState> {
                         this.selectEvent(null); // Reset selected event
                         this.setState(this.state.updateViewState("home"));
                     }}
+                    onUnattend={this.handleUnattendEvent}
                 />
             );
         } else {
