@@ -62,8 +62,6 @@ export class MyEvents extends React.Component<MyEventProps, MyEventState> {
         );
     } else  /*if (this.state.view === "myevents")*/ {
         const event = this.state.events.find(event => event.eventId === selectedEventId);
-        console.log("Selected Event ID:", event);
-        console.log("Current View:", this.state.view);
         if (event) {
             return (
                 <MyEventDetails

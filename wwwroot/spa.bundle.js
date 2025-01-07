@@ -1937,8 +1937,6 @@ var MyEvents = /*#__PURE__*/function (_React$Component) {
           var event = this.state.events.find(function (event) {
             return event.eventId === selectedEventId;
           });
-          console.log("Selected Event ID:", event);
-          console.log("Current View:", this.state.view);
           if (event) {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_MyEventDetails_MyEventDetails__WEBPACK_IMPORTED_MODULE_11__["default"], {
               event: event,
