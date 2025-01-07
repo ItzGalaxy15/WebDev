@@ -21,18 +21,26 @@ const EventDetails: React.FC<EventDetailsProps> = ({ event, backToHome }) => {
       <p>Deleted: {event.delete ? "Yes" : "No"}</p>
       <h4>Attendances:</h4>
       <ul>
-        {event.event_Attendances.map(attendance => (
-          <li key={attendance.event_AttendanceId}>
-            User ID: {attendance.userId}
-            <ul>
-              {attendance.reviews.map(review => (
-                <li key={review.reviewId}>
-                  Feedback: {review.feedback}, Rating: {review.rating}
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
+        {event.event_Attendances?.length ? (
+          event.event_Attendances.map(attendance => (
+            <li key={attendance.event_AttendanceId}>
+              User ID: {attendance.userId}
+              <ul>
+                {attendance.reviews?.length ? (
+                  attendance.reviews.map(review => (
+                    <li key={review.reviewId}>
+                      Feedback: {review.feedback}, Rating: {review.rating}
+                    </li>
+                  ))
+                ) : (
+                  <li>No reviews available</li>
+                )}
+              </ul>
+            </li>
+          ))
+        ) : (
+          <li>No attendances available</li>
+        )}
       </ul>
       <EventAttendanceForm 
         eventId={event.eventId}
@@ -43,5 +51,4 @@ const EventDetails: React.FC<EventDetailsProps> = ({ event, backToHome }) => {
     </div>
   );
 };
-
 export default EventDetails;
