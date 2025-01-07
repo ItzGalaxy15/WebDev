@@ -100,4 +100,16 @@ public class AttendEventController : Controller
         else return BadRequest("Couldn't set Event Attendance.");
     }
 
+
+    [UserRequired]
+    [HttpGet("MyEvents")]
+    public async Task<IActionResult> GetMyEvents()
+    {
+        int? userId = await _eventsService.GetUserId(HttpContext.Session.GetString("USER_SESSION_KEY"));
+        if (userId == null) return Unauthorized("User not found");
+
+        Event[] futureEvents = await _attendEventService.GetMyEvents((int)userId);
+        return Ok(futureEvents);
+    }
+
 }
