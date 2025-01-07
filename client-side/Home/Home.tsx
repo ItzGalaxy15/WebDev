@@ -6,6 +6,7 @@ import { AdminDashBoard } from "../Admindashboard/admindashboard";
 import Login from "../Login/Login"; // Import the Login component
 import { getAllEvents } from "./home.api";
 import EventDetails from "../EventDetails/EventDetails";
+import { MyEvents } from "../MyEvents/MyEvents";
 
 
 export interface HomeProps {
@@ -45,10 +46,10 @@ export class Home extends React.Component<HomeProps, HomeState> {
     </ul>
   );
 
-  handleEventNotFound = () => {
-    this.setState(this.state.updateViewState("home"));
-    this.selectEvent(null);
-  };
+  // handleEventNotFound = () => {
+  //   this.setState(this.state.updateViewState("home"));
+  //   this.selectEvent(null);
+  // };
 
 
   render(): JSX.Element {
@@ -60,10 +61,11 @@ export class Home extends React.Component<HomeProps, HomeState> {
             Welcome to our home page
             {this.state.showEvents && !selectedEvent && this.renderEventList()}
             {/* {selectedEvent && this.renderEventDetails(selectedEvent)} */}
-            <button onClick={() => this.selectEvent(null)}>Back to home page</button>
+            {/* <button onClick={() => this.selectEvent(null)}>Back to home page</button> */}
             <div>
               <button onClick={() => this.setState(this.state.updateViewState("overview"))}>Overview</button>
               <button onClick={() => this.setState(this.state.updateViewState("admindashboard"))}>Admin Dashboard</button>
+              <button onClick={() => this.setState(this.state.updateViewState("myevents"))}> My Events </button>
               <button onClick={this.props.backToMainHome}>Log out</button>
             </div>
           </div>
@@ -108,6 +110,15 @@ export class Home extends React.Component<HomeProps, HomeState> {
           </div>
         );
       }
+    } else if (this.state.view === "myevents"){
+    return (
+      <MyEvents
+      backToHome={() => this.setState(this.state.updateViewState("home"))}
+      // onSuccess={() => alert('Successfully removed yourself from the event!')}
+      // onFailure={(error) => alert(error)}
+      />
+    )
+
     } else {
       return (
         <OverviewPage
