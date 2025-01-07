@@ -86,8 +86,8 @@ public class AttendEventController : Controller
 
         bool check = await _attendEventService.DeleteEventAttendance(eventId, (int)userId);
 
-        if (check) return Ok("Event attendance deleted successfully.");
-        else return NotFound("Event attendance does not exist");
+        if (check) return Ok(new { message = "Event attendance deleted successfully." });
+        else return NotFound(new { message = "Event attendance does not exist" });
     }
 
     [UserRequired]
