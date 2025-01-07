@@ -19,7 +19,7 @@ content-type: application/json
     "StartTime": "12:00:00",
     "EndTime": "14:00:00",
     "Location": "Event 3 Location",
-    "Capacity": 1
+    "Capacity": 10
 }
 
 ###
