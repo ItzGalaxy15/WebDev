@@ -4,9 +4,11 @@ import { MyEvent } from "../MyEvents/myEvents.state";
 interface MyEventDetailsProps {
     event: MyEvent;
     backToHome: () => void;
+    onUnattend: (event: MyEvent) => void;
 }
 
-const MyEventDetails: React.FC<MyEventDetailsProps> = ({ event, backToHome }) => {
+
+const MyEventDetails: React.FC<MyEventDetailsProps> = ({ event, backToHome, onUnattend }) => {
     return (
         <div>
             <h3>Title: {event.title}</h3>
@@ -40,6 +42,7 @@ const MyEventDetails: React.FC<MyEventDetailsProps> = ({ event, backToHome }) =>
                     <li>No attendances available</li>
                 )}
             </ul>
+            <button onClick={() => onUnattend(event)}>Unattend Event</button>
             <button onClick={backToHome}>Back to home page</button>
         </div>
     );
