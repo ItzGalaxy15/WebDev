@@ -10,7 +10,7 @@ const EventAttendanceForm: React.FC<EventAttendanceFormProps> = ({ eventId, onSu
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(`api/v1/AttendEvent/CreateEventAttendance?eventId=${eventId -1}`, {
+      const response = await fetch(`api/v1/AttendEvent/CreateEventAttendance?eventId=${eventId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
