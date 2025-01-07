@@ -1,4 +1,4 @@
-export type ViewState = "home" |  "admindashboard"  | "overview" | "eventdetails" /*| "login" | "registration";*/
+export type ViewState = "home" |  "admindashboard"  | "overview" | "eventdetails" | "myevents"/*| "login" | "registration";*/
 
 export interface HomeEvent {
   eventId: number;
