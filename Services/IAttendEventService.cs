@@ -20,5 +20,7 @@ public interface IAttendEventService
     Task<bool> CheckCapacity(int eventId);
 
     Task<int> CheckUserAttendedEvent(string? USER_SESSION_KEY, int AttId);
+
+    Task<Event[]> GetMyEvents(int userId);
 }
 
