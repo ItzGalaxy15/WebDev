@@ -33,9 +33,13 @@ DELETE http://localhost:5097/api/v1/AttendEvent/DeleteEventAttendance?eventId=3 
 
 // SetEventAttendance
 POST http://localhost:5097/api/v1/AttendEvent/SetEventAttendance?eventId=1 HTTP/1.1
-
 ###
 
 // Create an Event_Attendance, for specific user and event. add event 3 first before running this.
 POST  http://localhost:5097/api/v1/AttendEvent/CreateEventAttendance?eventId=3 HTTP/1.1
 content-type: application/json
+###
+
+// Get My Events (Events I want to attend)
+GET http://localhost:5097/api/v1/AttendEvent/MyEvents HTTP/1.1
+###
