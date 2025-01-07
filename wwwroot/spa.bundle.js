@@ -811,7 +811,7 @@ var EventAttendanceForm = function EventAttendanceForm(_ref) {
             e.preventDefault();
             _context.prev = 1;
             _context.next = 4;
-            return fetch("api/v1/AttendEvent/CreateEventAttendance?eventId=".concat(eventId - 1), {
+            return fetch("api/v1/AttendEvent/CreateEventAttendance?eventId=".concat(eventId), {
               method: "POST",
               headers: {
                 "Content-Type": "application/json"
@@ -1808,7 +1808,8 @@ var initMainHomeState = {
 var MyEventDetails = function MyEventDetails(_ref) {
   var _event$event_Attendan;
   var event = _ref.event,
-    backToHome = _ref.backToHome;
+    backToHome = _ref.backToHome,
+    onUnattend = _ref.onUnattend;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Title: ", event.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Description: ", event.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Date: ", event.eventDate), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Time: ", event.startTime, " - ", event.endTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Location: ", event.location), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Capacity: ", event.capacity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Admin Approval: ", event.adminApproval ? "Yes" : "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Deleted: ", event["delete"] ? "Yes" : "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Attendances:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, (_event$event_Attendan = event.event_Attendances) !== null && _event$event_Attendan !== void 0 && _event$event_Attendan.length ? event.event_Attendances.map(function (attendance) {
     var _attendance$reviews;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
@@ -1819,6 +1820,10 @@ var MyEventDetails = function MyEventDetails(_ref) {
       }, "Feedback: ", review.feedback, ", Rating: ", review.rating);
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "No reviews available")));
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "No attendances available")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    onClick: function onClick() {
+      return onUnattend(event);
+    }
+  }, "Unattend Event"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     onClick: backToHome
   }, "Back to home page"));
 };
@@ -1849,6 +1854,7 @@ var MyEventDetails = function MyEventDetails(_ref) {
 /* harmony import */ var _myEvents_state__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./myEvents.state */ "./MyEvents/myEvents.state.ts");
 /* harmony import */ var _myEvents_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./myEvents.api */ "./MyEvents/myEvents.api.ts");
 /* harmony import */ var _MyEventDetails_MyEventDetails__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../MyEventDetails/MyEventDetails */ "./MyEventDetails/MyEventDetails.tsx");
+/* harmony import */ var _UnattendMyEvent_unattendMyEvent_api__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../UnattendMyEvent/unattendMyEvent.api */ "./UnattendMyEvent/unattendMyEvent.api.ts");
 
 
 
@@ -1861,6 +1867,7 @@ function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbol
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _callSuper(t, o, e) { return o = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(o), (0,_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__["default"])(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(t).constructor) : o.apply(t, e)); }
 function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+
 
 
 
@@ -1910,6 +1917,40 @@ var MyEvents = /*#__PURE__*/function (_React$Component) {
         );
       }));
     });
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(_this, "handleUnattendEvent", /*#__PURE__*/function () {
+      var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default().mark(function _callee2(event) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return (0,_UnattendMyEvent_unattendMyEvent_api__WEBPACK_IMPORTED_MODULE_12__.unattendMyEvent)(event);
+            case 3:
+              _this.setState(function (prevState) {
+                return _objectSpread(_objectSpread({}, prevState), {}, {
+                  events: prevState.events.filter(function (e) {
+                    return e.eventId !== event.eventId;
+                  }),
+                  selectedEventId: null,
+                  view: "home"
+                });
+              });
+              _context2.next = 9;
+              break;
+            case 6:
+              _context2.prev = 6;
+              _context2.t0 = _context2["catch"](0);
+              console.error("Failed to unattend the event", _context2.t0);
+            case 9:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2, null, [[0, 6]]);
+      }));
+      return function (_x) {
+        return _ref2.apply(this, arguments);
+      };
+    }());
     _this.state = _objectSpread({}, _myEvents_state__WEBPACK_IMPORTED_MODULE_9__.initMyEventState);
     return _this;
   }
@@ -1943,7 +1984,8 @@ var MyEvents = /*#__PURE__*/function (_React$Component) {
               backToHome: function backToHome() {
                 _this2.selectEvent(null); // Reset selected event
                 _this2.setState(_this2.state.updateViewState("home"));
-              }
+              },
+              onUnattend: this.handleUnattendEvent
             });
           } else {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Event not found"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
@@ -2092,6 +2134,81 @@ var OverviewPage = /*#__PURE__*/function (_ref) {
     }
   }]);
 }(react__WEBPACK_IMPORTED_MODULE_5__.Component);
+
+/***/ }),
+
+/***/ "./UnattendMyEvent/unattendMyEvent.api.ts":
+/*!************************************************!*\
+  !*** ./UnattendMyEvent/unattendMyEvent.api.ts ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   unattendMyEvent: () => (/* binding */ unattendMyEvent)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var unattendMyEvent = /*#__PURE__*/function () {
+  var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(myevent) {
+    var response, result, textResult;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          _context.next = 3;
+          return fetch("api/v1/AttendEvent/DeleteEventAttendance?eventId=".concat(myevent.eventId), {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          });
+        case 3:
+          response = _context.sent;
+          if (!response.ok) {
+            _context.next = 11;
+            break;
+          }
+          _context.next = 7;
+          return response.json();
+        case 7:
+          result = _context.sent;
+          onSuccess("Event attendance ".concat(myevent.title, " successfully deleted."));
+          _context.next = 15;
+          break;
+        case 11:
+          _context.next = 13;
+          return response.text();
+        case 13:
+          textResult = _context.sent;
+          onFailure(textResult);
+          // throw new Error(`Error: no event found with id ${eventId}`);
+        case 15:
+          _context.next = 20;
+          break;
+        case 17:
+          _context.prev = 17;
+          _context.t0 = _context["catch"](0);
+          onFailure(_context.t0.message);
+        case 20:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee, null, [[0, 17]]);
+  }));
+  return function unattendMyEvent(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+function onSuccess(Message) {
+  alert("".concat(Message));
+}
+function onFailure(errorMessage) {
+  alert("Failed to delete event attendance: " + errorMessage);
+}
 
 /***/ }),
 

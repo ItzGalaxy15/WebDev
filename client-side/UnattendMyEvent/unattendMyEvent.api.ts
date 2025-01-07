@@ -1,6 +1,6 @@
 import { MyEvent } from "../MyEvents/myEvents.state";
 
-export const deleteEventAttendance = async(myevent:MyEvent): Promise<void> =>{
+export const unattendMyEvent = async(myevent:MyEvent): Promise<void> =>{
     try{
         const response = await fetch(`api/v1/AttendEvent/DeleteEventAttendance?eventId=${myevent.eventId}`, {
             method: "DELETE",
