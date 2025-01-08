@@ -927,12 +927,11 @@ var EventDetails = function EventDetails(_ref) {
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _home_state__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./home.state */ "./Home/home.state.ts");
-/* harmony import */ var _Overview_overview__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Overview/overview */ "./Overview/overview.tsx");
-/* harmony import */ var _Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../Admindashboard/admindashboard */ "./Admindashboard/admindashboard.tsx");
-/* harmony import */ var _home_api__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./home.api */ "./Home/home.api.ts");
-/* harmony import */ var _EventDetails_EventDetails__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../EventDetails/EventDetails */ "./EventDetails/EventDetails.tsx");
-/* harmony import */ var _MyEvents_MyEvents__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../MyEvents/MyEvents */ "./MyEvents/MyEvents.tsx");
-/* harmony import */ var _Profile_profile_api__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../Profile/profile.api */ "./Profile/profile.api.ts");
+/* harmony import */ var _Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Admindashboard/admindashboard */ "./Admindashboard/admindashboard.tsx");
+/* harmony import */ var _home_api__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./home.api */ "./Home/home.api.ts");
+/* harmony import */ var _EventDetails_EventDetails__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../EventDetails/EventDetails */ "./EventDetails/EventDetails.tsx");
+/* harmony import */ var _MyEvents_MyEvents__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../MyEvents/MyEvents */ "./MyEvents/MyEvents.tsx");
+/* harmony import */ var _Profile_profile_api__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../Profile/profile.api */ "./Profile/profile.api.ts");
 
 
 
@@ -947,7 +946,7 @@ function _callSuper(t, o, e) { return o = (0,_babel_runtime_helpers_getPrototype
 function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
 
 
-
+// import { OverviewPage } from "../Overview/overview";
 
 
 
@@ -964,7 +963,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return (0,_home_api__WEBPACK_IMPORTED_MODULE_12__.getAllEvents)();
+            return (0,_home_api__WEBPACK_IMPORTED_MODULE_11__.getAllEvents)();
           case 2:
             events = _context.sent;
             _this.setState(_objectSpread(_objectSpread({}, _this.state), {}, {
@@ -982,7 +981,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return (0,_Profile_profile_api__WEBPACK_IMPORTED_MODULE_15__.IsAtOffice)();
+            return (0,_Profile_profile_api__WEBPACK_IMPORTED_MODULE_14__.IsAtOffice)();
           case 2:
             response = _context2.sent;
             _this.setState({
@@ -1003,13 +1002,13 @@ var Home = /*#__PURE__*/function (_React$Component) {
               break;
             }
             _context3.next = 3;
-            return (0,_Profile_profile_api__WEBPACK_IMPORTED_MODULE_15__.LeaveOffice)();
+            return (0,_Profile_profile_api__WEBPACK_IMPORTED_MODULE_14__.LeaveOffice)();
           case 3:
             _context3.next = 7;
             break;
           case 5:
             _context3.next = 7;
-            return (0,_Profile_profile_api__WEBPACK_IMPORTED_MODULE_15__.ArriveToOffice)();
+            return (0,_Profile_profile_api__WEBPACK_IMPORTED_MODULE_14__.ArriveToOffice)();
           case 7:
             _context3.next = 9;
             return _this.updateAttendanceStatus();
@@ -1081,10 +1080,6 @@ var Home = /*#__PURE__*/function (_React$Component) {
           onClick: this.handleAttendanceToggle
         }, this.state.isAtOffice ? "Leave office" : "Arrive to office"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
           onClick: function onClick() {
-            return _this2.setState(_this2.state.updateViewState("overview"));
-          }
-        }, "Overview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
-          onClick: function onClick() {
             return _this2.setState(_this2.state.updateViewState("admindashboard"));
           }
         }, "Admin Dashboard"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
@@ -1096,7 +1091,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
         }, "Log out")));
       } else if (this.state.view === "admindashboard") {
         if (this.props.IsAdmin) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_11__.AdminDashBoard, {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_Admindashboard_admindashboard__WEBPACK_IMPORTED_MODULE_10__.AdminDashBoard, {
             backToHome: function backToHome() {
               return _this2.setState(_this2.state.updateViewState("home"));
             }
@@ -1113,7 +1108,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
           return event.eventId === selectedEventId;
         });
         if (event) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_EventDetails_EventDetails__WEBPACK_IMPORTED_MODULE_13__["default"], {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_EventDetails_EventDetails__WEBPACK_IMPORTED_MODULE_12__["default"], {
             event: event,
             backToHome: function backToHome() {
               _this2.selectEvent(null); // Reset selected event
@@ -1127,19 +1122,20 @@ var Home = /*#__PURE__*/function (_React$Component) {
             }
           }, "Back to Home"));
         }
-      } else if (this.state.view === "myevents") {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_MyEvents_MyEvents__WEBPACK_IMPORTED_MODULE_14__.MyEvents, {
-          backToHome: function backToHome() {
-            return _this2.setState(_this2.state.updateViewState("home"));
-          }
-        });
-      } else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_Overview_overview__WEBPACK_IMPORTED_MODULE_10__.OverviewPage, {
-          backToHome: function backToHome() {
-            return _this2.setState(_this2.state.updateViewState("home"));
-          }
-        });
-      }
+      } else /*if (this.state.view === "myevents")*/{
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_MyEvents_MyEvents__WEBPACK_IMPORTED_MODULE_13__.MyEvents, {
+            backToHome: function backToHome() {
+              return _this2.setState(_this2.state.updateViewState("home"));
+            }
+          });
+        }
+      // else {
+      //   return (
+      //     <OverviewPage
+      //       backToHome={() => this.setState(this.state.updateViewState("home"))}
+      //     />
+      //   );
+      // }
     }
   }]);
 }(react__WEBPACK_IMPORTED_MODULE_8__.Component);
@@ -2097,51 +2093,6 @@ var initMyEventState = {
     };
   }
 };
-
-/***/ }),
-
-/***/ "./Overview/overview.tsx":
-/*!*******************************!*\
-  !*** ./Overview/overview.tsx ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   OverviewPage: () => (/* binding */ OverviewPage)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
-/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
-/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
-/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-
-
-
-function _callSuper(t, o, e) { return o = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(o), (0,_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(t).constructor) : o.apply(t, e)); }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-
-var OverviewPage = /*#__PURE__*/function (_ref) {
-  function OverviewPage(props) {
-    (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, OverviewPage);
-    return _callSuper(this, OverviewPage, [props]);
-  }
-  (0,_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(OverviewPage, _ref);
-  return (0,_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(OverviewPage, [{
-    key: "render",
-    value: function render() {
-      var _this = this;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, "Welcome to our overview page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
-        onClick: function onClick(e) {
-          return _this.props.backToHome();
-        }
-      }, "Back"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("th", null, "Firstname"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("th", null, "Lastname"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("th", null, "Age"))));
-    }
-  }]);
-}(react__WEBPACK_IMPORTED_MODULE_5__.Component);
 
 /***/ }),
 

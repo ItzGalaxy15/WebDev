@@ -1,7 +1,7 @@
 import React from "react";
 import { HomeEvent, HomeState, initHomeState } from './home.state';
 import { RegistrationForm } from "../registration/registration";
-import { OverviewPage } from "../Overview/overview";
+// import { OverviewPage } from "../Overview/overview";
 import { AdminDashBoard } from "../Admindashboard/admindashboard";
 import Login from "../Login/Login";
 import { getAllEvents } from "./home.api";
@@ -75,7 +75,7 @@ export class Home extends React.Component<HomeProps, HomeState> {
             <button onClick={this.handleAttendanceToggle}>
               {this.state.isAtOffice ? "Leave office" : "Arrive to office"}
             </button>
-            <button onClick={() => this.setState(this.state.updateViewState("overview"))}>Overview</button>
+            {/* <button onClick={() => this.setState(this.state.updateViewState("overview"))}>Overview</button> */}
             <button onClick={() => this.setState(this.state.updateViewState("admindashboard"))}>Admin Dashboard</button>
             <button onClick={() => this.setState(this.state.updateViewState("myevents"))}>My Events</button>
             <button onClick={this.props.backToMainHome}>Log out</button>
@@ -122,19 +122,19 @@ export class Home extends React.Component<HomeProps, HomeState> {
           </div>
         );
       }
-    } else if (this.state.view === "myevents"){
+    } else /*if (this.state.view === "myevents")*/{
     return (
       <MyEvents
       backToHome={() => this.setState(this.state.updateViewState("home"))}
       />
     )
-
-    } else {
-      return (
-        <OverviewPage
-          backToHome={() => this.setState(this.state.updateViewState("home"))}
-        />
-      );
     }
+      // else {
+    //   return (
+    //     <OverviewPage
+    //       backToHome={() => this.setState(this.state.updateViewState("home"))}
+    //     />
+    //   );
+    // }
   }
 }
