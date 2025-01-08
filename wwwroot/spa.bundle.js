@@ -1814,7 +1814,8 @@ var MyEventDetails = function MyEventDetails(_ref) {
   var _event$event_Attendan;
   var event = _ref.event,
     backToHome = _ref.backToHome,
-    onUnattend = _ref.onUnattend;
+    onUnattend = _ref.onUnattend,
+    leaveReview = _ref.leaveReview;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Title: ", event.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Description: ", event.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Date: ", event.eventDate), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Time: ", event.startTime, " - ", event.endTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Location: ", event.location), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Capacity: ", event.capacity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Admin Approval: ", event.adminApproval ? "Yes" : "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Deleted: ", event["delete"] ? "Yes" : "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Attendances:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, (_event$event_Attendan = event.event_Attendances) !== null && _event$event_Attendan !== void 0 && _event$event_Attendan.length ? event.event_Attendances.map(function (attendance) {
     var _attendance$reviews;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
@@ -1829,6 +1830,10 @@ var MyEventDetails = function MyEventDetails(_ref) {
       return onUnattend(event);
     }
   }, "Unattend Event"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    onClick: function onClick() {
+      return leaveReview(event);
+    }
+  }, "Leave Review"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     onClick: backToHome
   }, "Back to home page"));
 };
@@ -1859,7 +1864,8 @@ var MyEventDetails = function MyEventDetails(_ref) {
 /* harmony import */ var _myEvents_state__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./myEvents.state */ "./MyEvents/myEvents.state.ts");
 /* harmony import */ var _myEvents_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./myEvents.api */ "./MyEvents/myEvents.api.ts");
 /* harmony import */ var _MyEventDetails_MyEventDetails__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../MyEventDetails/MyEventDetails */ "./MyEventDetails/MyEventDetails.tsx");
-/* harmony import */ var _UnattendMyEvent_unattendMyEvent_api__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../UnattendMyEvent/unattendMyEvent.api */ "./UnattendMyEvent/unattendMyEvent.api.ts");
+/* harmony import */ var _Review_addReview__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../Review/addReview */ "./Review/addReview.tsx");
+/* harmony import */ var _UnattendMyEvent_unattendMyEvent_api__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../UnattendMyEvent/unattendMyEvent.api */ "./UnattendMyEvent/unattendMyEvent.api.ts");
 
 
 
@@ -1872,6 +1878,7 @@ function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbol
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _callSuper(t, o, e) { return o = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(o), (0,_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__["default"])(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(t).constructor) : o.apply(t, e)); }
 function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+
 
 
 
@@ -1929,7 +1936,7 @@ var MyEvents = /*#__PURE__*/function (_React$Component) {
             case 0:
               _context2.prev = 0;
               _context2.next = 3;
-              return (0,_UnattendMyEvent_unattendMyEvent_api__WEBPACK_IMPORTED_MODULE_12__.unattendMyEvent)(event);
+              return (0,_UnattendMyEvent_unattendMyEvent_api__WEBPACK_IMPORTED_MODULE_13__.unattendMyEvent)(event);
             case 3:
               _this.setState(function (prevState) {
                 return _objectSpread(_objectSpread({}, prevState), {}, {
@@ -1956,6 +1963,12 @@ var MyEvents = /*#__PURE__*/function (_React$Component) {
         return _ref2.apply(this, arguments);
       };
     }());
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(_this, "leaveReview", function (event) {
+      _this.setState({
+        view: "leaveReview",
+        selectedEventId: event.eventId
+      });
+    });
     _this.state = _objectSpread({}, _myEvents_state__WEBPACK_IMPORTED_MODULE_9__.initMyEventState);
     return _this;
   }
@@ -1978,7 +1991,15 @@ var MyEvents = /*#__PURE__*/function (_React$Component) {
       if (this.state.view === "home") {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Here you can see your events"), this.state.showEvents && !selectedEvent && this.renderEventList(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
           onClick: this.props.backToHome
-        }, "Back to Home")));
+        }, "Back to previous page")));
+      } else if (this.state.view === "leaveReview" && selectedEventId !== null) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement(_Review_addReview__WEBPACK_IMPORTED_MODULE_12__["default"], {
+          backToPreviousScreen: function backToPreviousScreen() {
+            _this2.selectEvent(null);
+            _this2.setState(_this2.state.updateViewState("home"));
+          },
+          eventId: selectedEventId
+        });
       } else /*if (this.state.view === "myevents")*/{
           var event = this.state.events.find(function (event) {
             return event.eventId === selectedEventId;
@@ -1990,7 +2011,8 @@ var MyEvents = /*#__PURE__*/function (_React$Component) {
                 _this2.selectEvent(null); // Reset selected event
                 _this2.setState(_this2.state.updateViewState("home"));
               },
-              onUnattend: this.handleUnattendEvent
+              onUnattend: this.handleUnattendEvent,
+              leaveReview: this.leaveReview
             });
           } else {
             return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("p", null, "Event not found"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8__.createElement("button", {
@@ -2139,6 +2161,111 @@ var OverviewPage = /*#__PURE__*/function (_ref) {
     }
   }]);
 }(react__WEBPACK_IMPORTED_MODULE_5__.Component);
+
+/***/ }),
+
+/***/ "./Review/addReview.tsx":
+/*!******************************!*\
+  !*** ./Review/addReview.tsx ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+
+
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+
+var AddReview = function AddReview(_ref) {
+  var eventId = _ref.eventId,
+    backToPreviousScreen = _ref.backToPreviousScreen;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)({
+      Feedback: "",
+      Rating: 1,
+      EventId: eventId
+    }),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState, 2),
+    review = _useState2[0],
+    setReview = _useState2[1];
+  var handleChange = function handleChange(r) {
+    var _r$target = r.target,
+      name = _r$target.name,
+      value = _r$target.value;
+    setReview(_objectSpread(_objectSpread({}, review), {}, (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])({}, name, name === "Rating" || name === "EventId" ? parseInt(value, 10) : value)));
+  };
+  var handleSubmit = /*#__PURE__*/function () {
+    var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().mark(function _callee(r) {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            r.preventDefault();
+            _context.next = 3;
+            return fetch('api/v1/AttendEvent/AddReview', {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(review)
+            });
+          case 3:
+            response = _context.sent;
+            if (response.ok) {
+              backToPreviousScreen();
+            } else {
+              console.error('Failed to add review');
+            }
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee);
+    }));
+    return function handleSubmit(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("h2", null, "Add Review"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("label", null, "Feedback:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("textarea", {
+    name: "Feedback",
+    value: review.Feedback,
+    onChange: handleChange,
+    required: true
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("label", null, "Rating:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("select", {
+    name: "Rating",
+    value: review.Rating,
+    onChange: handleChange,
+    required: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("option", {
+    value: 1
+  }, "1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("option", {
+    value: 2
+  }, "2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("option", {
+    value: 3
+  }, "3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("option", {
+    value: 4
+  }, "4"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("option", {
+    value: 5
+  }, "5"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("button", {
+    type: "submit"
+  }, "Submit Review"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("button", {
+    type: "button",
+    onClick: backToPreviousScreen
+  }, "Cancel")));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AddReview);
 
 /***/ }),
 

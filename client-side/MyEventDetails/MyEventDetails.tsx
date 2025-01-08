@@ -5,10 +5,11 @@ interface MyEventDetailsProps {
     event: MyEvent;
     backToHome: () => void;
     onUnattend: (event: MyEvent) => void;
+    leaveReview: (event: MyEvent) => void;
 }
 
 
-const MyEventDetails: React.FC<MyEventDetailsProps> = ({ event, backToHome, onUnattend }) => {
+const MyEventDetails: React.FC<MyEventDetailsProps> = ({ event, backToHome, onUnattend, leaveReview}) => {
     return (
         <div>
             <h3>Title: {event.title}</h3>
@@ -43,6 +44,7 @@ const MyEventDetails: React.FC<MyEventDetailsProps> = ({ event, backToHome, onUn
                 )}
             </ul>
             <button onClick={() => onUnattend(event)}>Unattend Event</button>
+            <button onClick={() => leaveReview(event)}>Leave Review</button>
             <button onClick={backToHome}>Back to home page</button>
         </div>
     );
