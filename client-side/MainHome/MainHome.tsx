@@ -2,7 +2,8 @@ import React from "react";
 import { initMainHomeState, MainHomeState } from "./mainhome.state";
 
 import Login from "../Login/Login";
-import { RegistrationForm } from "../registration/Registration";
+import { RegistrationForm } from "../registration/registration";
+
 
 
 export class MainHome extends React.Component<{}, MainHomeState> {
