@@ -1,5 +1,10 @@
-export type ViewState = "home" | "myevents"
+export type ViewState = "home" | "myevents" | "leaveReview"
 
+export interface Review {
+  Feedback: string;
+  Rating: number;
+  EventId: number;
+}
 
 export interface MyEvent {
     eventId: number;

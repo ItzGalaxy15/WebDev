@@ -2,6 +2,7 @@ import React from "react";
 import { initMyEventState, MyEvent, MyEventState } from "./myEvents.state";
 import { getMyEvents } from "./myEvents.api";
 import MyEventDetails from "../MyEventDetails/MyEventDetails";
+import AddReview from "../Review/addReview";
 import { unattendMyEvent } from "../UnattendMyEvent/unattendMyEvent.api";
 
 export interface MyEventProps {
@@ -32,6 +33,7 @@ export class MyEvents extends React.Component<MyEventProps, MyEventState> {
     this.setState({ ...this.state, selectedEventId: eventId });
   };
 
+
   renderEventList = () => (
     <ul>
       {this.state.events.map((event, index) => (
@@ -61,6 +63,10 @@ export class MyEvents extends React.Component<MyEventProps, MyEventState> {
     }
   };
 
+  leaveReview = (event: MyEvent) => {
+    this.setState({ view: "leaveReview", selectedEventId: event.eventId });
+  };
+
   render(): JSX.Element {
     const { view, selectedEventId } = this.state;
     const selectedEvent = this.state.events.find(event => event.eventId === this.state.selectedEventId);
@@ -72,10 +78,20 @@ export class MyEvents extends React.Component<MyEventProps, MyEventState> {
                <p>Here you can see your events</p>
               {this.state.showEvents && !selectedEvent && this.renderEventList()}
               <div>
-                <button onClick={this.props.backToHome}>Back to Home</button>
+                <button onClick={this.props.backToHome}>Back to previous page</button>
               </div>
             </div>
-        );
+        );    
+      } else if (this.state.view === "leaveReview" && selectedEventId !== null) {
+          return (
+            <AddReview
+              backToPreviousScreen={() => {
+                this.selectEvent(null);
+                this.setState(this.state.updateViewState("home"));
+              }}
+              eventId={selectedEventId}
+            />
+          );
     } else  /*if (this.state.view === "myevents")*/ {
         const event = this.state.events.find(event => event.eventId === selectedEventId);
         if (event) {
@@ -87,6 +103,7 @@ export class MyEvents extends React.Component<MyEventProps, MyEventState> {
                         this.setState(this.state.updateViewState("home"));
                     }}
                     onUnattend={this.handleUnattendEvent}
+                    leaveReview={this.leaveReview}
                 />
             );
         } else {
