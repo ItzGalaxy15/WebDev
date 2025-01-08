@@ -10,9 +10,10 @@ export class MainHome extends React.Component<{}, MainHomeState> {
     this.state = initMainHomeState;
   }
 
-  // setAdminStatus = (status: boolean) => {
-  //   this.setState({ isAdmin: status });
-  // };
+
+  handleBackToMainHome = () => {
+    this.setState({ isRegisterd: false });
+  }
 
   render(): JSX.Element {
     if (this.state.view === "mainHome") {
@@ -22,6 +23,7 @@ export class MainHome extends React.Component<{}, MainHomeState> {
           <div>
             <button
               onClick={() => this.setState(this.state.updateViewState("registration"))}
+
             >
               Registration
             </button>
@@ -36,7 +38,8 @@ export class MainHome extends React.Component<{}, MainHomeState> {
     } else if (this.state.view === "registration") {
         return (
             <RegistrationForm
-            backToMainHome={() => this.setState(this.state.updateViewState("mainHome"))}
+            backToMainHome={() => {this.setState(this.state.updateViewState("mainHome")), this.handleBackToMainHome()}}
+            isRegisterd = {true}
             />
         );
     } else{
