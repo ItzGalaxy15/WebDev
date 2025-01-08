@@ -1,7 +1,8 @@
 import React from "react";
 import { initMainHomeState, MainHomeState } from "./mainhome.state";
-import { RegistrationForm } from "../registration/registration";
+
 import Login from "../Login/Login";
+import { RegistrationForm } from "../registration/Registration";
 
 
 export class MainHome extends React.Component<{}, MainHomeState> {
@@ -10,10 +11,6 @@ export class MainHome extends React.Component<{}, MainHomeState> {
     this.state = initMainHomeState;
   }
 
-
-  handleBackToMainHome = () => {
-    this.setState({ isRegisterd: false });
-  }
 
   render(): JSX.Element {
     if (this.state.view === "mainHome") {
@@ -38,8 +35,7 @@ export class MainHome extends React.Component<{}, MainHomeState> {
     } else if (this.state.view === "registration") {
         return (
             <RegistrationForm
-            backToMainHome={() => {this.setState(this.state.updateViewState("mainHome")), this.handleBackToMainHome()}}
-            isRegisterd = {true}
+            backToMainHome={() => {this.setState(this.state.updateViewState("mainHome"))}}
             />
         );
     } else{

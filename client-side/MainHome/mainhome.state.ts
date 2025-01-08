@@ -2,14 +2,14 @@ export type ViewState = "registration" | "mainHome" | "login"
 
 
 export interface MainHomeState {
-  isRegisterd : boolean
+  // isRegisterd : boolean
   view: ViewState;
   isAdmin?: boolean;
   updateViewState: (view: ViewState) => (state: MainHomeState) => MainHomeState;
 }
 
 export const initMainHomeState: MainHomeState = {
-  isRegisterd: false,
+  // isRegisterd: false,
   view: "mainHome",
   updateViewState: (view: ViewState) => (state: MainHomeState): MainHomeState => {
     return {

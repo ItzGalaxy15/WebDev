@@ -6,7 +6,6 @@ import { MainHome } from "../MainHome/MainHome";
 
 export interface RegisterationProps{
     backToMainHome :()=>void
-    isRegisterd: boolean
 }
 
 
@@ -31,61 +30,59 @@ export class RegistrationForm extends React.Component<RegisterationProps,Registe
     }
 
     render():JSX.Element{
-        if (this.props.isRegisterd == true){
-            return(
+
+        return(
+            <div>
                 <div>
-                    <div>
-                        Welcome to the Registration Page
-                    </div>
-                    <br />
-                    <div>
-                        First Name:
-                        <input
-                            value = {this.state.firstname}
-                            onChange ={e=>this.setState(this.state.updateName(e.currentTarget.value))}  
-                            >
-                        </input>
-                        < br />
-                        Last Name:
-                        <input
-                            value = {this.state.lastname}
-                            onChange ={e=>this.setState(this.state.updateLastName(e.currentTarget.value))}  
-                            >
-                        </input>
-                        < br />
-                        User Name:
-                        <input
-                            value = {this.state.username}
-                            onChange ={e=>this.setState(this.state.updateUsername(e.currentTarget.value))}
-                            placeholder="it should contain '@'"
-                            >
-                        </input>
-                        < br />
-                        Password:
-                        <input
-                            value = {this.state.password}
-                            onChange = {e => this.setState(this.state.updatePassword(e.currentTarget.value))}  
-                            >
-                        </input>
-                        < br />
-                        < br />
-                        <button
-                            onClick={()=> {
-                                this.handelsubmit();
-                            }}
-                            >
-                            Submit
-                        </button>
-                        <button
-                            onClick={e=>this.props.backToMainHome()}
-                        >
-                            Back
-                        </button>
-                    </div>
+                    Welcome to the Registration Page
                 </div>
-            )
-        } else{
-            return( <MainHome/>)
-        }
+                <br />
+                <div>
+                    First Name:
+                    <input
+                        value = {this.state.firstname}
+                        onChange ={e=>this.setState(this.state.updateName(e.currentTarget.value))}  
+                        >
+                    </input>
+                    < br />
+                    Last Name:
+                    <input
+                        value = {this.state.lastname}
+                        onChange ={e=>this.setState(this.state.updateLastName(e.currentTarget.value))}  
+                        >
+                    </input>
+                    < br />
+                    User Name:
+                    <input
+                        value = {this.state.username}
+                        onChange ={e=>this.setState(this.state.updateUsername(e.currentTarget.value))}
+                        placeholder="it should contain '@'"
+                        >
+                    </input>
+                    < br />
+                    Password:
+                    <input
+                        value = {this.state.password}
+                        onChange = {e => this.setState(this.state.updatePassword(e.currentTarget.value))}  
+                        >
+                    </input>
+                    < br />
+                    < br />
+                    <button
+                        onClick={()=> {
+                            this.handelsubmit();
+                        }}
+                        >
+                        Submit
+                    </button>
+                    <button
+                        onClick={e=>this.props.backToMainHome()}
+                    >
+                        Back
+                    </button>
+                </div>
+            </div>
+        )
+
     }
 }

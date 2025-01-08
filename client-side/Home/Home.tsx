@@ -1,6 +1,5 @@
 import React from "react";
 import { HomeEvent, HomeState, initHomeState } from './home.state';
-import { RegistrationForm } from "../registration/registration";
 import { OverviewPage } from "../Overview/overview";
 import { AdminDashBoard } from "../Admindashboard/admindashboard";
 import Login from "../Login/Login"; // Import the Login component
