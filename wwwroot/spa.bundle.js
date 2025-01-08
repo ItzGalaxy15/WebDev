@@ -1704,10 +1704,12 @@ var initLoginState = {
 /* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
 /* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _mainhome_state__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./mainhome.state */ "./MainHome/mainhome.state.ts");
-/* harmony import */ var _registration_registration__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../registration/registration */ "./registration/registration.tsx");
-/* harmony import */ var _Login_Login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Login/Login */ "./Login/Login.tsx");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _mainhome_state__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./mainhome.state */ "./MainHome/mainhome.state.ts");
+/* harmony import */ var _registration_registration__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../registration/registration */ "./registration/registration.tsx");
+/* harmony import */ var _Login_Login__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Login/Login */ "./Login/Login.tsx");
+
 
 
 
@@ -1724,36 +1726,38 @@ var MainHome = /*#__PURE__*/function (_React$Component) {
     var _this;
     (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, MainHome);
     _this = _callSuper(this, MainHome, [props]);
-    _this.state = _mainhome_state__WEBPACK_IMPORTED_MODULE_6__.initMainHomeState;
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5__["default"])(_this, "handleBackToMainHome", function () {
+      _this.setState({
+        isRegisterd: false
+      });
+    });
+    _this.state = _mainhome_state__WEBPACK_IMPORTED_MODULE_7__.initMainHomeState;
     return _this;
   }
-
-  // setAdminStatus = (status: boolean) => {
-  //   this.setState({ isAdmin: status });
-  // };
   (0,_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(MainHome, _React$Component);
   return (0,_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(MainHome, [{
     key: "render",
     value: function render() {
       var _this2 = this;
       if (this.state.view === "mainHome") {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, "Welcome to the Office Calendar", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("div", null, "Welcome to the Office Calendar", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
           onClick: function onClick() {
             return _this2.setState(_this2.state.updateViewState("registration"));
           }
-        }, "Registration"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
+        }, "Registration"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
           onClick: function onClick() {
             return _this2.setState(_this2.state.updateViewState("login"));
           }
         }, "Login")));
       } else if (this.state.view === "registration") {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(_registration_registration__WEBPACK_IMPORTED_MODULE_7__.RegistrationForm, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_registration_registration__WEBPACK_IMPORTED_MODULE_8__.RegistrationForm, {
           backToMainHome: function backToMainHome() {
-            return _this2.setState(_this2.state.updateViewState("mainHome"));
-          }
+            _this2.setState(_this2.state.updateViewState("mainHome")), _this2.handleBackToMainHome();
+          },
+          isRegisterd: true
         });
       } else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(_Login_Login__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_Login_Login__WEBPACK_IMPORTED_MODULE_9__["default"], {
           backToMainHome: function backToMainHome() {
             return _this2.setState(_this2.state.updateViewState("mainHome"));
           }
@@ -1762,7 +1766,7 @@ var MainHome = /*#__PURE__*/function (_React$Component) {
       }
     }
   }]);
-}(react__WEBPACK_IMPORTED_MODULE_5__.Component);
+}(react__WEBPACK_IMPORTED_MODULE_6__.Component);
 
 /***/ }),
 
@@ -1781,6 +1785,7 @@ var MainHome = /*#__PURE__*/function (_React$Component) {
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var initMainHomeState = {
+  isRegisterd: false,
   view: "mainHome",
   updateViewState: function updateViewState(view) {
     return function (state) {
@@ -2229,27 +2234,58 @@ function onFailure(errorMessage) {
 
 var submit = /*#__PURE__*/function () {
   var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(person) {
+    var response, textResult;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _context.next = 2;
-          return fetch("api/storage", {
+          _context.prev = 0;
+          _context.next = 3;
+          return fetch("api/v1/Login/Register", {
             method: "POST",
             body: JSON.stringify(person),
             headers: {
               "content-type": "application/json"
             }
           });
-        case 2:
+        case 3:
+          response = _context.sent;
+          if (!response.ok) {
+            _context.next = 8;
+            break;
+          }
+          // const result = await response.json();
+          onSuccess("User with name ".concat(person.firstname, " registered successfully. \nNow you can login"));
+          _context.next = 12;
+          break;
+        case 8:
+          _context.next = 10;
+          return response.text();
+        case 10:
+          textResult = _context.sent;
+          onFailure(textResult);
+        case 12:
+          _context.next = 17;
+          break;
+        case 14:
+          _context.prev = 14;
+          _context.t0 = _context["catch"](0);
+          onFailure(_context.t0.errorMessage);
+        case 17:
         case "end":
           return _context.stop();
       }
-    }, _callee);
+    }, _callee, null, [[0, 14]]);
   }));
   return function submit(_x) {
     return _ref.apply(this, arguments);
   };
 }();
+var onSuccess = function onSuccess(Message) {
+  alert(Message);
+};
+function onFailure(errorMessage) {
+  alert("Failed to register: " + errorMessage + " \nTry again");
+}
 
 /***/ }),
 
@@ -2268,40 +2304,37 @@ var submit = /*#__PURE__*/function () {
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var initRegistrationState = {
-  name: "",
+  isRegisterd: false,
+  firstname: "",
   lastname: "",
-  age: 0,
-  updateName: function updateName(name) {
+  password: "",
+  username: "",
+  recuringdays: "mo,tu,we,th,fr",
+  updateName: function updateName(firstname) {
     return function (state) {
       return _objectSpread(_objectSpread({}, state), {}, {
-        name: name,
-        updateName: state.updateName
+        firstname: firstname
       });
     };
   },
   updateLastName: function updateLastName(lastName) {
     return function (state) {
       return _objectSpread(_objectSpread({}, state), {}, {
-        lastname: lastName,
-        updateLastName: state.updateLastName
+        lastname: lastName
       });
     };
   },
-  updateAge: function updateAge(age) {
+  updatePassword: function updatePassword(password) {
     return function (state) {
       return _objectSpread(_objectSpread({}, state), {}, {
-        age: age,
-        updateAge: state.updateAge
+        password: password
       });
     };
   },
-  //when clicking reset fields
-  clearContents: function clearContents() {
+  updateUsername: function updateUsername(username) {
     return function (state) {
       return _objectSpread(_objectSpread({}, state), {}, {
-        name: "",
-        lastname: "",
-        age: 0
+        username: username
       });
     };
   }
@@ -2324,9 +2357,12 @@ var initRegistrationState = {
 /* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
 /* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
 /* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _registration_state__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./registration.state */ "./registration/registration.state.ts");
-/* harmony import */ var _registration_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./registration.api */ "./registration/registration.api.ts");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _registration_state__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./registration.state */ "./registration/registration.state.ts");
+/* harmony import */ var _registration_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./registration.api */ "./registration/registration.api.ts");
+/* harmony import */ var _MainHome_MainHome__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../MainHome/MainHome */ "./MainHome/MainHome.tsx");
+
 
 
 
@@ -2337,12 +2373,24 @@ function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.
 
 
 
+
 var RegistrationForm = /*#__PURE__*/function (_React$Component) {
   function RegistrationForm(props) {
     var _this;
     (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, RegistrationForm);
     _this = _callSuper(this, RegistrationForm, [props]);
-    _this.state = _registration_state__WEBPACK_IMPORTED_MODULE_6__.initRegistrationState;
+    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5__["default"])(_this, "handelsubmit", function () {
+      (0,_registration_api__WEBPACK_IMPORTED_MODULE_8__.submit)({
+        firstname: _this.state.firstname,
+        lastname: _this.state.lastname,
+        password: _this.state.password,
+        username: _this.state.username,
+        recuringdays: _this.state.recuringdays
+      });
+      _this.setState(_registration_state__WEBPACK_IMPORTED_MODULE_7__.initRegistrationState);
+      _this.props.backToMainHome();
+    });
+    _this.state = _registration_state__WEBPACK_IMPORTED_MODULE_7__.initRegistrationState;
     return _this;
   }
   (0,_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(RegistrationForm, _React$Component);
@@ -2350,41 +2398,43 @@ var RegistrationForm = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var _this2 = this;
-      var condition = true;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, "Welcome to our Registration page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", null, "Name:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("input", {
-        value: this.state.name,
-        onChange: function onChange(e) {
-          return _this2.setState(_this2.state.updateName(e.currentTarget.value));
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("br", null), "Lastname:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("input", {
-        value: this.state.lastname,
-        onChange: function onChange(e) {
-          return _this2.setState(_this2.state.updateLastName(e.currentTarget.value));
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("br", null), "Age:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("input", {
-        value: this.state.age,
-        type: "number",
-        onChange: function onChange(e) {
-          return _this2.setState(_this2.state.updateAge(Number(e.currentTarget.value)));
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
-        onClick: function onClick() {
-          // this.props.insertPerson({name: this.state.name, lastname: this.state.lastname, age: this.state.age});
-          (0,_registration_api__WEBPACK_IMPORTED_MODULE_7__.submit)({
-            name: _this2.state.name,
-            lastname: _this2.state.lastname,
-            age: _this2.state.age
-          });
-          _this2.setState(_this2.state.clearContents());
-        }
-      }, "Submit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement("button", {
-        onClick: function onClick(e) {
-          return _this2.props.backToMainHome();
-        }
-      }, "Back")));
+      if (this.props.isRegisterd == true) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("div", null, "Welcome to the Registration Page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("div", null, "First Name:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("input", {
+          value: this.state.firstname,
+          onChange: function onChange(e) {
+            return _this2.setState(_this2.state.updateName(e.currentTarget.value));
+          }
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("br", null), "Last Name:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("input", {
+          value: this.state.lastname,
+          onChange: function onChange(e) {
+            return _this2.setState(_this2.state.updateLastName(e.currentTarget.value));
+          }
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("br", null), "User Name:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("input", {
+          value: this.state.username,
+          onChange: function onChange(e) {
+            return _this2.setState(_this2.state.updateUsername(e.currentTarget.value));
+          },
+          placeholder: "it should contain '@'"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("br", null), "Password:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("input", {
+          value: this.state.password,
+          onChange: function onChange(e) {
+            return _this2.setState(_this2.state.updatePassword(e.currentTarget.value));
+          }
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
+          onClick: function onClick() {
+            _this2.handelsubmit();
+          }
+        }, "Submit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("button", {
+          onClick: function onClick(e) {
+            return _this2.props.backToMainHome();
+          }
+        }, "Back")));
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_MainHome_MainHome__WEBPACK_IMPORTED_MODULE_9__.MainHome, null);
+      }
     }
   }]);
-}(react__WEBPACK_IMPORTED_MODULE_5__.Component);
+}(react__WEBPACK_IMPORTED_MODULE_6__.Component);
 
 /***/ }),
 
