@@ -50,8 +50,8 @@ public class ProfileController : Controller
     {
         bool check = await _profileService.LeaveOffice(HttpContext.Session.GetString("USER_SESSION_KEY")!);
 
-        if (check) return Ok("left office!");
-        else return BadRequest("You are not even at the office!!");
+        if (check) return Ok(new {message = "left office!"});
+        else return BadRequest(new {message = "You are not even at the office!!"});
     }
 
     [UserRequired]
@@ -60,8 +60,19 @@ public class ProfileController : Controller
     {
         bool check = await _profileService.ArriveToOffice(HttpContext.Session.GetString("USER_SESSION_KEY")!);
 
-        if (check) return Ok("You arrived to the office :)");
-        else return BadRequest("you already arrived to the office!");
+        if (check) return Ok(new {message = "You arrived to the office :)"});
+        else return BadRequest(new { message= "you already arrived to the office!"});
+    }
+
+
+    [UserRequired]
+    [HttpGet("attendance/isatoffice")]
+    public async Task<IActionResult> IsAtOffice()
+    {
+        bool check = await _profileService.IsAtOffice(HttpContext.Session.GetString("USER_SESSION_KEY")!);
+
+        if (check) return Ok(new { message = "You are at office" });
+        else return Ok(new { message = "You are not at office" });
     }
 
     [HttpGet("profiles/find")]

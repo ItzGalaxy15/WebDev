@@ -105,6 +105,13 @@ public class ProfileService : IProfileService
         return false;
     }
 
+    public async Task<bool> IsAtOffice(string USER_SESSION_KEY)
+    {
+        int userId = await _eventsService.GetUserId(USER_SESSION_KEY);
+        Attendance attendance = await _context.Attendance.FirstAsync(att => att.UserId == userId);
+        return attendance.TimeArrived != null;
+    }
+
     public async Task<ProfileSearch[]> GetProfiles(string search){
         // Remove all whitespaces in search string
         Regex.Replace(search, @"\s+", "");

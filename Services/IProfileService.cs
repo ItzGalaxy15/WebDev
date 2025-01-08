@@ -8,4 +8,5 @@ public interface IProfileService {
     public Task<bool> ArriveToOffice(string USER_SESSION_KEY);
     public Task<bool> LeaveOffice(string USER_SESSION_KEY);
     public Task<ProfileSearch[]> GetProfiles(string search);
+    public Task<bool> IsAtOffice(string USER_SESSION_KEY);
 }
