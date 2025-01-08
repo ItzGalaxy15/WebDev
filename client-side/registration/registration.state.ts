@@ -1,53 +1,57 @@
-import { Person } from "../Home/home.state"
+export interface Person {
+    firstname: string,
+    lastname: string,
+    password: string,
+    username: string,
+    recuringdays: string
+  }
 
 
 export type RegisterationState = Person & {
-
-    updateName: (name: string) => (state:RegisterationState) => RegisterationState
+    isRegisterd: boolean,
+    updateName: (firstname: string) => (state:RegisterationState) => RegisterationState
     updateLastName: (lastname: string) => (state:RegisterationState) => RegisterationState
-    updateAge: (age: number) => (state:RegisterationState) => RegisterationState
-    clearContents:()=>(state:RegisterationState)=>RegisterationState
+    updatePassword: (password: string) => (state:RegisterationState) => RegisterationState
+    updateUsername: (username: string) => (state:RegisterationState) => RegisterationState
 }
 
 
 export const initRegistrationState: RegisterationState =
 {
-    name: "",
+    isRegisterd: false,
+    firstname: "",
     lastname: "",
-    age: 0,
+    password: "",
+    username: "",
+    recuringdays: "mo,tu,we,th,fr",
 
 
-    updateName: (name: string) => (state: RegisterationState): RegisterationState => {
+    updateName: (firstname: string) => (state: RegisterationState): RegisterationState => {
         return {
             ...state,
-            name: name,
-            updateName: state.updateName,
+            firstname: firstname
         }
     },
 
     updateLastName: (lastName: string) => (state: RegisterationState): RegisterationState => {
         return {
             ...state,
-            lastname: lastName,
-            updateLastName: state.updateLastName,
+            lastname: lastName
         }
     },
 
-    updateAge: (age: number) => (state: RegisterationState): RegisterationState => {
+    updatePassword: (password: string) => (state: RegisterationState): RegisterationState => {
         return {
             ...state,
-            age: age,
-            updateAge: state.updateAge,
+            password: password
         }
     },
-    //when clicking reset fields
-    clearContents:()=> (state:RegisterationState):RegisterationState=>{
-        return{
+
+    updateUsername: (username: string) => (state: RegisterationState): RegisterationState => {
+        return {
             ...state,
-            name: "",
-            lastname: "",
-            age: 0,
+            username: username,
         }
-    }
+    },
 
 }

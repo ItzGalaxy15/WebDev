@@ -1,15 +1,12 @@
 import React from "react"
 import { initRegistrationState, RegisterationState } from './registration.state';
-import { Person } from "../Home/home.state"
 import { submit } from './registration.api';
+import { MainHome } from "../MainHome/MainHome";
 
 
 export interface RegisterationProps{
     backToMainHome :()=>void
-    // insertPerson: (person: Person)=>void
-    // testVal: number
-    // testName: string
-    // updateTest : (num : number) => void
+    isRegisterd: boolean
 }
 
 
@@ -21,69 +18,74 @@ export class RegistrationForm extends React.Component<RegisterationProps,Registe
 
     }
 
-
+    handelsubmit = () =>{
+        submit({
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            password: this.state.password,
+            username: this.state.username,
+            recuringdays: this.state.recuringdays,
+        })
+        this.setState(initRegistrationState);
+        this.props.backToMainHome();
+    }
 
     render():JSX.Element{
-        let condition = true
-        return(
-            <div>
+        if (this.props.isRegisterd == true){
+            return(
                 <div>
-                    Welcome to our Registration page
+                    <div>
+                        Welcome to the Registration Page
+                    </div>
+                    <br />
+                    <div>
+                        First Name:
+                        <input
+                            value = {this.state.firstname}
+                            onChange ={e=>this.setState(this.state.updateName(e.currentTarget.value))}  
+                            >
+                        </input>
+                        < br />
+                        Last Name:
+                        <input
+                            value = {this.state.lastname}
+                            onChange ={e=>this.setState(this.state.updateLastName(e.currentTarget.value))}  
+                            >
+                        </input>
+                        < br />
+                        User Name:
+                        <input
+                            value = {this.state.username}
+                            onChange ={e=>this.setState(this.state.updateUsername(e.currentTarget.value))}
+                            placeholder="it should contain '@'"
+                            >
+                        </input>
+                        < br />
+                        Password:
+                        <input
+                            value = {this.state.password}
+                            onChange = {e => this.setState(this.state.updatePassword(e.currentTarget.value))}  
+                            >
+                        </input>
+                        < br />
+                        < br />
+                        <button
+                            onClick={()=> {
+                                this.handelsubmit();
+                            }}
+                            >
+                            Submit
+                        </button>
+                        <button
+                            onClick={e=>this.props.backToMainHome()}
+                        >
+                            Back
+                        </button>
+                    </div>
                 </div>
-                {/* <br /> */}
-                {/* <div>
-                    this is the test value: {this.props.testVal}
-                    <br />
-                    this is the test name: {this.props.testName}
-                    <br />
-                    <button
-                        onClick = {e=>this.props.updateTest(555)}
-                    >
-                        Update test
-                    </button>
-                </div> */}
-                <br />
-                <div>
-                    Name:
-                    <input
-                        value = {this.state.name}
-                        onChange ={e=>this.setState(this.state.updateName(e.currentTarget.value))}  
-                        >
-                    </input>
-                    < br />
-                    Lastname:
-                    <input
-                        value = {this.state.lastname}
-                        onChange ={e=>this.setState(this.state.updateLastName(e.currentTarget.value))}  
-                        >
-                    </input>
-                    < br />
-                    Age:
-                    <input
-                        value = {this.state.age}
-                        type = "number"
-                        onChange ={e=>this.setState(this.state.updateAge(Number(e.currentTarget.value)))}  
-                        >
-                    </input>
-                    <br />
-                    <button
-                        onClick={()=> {
-                            // this.props.insertPerson({name: this.state.name, lastname: this.state.lastname, age: this.state.age});
-                            submit({name: this.state.name, lastname: this.state.lastname, age: this.state.age});
-                            this.setState(this.state.clearContents());
-                            
-                        }}
-                        >
-                        Submit
-                    </button>
-                    <br />
-                    <button
-                        onClick={e=>this.props.backToMainHome()}
-                    >
-                        Back
-                    </button>
-                </div>
-            </div>
-        )
+            )
+        } else{
+            return( <MainHome/>)
+        }
     }
 }
