@@ -32,7 +32,7 @@ export interface HomeState {
   events: HomeEvent[];
   showEvents: boolean;
   view: ViewState;
-  // isAdmin?: boolean;
+  isAtOffice: boolean;
   updateViewState: (view: ViewState) => (state: HomeState) => HomeState;
   getEvents: (events: HomeEvent[]) => (state: HomeState) => HomeState;
 }
@@ -43,6 +43,7 @@ export const initHomeState: HomeState = {
   events: [],
   showEvents: true,
   view: "home",
+  isAtOffice: false,
   updateViewState: (view: ViewState) => (state: HomeState): HomeState => {
     return {
       ...state,
