@@ -1,5 +1,4 @@
 import React from "react"
-import { Person } from "../Home/home.state"
 
 export interface OverviewProps{
     backToHome: () => void
