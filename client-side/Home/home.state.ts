@@ -26,11 +26,6 @@ export interface HomeEvent {
   }>;
 }
 
-export interface Person {
-  name: string;
-  lastname: string;
-  age: number;
-}
 
 export interface HomeState {
   selectedEventId: number | null;
