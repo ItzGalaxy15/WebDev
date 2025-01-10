@@ -49,3 +49,22 @@
 18/12/2024 18:17:00 - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
 18/12/2024 18:18:20 - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
 18/12/2024 18:21:09 - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
+1/10/2025 7:57:27 PM - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
+1/10/2025 7:59:08 PM - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
+1/10/2025 7:59:09 PM - ::1 requested GET http://localhost:5097/spa.bundle.js	 | 	Responded with status code: 401
+1/10/2025 7:59:30 PM - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
+1/10/2025 7:59:35 PM - ::1 requested POST http://localhost:5097/api/v1/Login/Login	 | 	Responded with status code: 200
+1/10/2025 7:59:38 PM - ::1 requested GET http://localhost:5097/api/v1/Events
+1/10/2025 7:59:38 PM - ::1 requested GET http://localhost:5097/api/v1/login/IsAdminLoggedIn	 | 	Responded with status code: 200
+1/10/2025 7:59:38 PM - ::1 requested GET http://localhost:5097/api/v1/login/IsAdminLoggedIn	 | 	Responded with status code: 200	 | 	Responded with status code: 200
+1/10/2025 7:59:39 PM - ::1 requested GET http://localhost:5097/api/v1/Profile/attendance/isatoffice	 | 	Responded with status code: 401
+1/10/2025 7:59:46 PM - ::1 requested GET http://localhost:5097/api/v1/login/isadminloggedin	 | 	Responded with status code: 200
+1/10/2025 7:59:46 PM - ::1 requested GET http://localhost:5097/api/v1/login/isuserloggedin	 | 	Responded with status code: 200
+1/10/2025 7:59:46 PM - ::1 requested GET http://localhost:5097/api/v1/login/isadminloggedin	 | 	Responded with status code: 200
+1/10/2025 7:59:46 PM - ::1 requested GET http://localhost:5097/api/v1/login/isuserloggedin	 | 	Responded with status code: 200
+1/10/2025 7:59:46 PM - ::1 requested GET http://localhost:5097/api/v1/login/logout	 | 	Responded with status code: 200
+1/10/2025 7:59:46 PM - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
+1/10/2025 8:00:45 PM - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
+1/10/2025 8:00:48 PM - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
+1/10/2025 8:03:31 PM - ::1 requested GET http://localhost:5097/	 | 	Responded with status code: 200
+1/10/2025 8:03:33 PM - ::1 requested GET http://localhost:5097/js/main.js	 | 	Responded with status code: 401
