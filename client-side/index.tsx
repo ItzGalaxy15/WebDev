@@ -1,12 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Home } from './Home/Home';
-import { MainHome } from './MainHome/MainHome';
- 
-export const main = () => {
-  let rootElement =document.querySelector('#root')
-  ReactDOM.render(
-    <MainHome/>,
-  rootElement
-  )
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  const root = createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  );
 }
