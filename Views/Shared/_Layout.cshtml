@@ -1,12 +1,27 @@
-﻿<!DOCTYPE html>
+﻿@* <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - StarterKit</title>
+
+    <!--Custom styling in site.css-->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!--Bootstrap styling-->
+    <link rel="stylesheet" href="~/lib/bootstrap.min.css" />
     <title>@ViewData["Title"] - Week12_C</title>
     <script src="/spa.bundle.js"></script>
 </head>
+
 <body>
+
+    @RenderBody()
+
+    <!--The main Javascript bundle that is produced by Webpack containing the React App-->
     <div id="root">
         @RenderBody()
     </div>
@@ -19,6 +34,29 @@
         }
     </script>
     <script src="~/js/main.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
+</html> *@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>@ViewData["Title"] - Week12_C</title>
+<script src="/spa.bundle.js"></script>
+</head>
+<body>
+<div id="root">
+<script>
+            spa.main()
+</script>
+       @RenderBody()
+</div>
+</body>
+</html>
+ 
 </html>
