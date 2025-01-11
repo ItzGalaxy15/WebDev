@@ -25,7 +25,13 @@ In one of the terminals use the following commands:
 
 1. cd client-side
 2. yarn (this downloads yarn with all the packages and dependencies in our project)
-3. yarn fe-watch 
+3. dotnet run
+
+This should be enough. If blank page returns do the following down here: 
+
+1. cd client-side
+2. yarn
+3. yarn fe-watch
 
 4. Go to the bottom of Spa.bundle.js in wwwroot\spa.bundle.js
 
