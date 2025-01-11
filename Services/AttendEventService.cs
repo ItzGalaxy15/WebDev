@@ -146,17 +146,10 @@ public class AttendEventService : IAttendEventService
     {
         List<int> eventsIds = await _dbcontext.Event_Attendance.Where(ea => ea.UserId == userId).Select(ea => ea.EventId).ToListAsync();
         List<Event> events = new();
-        Event[] eventsArray = await _dbcontext.Event.Where(e => eventsIds.Contains(e.EventId)).ToArrayAsync();
+        Event[] eventsArray = await _dbcontext.Event.Where(e => eventsIds.Contains(e.EventId))
+                                    .Include(evnt => evnt.Event_Attendances)
+                                    .ThenInclude(evAtt => evAtt.Reviews)
+                                    .ToArrayAsync();
         return eventsArray;
-
-        // DateTime now = DateTime.Now;
-        // DateOnly today = DateOnly.FromDateTime(now);
-        // TimeSpan nowTime = now.TimeOfDay;
-
-        // List<int> eventIds = await _dbcontext.Event_Attendance.Where(ea => ea.UserId == userId).Select(ea => ea.EventId).Distinct().ToListAsync();
-        // List<Event> events = await _dbcontext.Event.Where(e => eventIds.Contains(e.EventId) && e.EventDate >= today).ToListAsync();
-        // Event[] futureEvents = events.Where(e => e.EventDate > today || (e.EventDate == today && e.StartTime > nowTime)).ToArray();
-
-        // return futureEvents;
     }
 }
