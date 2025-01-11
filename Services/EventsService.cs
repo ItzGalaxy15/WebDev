@@ -90,6 +90,7 @@ public class EventsService : IEventsService
             {
                 IsDeleted = true;
                 ev.Delete = true;
+                _context.Event.Remove(ev);
                 break;
             }
         }
