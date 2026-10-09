@@ -25,10 +25,11 @@ In one of the terminals use the following commands:
 
 1. cd client-side
 2. yarn (this downloads yarn with all the packages and dependencies in our project)
-3. dotnet ef database update
-4. dotnet run
+3. cd ..
+4. dotnet ef database update
+5. dotnet run
 
-This should be enough. If blank page returns do the following down here: 
+This should be enough. In another terminal run: 
 
 1. cd client-side
 2. yarn
@@ -87,11 +88,7 @@ with:
   ; -->
 
 
-Make sure to do this BEFORE using fe-watch, 
-
-In the other terminal run the following to launch the localhost:
-
-5. dotnet run  
+Make sure to do this BEFORE using fe-watch.
 
 To check it went correctly make sure the spa.bundle.js HAS the function main() so the website loads on a homepage with registration and login.
 If the function main doesn't exist then the website will be blank, because function main is being called to load the website.
